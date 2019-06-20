@@ -58,6 +58,23 @@ jobs:
       - store_artifacts:
           path: coverage
 
+  android-package-rn:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      # Run package-android
+      - run:
+          name: package-android
+          command: npm run package-android --max-workers=1
+      # Persist data
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./
+
   #Run android buils
   android-build:
     working_directory: ~/repo
@@ -65,17 +82,13 @@ jobs:
       - image: circleci/android:api-28-node
         environment:
           ANDROID_HOME: /opt/android/sdk
-          GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xms256m -Xmx3072m -XX:+HeapDumpOnOutOfMemoryError" -Dorg.gradle.daemon=true -Dorg.gradle.parallel=true'
+          GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xms256m -Xmx3072m -XX:+HeapDumpOnOutOfMemoryError"'
           TERM: dumb
           LC_ALL: en_US.UTF-8
           LANG: en_US.UTF-8
     steps:
       - attach_workspace:
           at: ~/repo
-      # Run package-android
-      - run:
-          name: package-android
-          command: npm run package-android --max-workers=3
 
       # Restore gradle cache (from https://circleci.com/docs/2.0/caching/)
       - restore_cache:
@@ -85,10 +98,10 @@ jobs:
             - gradle-repo-v1-{{ .Branch }}-
             - gradle-repo-v1-
 
-      #Run androidDependncies
+      #Run androidDependencies
       - run:
           name: get android dependencies
-          command: cd ~/repo/android && ./gradlew androidDependencies
+          command: cd ~/repo/android && ./gradlew dependencies androidDependencies
 
       # Save dependencies cache
       - save_cache:
@@ -97,7 +110,7 @@ jobs:
           key: gradle-repo-v1-{{ .Branch }}-{{ checksum "android/build.gradle" }}
 
       # Run assemble
-      - run: cd ~/repo/android && ./gradlew assemble
+      - run: cd ~/repo/android && ./gradlew :app:assembleDebug -x bundleReleaseJsAndAssets
 
       # Persist for deploy
       - persist_to_workspace:
@@ -108,6 +121,9 @@ jobs:
       # Store build report
       - store_artifacts:
           path: android/app/build/reports
+      # Store build report
+      - store_artifacts:
+          path: android/app/build/outputs
 
   # Deploy android version to testing channels
   android-deploy:
@@ -119,7 +135,7 @@ jobs:
           at: ~/repo
       - run:
           name: todo-deploy
-          command: echo "TODO deploy android version to testing channels"
+          command: ls android/app/build/outputs && echo "TODO deploy android version to testing channels"
       - run:
           name: deliver-story
           command: echo "TODO deliver story in PT"
@@ -164,7 +180,7 @@ jobs:
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
     macos:
-      xcode: "10.1.0"
+      xcode: '10.1.0'
     shell: /bin/bash --login -o pipefail
     steps:
       - attach_workspace:
@@ -233,9 +249,12 @@ workflows:
       - unit-tests:
           requires:
             - checkout-setup
-      - android-build:
+      - android-package-rn:
           requires:
             - checkout-setup
+      - android-build:
+          requires:
+            - android-package-rn
       - android-deploy:
           requires:
             - android-build
@@ -245,6 +264,7 @@ workflows:
       - android-release:
           requires:
             - android-tests
+            - unit-tests
           filters:
             branches:
               only: master
@@ -260,6 +280,7 @@ workflows:
       - ios-release:
           requires:
             - ios-tests
+            - unit-tests
           filters:
             branches:
               only: master
