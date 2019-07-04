@@ -3,6 +3,10 @@ package com.serto;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.swmansion.rnscreens.RNScreensPackage;
+import org.reactnative.camera.RNCameraPackage;
+import com.segment.analytics.reactnative.core.RNAnalyticsPackage;
+import io.sentry.RNSentryPackage;
 import com.reactlibrary.RNUportSignerPackage;
 import com.reactcommunity.rnlocalize.RNLocalizePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -21,11 +25,11 @@ public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
-        @Override
-        protected String getJSBundleFile() {
-        return CodePush.getJSBundleFile();
-        }
-    
+    @Override
+    protected String getJSBundleFile() {
+      return CodePush.getJSBundleFile();
+    }
+
     @Override
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
@@ -33,15 +37,12 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new RNUportSignerPackage(),
-            new RNLocalizePackage(),
-            new RNGestureHandlerPackage(),
-            new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG, R.string.reactNativeCodePush_PublicKey),
-            new AppCenterReactNativePackage(MainApplication.this),
-            new ReactNativeConfigPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new RNScreensPackage(), new RNCameraPackage(),
+          new RNAnalyticsPackage(), new RNSentryPackage(), new RNUportSignerPackage(), new RNLocalizePackage(),
+          new RNGestureHandlerPackage(),
+          new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey),
+              getApplicationContext(), BuildConfig.DEBUG, R.string.reactNativeCodePush_PublicKey),
+          new AppCenterReactNativePackage(MainApplication.this), new ReactNativeConfigPackage());
     }
 
     @Override

@@ -5,8 +5,13 @@ import { render } from 'react-native-testing-library'
 
 jest.useFakeTimers()
 
+const navigation = {
+  navigate: jest.fn(),
+}
+
 it('renders correctly', () => {
-  const tree = render(<Welcome />).toJSON()
+  //@ts-ignore
+  const tree = render(<Welcome navigation={navigation} />).toJSON()
 
   expect(tree).toMatchSnapshot()
 })

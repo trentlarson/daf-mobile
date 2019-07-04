@@ -66,3 +66,8 @@ test-reports/
 
 codepush-privatekey.pem
 Serto.app.dSYM.zip
+
+#sentry.properties
+.env.production
+
+ios/Pods
