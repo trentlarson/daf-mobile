@@ -26,6 +26,11 @@ jobs:
           root: ~/repo
           paths:
             - ./
+  vault:
+    docker:
+      - image: vault:0.7.3
+    steps:
+      - run: vault token-renew > /dev/null
 
   # Run unit tests and codecoverage
   unit-tests:
@@ -247,6 +252,7 @@ workflows:
   build-and-deploy:
     jobs:
       - checkout-setup
+      - vault
       - unit-tests:
           requires:
             - checkout-setup
