@@ -26,7 +26,7 @@ jobs:
           root: ~/repo
           paths:
             - ./
-  vault:
+  vault-refresh:
     docker:
       - image: vault:0.7.3
     steps:
@@ -252,7 +252,7 @@ workflows:
   build-and-deploy:
     jobs:
       - checkout-setup
-      - vault
+      - vault-refresh
       - unit-tests:
           requires:
             - checkout-setup
@@ -261,6 +261,7 @@ workflows:
             - checkout-setup
       - android-build:
           requires:
+            - vault-refresh
             - android-package-rn
       - android-deploy:
           requires:
