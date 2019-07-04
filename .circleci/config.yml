@@ -116,7 +116,7 @@ jobs:
           key: gradle-repo-v2-{{ .Branch }}-{{ checksum "android/build.gradle" }}
 
       # Run assemble
-      - run: cd ~/repo/android && ./gradlew :app:assembleDebug -x bundleReleaseJsAndAssets
+      - run: cd ~/repo/android && ./gradlew :app:assembleRelease -x bundleReleaseJsAndAssets
 
       # Persist for deploy
       - persist_to_workspace:
