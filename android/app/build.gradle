@@ -1,3 +1,7 @@
+plugins {
+    id "io.errorlab.gradle.vault" version "0.1.0"
+}
+
 apply plugin: "com.android.application"
 
 project.ext.envConfigFiles = [
@@ -79,6 +83,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
+        inputExcludes: ["android/**", "ios/**", 'fastlane/**', 'build/**', '.idea/**'],
         entryFile: "index.js"
 ]
 
@@ -93,12 +98,23 @@ apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = false
+def enableSeparateBuildPerCPUArchitecture = true
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
 def enableProguardInReleaseBuilds = false
+
+// is gradle started for release build?
+// this is not bullet proof since there may exist some tasks that call for release but are not explicitly run
+boolean releaseRequested = false
+gradle.startParameter.taskNames.each {
+    if (it.toLowerCase() ==~ /.*(release|deliver|build|signingreport).*/) {
+        releaseRequested = true
+    }
+}
+
+apply from: "../signing.gradle"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -123,22 +139,46 @@ android {
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
     }
+
+    signingConfigs {
+        release {
+            if (releaseRequested) {
+                storeFile getReleaseKeystore()
+                storePassword getReleaseKeystorePassword()
+                keyAlias getReleaseKeyAlias()
+                keyPassword getReleaseKeyPassword()
+                v1SigningEnabled true
+                v2SigningEnabled true
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            if (releaseRequested) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            // For each separate APK per architecture, set a unique version code as described here:
-            // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3, "x86_64": 4]
-            def abi = output.getFilter(OutputFile.ABI)
-            if (abi != null) {  // null for the universal-debug, universal-release variants
-                output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+        if (variant.name.toLowerCase().contains("debug")) {
+            variant.outputs.each {
+                it.versionCodeOverride = 42
+            }
+        } else {
+            variant.outputs.each { output ->
+                // For each separate APK per architecture, set a unique version code as described here:
+                // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
+                def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3, "x86_64": 4]
+                def abi = output.getFilter(OutputFile.ABI)
+                if (abi != null) {  // null for the universal-debug, universal-release variants
+                    output.versionCodeOverride =
+                            versionCodes.get(abi) * 1000000 + defaultConfig.versionCode
+                }
             }
         }
     }
