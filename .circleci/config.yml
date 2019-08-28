@@ -43,7 +43,6 @@ references:
 
 jobs:
   verify:
-    parallelism: 2
     working_directory: ~/project
     docker:
       - image: circleci/node:10
