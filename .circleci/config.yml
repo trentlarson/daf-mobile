@@ -124,7 +124,7 @@ workflows:
             tags:
               only:
                 - /\d+\.\d+\.\d+/
-      - build-ios:
+      - build_ios:
           requires:
             - verify
       # - deploy_ios:
