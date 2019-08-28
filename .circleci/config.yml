@@ -55,7 +55,7 @@ jobs:
       - *save_yarn_cache
       - run:
           name: Unit tests
-          command: yarn test
+          command: yarn test --maxWorkers=2
       - persist_to_workspace:
           root: ~/project
           paths:
