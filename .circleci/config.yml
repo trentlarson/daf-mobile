@@ -23,8 +23,8 @@ references:
       keys:
         # when lock file changes, use increasingly general patterns to restore cache
         - yarn-packages-macos-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        - yarn-packages-macos-v2-{{ .Branch }}-
-        - yarn-packages-macos-v3-
+        - yarn-packages-macos-v1-{{ .Branch }}-
+        - yarn-packages-macos-v2-
   save_yarn_cache_macos: &save_yarn_cache_macos
     save_cache:
       paths:
@@ -43,6 +43,7 @@ references:
 
 jobs:
   verify:
+    parallelism: 3
     working_directory: ~/project
     docker:
       - image: circleci/node:10
