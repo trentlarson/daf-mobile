@@ -2,35 +2,42 @@ default_platform(:ios)
 
 platform :ios do
 
-desc "Push a new beta build to TestFlight"
-before_all do
-  # Sets up fastlane match on Circle CI
-  # for readonly code signing
-  setup_circle_ci
-end
+  desc "Make a build for TestFlight"
+  lane :assemble_ios_build do
+    match(type: "appstore")
+    gym(
+      export_method: "app-store",
+      workspace: "Serto.xcworkspace",
+      scheme: "Serto",
+      include_bitcode: true,
+      include_symbols: true
+    )
+  end
 
-desc "Build the iOS app"
-lane :assemble_build do
-  match(type: "appstore")
-  gym(
-    scheme: "Serto",
-    export_method: "app-store",
-    workspace: "Serto.xcworkspace",
-    include_bitcode: true,
-    include_symbols: true
-    export_options: {
-      provisioningProfiles: {
-        "com.serto.wallet" => "match AppStore com.serto.wallet"
-      }
-    }
-  )
-end
+  desc "Upload to Testflight"
+  lane :upload_ios_testflight do
+       match(type: "appstore")
+       pilot(
+         ipa: "./Serto.ipa",
+         skip_submission: true,
+         skip_waiting_for_build_processing: true
+       )
+  end
 
-desc "Deploy to TestFlight"
-lane :deploy do
-  # assemble_build
-  upload_to_testflight
-  # Includes the git tag commit message,
-  # which has all the release notes
-  # slack(message: "App successfully released!")
+  desc "Build & Upload to Testflight"
+  lane :build_and_upload do
+    match(type: "appstore")
+    gym(
+      export_method: "app-store",
+      workspace: "Serto.xcworkspace",
+      scheme: "Serto",
+      include_bitcode: true,
+      include_symbols: true
+    )
+    pilot(
+      ipa: "./Serto.ipa",
+      skip_submission: true,
+      skip_waiting_for_build_processing: true
+    )
+  end  
 end
