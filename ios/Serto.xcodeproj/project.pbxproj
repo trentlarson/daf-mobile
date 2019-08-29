@@ -43,25 +43,9 @@
 		7010C9ED227B270200642EEA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010C9EC227B270200642EEA /* libz.tbd */; };
 		70AFD2F422C3C12C00C7808E /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010C9C1227B26BF00642EEA /* libCodePush.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		9685349122BD26A300EED8BB /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348222BD26A300EED8BB /* AntDesign.ttf */; };
-		9685349222BD26A300EED8BB /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348322BD26A300EED8BB /* FontAwesome5_Brands.ttf */; };
-		9685349322BD26A300EED8BB /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348422BD26A300EED8BB /* MaterialCommunityIcons.ttf */; };
-		9685349422BD26A300EED8BB /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348522BD26A300EED8BB /* EvilIcons.ttf */; };
-		9685349522BD26A300EED8BB /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348622BD26A300EED8BB /* Ionicons.ttf */; };
-		9685349622BD26A300EED8BB /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348722BD26A300EED8BB /* FontAwesome5_Solid.ttf */; };
-		9685349722BD26A300EED8BB /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348822BD26A300EED8BB /* Feather.ttf */; };
-		9685349822BD26A300EED8BB /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348922BD26A300EED8BB /* FontAwesome5_Regular.ttf */; };
-		9685349922BD26A300EED8BB /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348A22BD26A300EED8BB /* SimpleLineIcons.ttf */; };
-		9685349A22BD26A300EED8BB /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348B22BD26A300EED8BB /* MaterialIcons.ttf */; };
-		9685349B22BD26A300EED8BB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348C22BD26A300EED8BB /* Octicons.ttf */; };
-		9685349C22BD26A300EED8BB /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348D22BD26A300EED8BB /* FontAwesome.ttf */; };
-		9685349D22BD26A300EED8BB /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348E22BD26A300EED8BB /* Foundation.ttf */; };
-		9685349E22BD26A300EED8BB /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685348F22BD26A300EED8BB /* Zocial.ttf */; };
-		9685349F22BD26A300EED8BB /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9685349022BD26A300EED8BB /* Entypo.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B539769F4BB14DB89C1B3F3F /* libAppCenterReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E239F5FC32547B2B894550C /* libAppCenterReactNative.a */; };
 		D833D557FB274CE8ABBDA520 /* libRNUportSigner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D77231876FD7434582D4DEC9 /* libRNUportSigner.a */; };
-		E192D44E08184382B4906350 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEB4AFB3599445F89D0385C0 /* AppCenter-Config.plist */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
@@ -1461,22 +1445,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				9685349D22BD26A300EED8BB /* Foundation.ttf in Resources */,
-				9685349722BD26A300EED8BB /* Feather.ttf in Resources */,
-				9685349822BD26A300EED8BB /* FontAwesome5_Regular.ttf in Resources */,
-				9685349A22BD26A300EED8BB /* MaterialIcons.ttf in Resources */,
-				9685349522BD26A300EED8BB /* Ionicons.ttf in Resources */,
-				9685349F22BD26A300EED8BB /* Entypo.ttf in Resources */,
-				9685349922BD26A300EED8BB /* SimpleLineIcons.ttf in Resources */,
-				9685349122BD26A300EED8BB /* AntDesign.ttf in Resources */,
-				9685349422BD26A300EED8BB /* EvilIcons.ttf in Resources */,
-				E192D44E08184382B4906350 /* AppCenter-Config.plist in Resources */,
-				9685349B22BD26A300EED8BB /* Octicons.ttf in Resources */,
-				9685349C22BD26A300EED8BB /* FontAwesome.ttf in Resources */,
-				9685349622BD26A300EED8BB /* FontAwesome5_Solid.ttf in Resources */,
-				9685349322BD26A300EED8BB /* MaterialCommunityIcons.ttf in Resources */,
-				9685349E22BD26A300EED8BB /* Zocial.ttf in Resources */,
-				9685349222BD26A300EED8BB /* FontAwesome5_Brands.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
