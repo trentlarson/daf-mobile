@@ -92,7 +92,7 @@ jobs:
           name: Build iOS ipa
           command: bundle exec fastlane assemble_ios_build
           working_directory: ios
-          # no_output_timeout: 10m
+          no_output_timeout: 30m
 
       - store_artifacts:
           path: ios/output/gym/Serto.ipa
