@@ -9,11 +9,6 @@ target 'Serto' do
     'Core',
     'CxxBridge', # Include this for RN >= 0.47
     'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
-    # 'RCTText',
-    # 'RCTNetwork',
-    # 'RCTWebSocket', # Needed for debugging
-    # 'RCTAnimation', # Needed for FlatList and animations running on native UI thread
-    # Add any other subspecs you want to use in your project
   ]
   pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
 
@@ -30,9 +25,7 @@ target 'Serto' do
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
-
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
-
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
   target 'SertoTests' do
