@@ -78,6 +78,9 @@ jobs:
     environment:
       FL_OUTPUT_DIR: output
     shell: /bin/bash --login -o pipefail
+    dependencies:
+    override:
+      - pod install
     steps:
       - checkout
       - *restore_yarn_cache_macos
