@@ -73,7 +73,7 @@ jobs:
 
   build_ios:
     macos:
-      xcode: '10.3.0'
+      xcode: '10.1.0'
     working_directory: ~/project
     environment:
       FL_OUTPUT_DIR: output
