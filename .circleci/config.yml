@@ -80,7 +80,6 @@ jobs:
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
-      - *restore_pods_cache_ios
       - run:
           name: Fetch CocoaPods Specs
           command: |
@@ -89,7 +88,6 @@ jobs:
           name: Install Pods
           command: pod install --verbose
           working_directory: ios
-      - *save_pods_cache_ios
       - *restore_yarn_cache_macos
       - run:
           name: Install node modules
