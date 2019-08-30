@@ -97,7 +97,7 @@ jobs:
       # - *restore_pods_cache_ios
       - run:
           name: Install Pods
-          command: pod install --verbose
+          command: bundle exec pod install --verbose
           working_directory: ios
       # - *save_pods_cache_ios
       - run:
