@@ -79,8 +79,9 @@ jobs:
       FL_OUTPUT_DIR: output
     shell: /bin/bash --login -o pipefail
     dependencies:
-    override:
-      - pod install
+      override:
+        - bundle install
+        - bundle exec pod install
     steps:
       - checkout
       - *restore_yarn_cache_macos
@@ -88,21 +89,21 @@ jobs:
           name: Install node modules
           command: yarn --frozen-lockfile
       - *save_yarn_cache_macos
-      - *restore_gems_cache_ios
-      - run:
-          name: Bundle install
-          command: bundle install
-          working_directory: ios
-      - *save_gems_cache_ios
+      # - *restore_gems_cache_ios
+      # - run:
+      #     name: Bundle install
+      #     command: bundle install
+      #     working_directory: ios
+      # - *save_gems_cache_ios
       # - *restore_pods_cache_ios
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-      - run:
-          name: Install Pods
-          command: pod install --verbose
-          working_directory: ios
+      # - run:
+      #     name: Fetch CocoaPods Specs
+      #     command: |
+      #       curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      # - run:
+      #     name: Install Pods
+      #     command: pod install --verbose
+      #     working_directory: ios
       # - *save_pods_cache_ios
       - run:
           name: Build iOS ipa
