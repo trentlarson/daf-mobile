@@ -91,7 +91,7 @@ jobs:
           command: bundle install
           working_directory: ios
       - *save_gems_cache_ios
-      - *restore_pods_cache_ios
+      # - *restore_pods_cache_ios
       - run:
           name: Fetch CocoaPods Specs
           command: |
@@ -100,7 +100,7 @@ jobs:
           name: Install Pods
           command: pod install --verbose
           working_directory: ios
-      - *save_pods_cache_ios
+      # - *save_pods_cache_ios
       - run:
           name: Build iOS ipa
           command: bundle exec fastlane assemble_ios_build
