@@ -98,7 +98,7 @@ jobs:
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
           name: Install Pods
-          command: bundle exec pod install
+          command: pod install --verbose
           working_directory: ios
       - *save_pods_cache_ios
       - run:
@@ -150,8 +150,8 @@ workflows:
               only:
                 - /\d+\.\d+\.\d+/
       - build_ios:
-          requires:
-            - verify
+          # requires:
+          #   - verify
       # - deploy_ios:
       #     requires:
       #       - verify
