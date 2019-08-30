@@ -80,6 +80,10 @@ jobs:
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
+      - run:
+          name: Fetch CocoaPods Specs
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - *restore_yarn_cache_macos
       - run:
           name: Install node modules
@@ -89,13 +93,8 @@ jobs:
       - run:
           name: Bundle install
           command: bundle install
-          working_directory: ios
       - *save_gems_cache_ios
       # - *restore_pods_cache_ios
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
           name: Install Pods
           command: pod install --verbose
