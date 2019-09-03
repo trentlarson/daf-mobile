@@ -61,7 +61,7 @@ references:
       name: Decode Android keystore
       command: echo $ANDROID_KEYSTORE | base64 -di | tee release-key.keystore app/release-key.keystore >/dev/null
 
-  gems_cache_key_android: &gems_cache_key_android android-bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+  gems_cache_key_android: &gems_cache_key_android android-bundle-v1-{{ checksum "../Gemfile.lock" }}-{{ arch }}
 
   gradle_cache_key: &gradle_cache_key jars-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
 
@@ -127,7 +127,10 @@ jobs:
       - *save_gradle_cache
 
       - *restore_gems_cache_android
-      - run: bundle install
+      - run:
+          name: Bundle install
+          command: bundle install
+          working_directory: ~/project
       - *save_gems_cache_android
 
       - *decode_android_key
