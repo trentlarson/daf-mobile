@@ -27,17 +27,19 @@ lane :assemble_android_build do
   gradle(task: "assemble", build_type: "Release", print_command: false, properties: production_properties)
 end
 
-desc "Build Android app (dummy)"
-lane :assemble_android_dummy_build do
-  dummy_properties = {
-    "android.injected.signing.store.file" => "app/dummy-release-key.key",
-    "android.injected.signing.store.password" => "sertodummy",
-    "android.injected.signing.key.alias" => "dummy-serto-release-key",
-    "android.injected.signing.key.password" => "sertodummy"
-  }
+# Un-comment to run dummy build. Do not commit un-commented code.
 
-  gradle(task: "assemble", build_type: "Release", properties: dummy_properties)
-end
+# desc "Build Android app (dummy)"
+# lane :assemble_android_dummy_build do
+#   dummy_properties = {
+#     "android.injected.signing.store.file" => "app/dummy-release-key.key",
+#     "android.injected.signing.store.password" => "sertodummy",
+#     "android.injected.signing.key.alias" => "dummy-serto-release-key",
+#     "android.injected.signing.key.password" => "sertodummy"
+#   }
+
+#   gradle(task: "assemble", build_type: "Release", properties: dummy_properties)
+# end
 
 desc "Clean project"
 lane :clean_android do
