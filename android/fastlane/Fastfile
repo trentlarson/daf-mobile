@@ -15,7 +15,6 @@
 
 default_platform(:android)
 
-# android/fastlane/Fastfile
 desc "Build the Android app"
 lane :assemble_android_build do
   properties = {
@@ -23,6 +22,18 @@ lane :assemble_android_build do
     "android.injected.signing.store.password" => ENV['ANDROID_STORE_PASSWORD'],
     "android.injected.signing.key.alias" => ENV['ANDROID_KEY_ALIAS'],
     "android.injected.signing.key.password" => ENV['ANDROID_STORE_PASSWORD']
+  }
+
+  gradle(task: "assemble", build_type: "Release", properties: properties)
+end
+
+desc "Build Android app (dummy)"
+lane :assemble_android_dummy_build do
+  properties = {
+    "android.injected.signing.store.file" => "dummy-release-key.key",
+    "android.injected.signing.store.password" => "sertodummy",
+    "android.injected.signing.key.alias" => "dummy-serto-release-key",
+    "android.injected.signing.key.password" => "sertodummy"
   }
 
   gradle(task: "assemble", build_type: "Release", properties: properties)
