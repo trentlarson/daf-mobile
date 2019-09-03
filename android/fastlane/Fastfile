@@ -17,27 +17,27 @@ default_platform(:android)
 
 desc "Build the Android app"
 lane :assemble_android_build do
-  properties = {
+  production_properties = {
     "android.injected.signing.store.file" => "release-key.keystore",
     "android.injected.signing.store.password" => ENV['ANDROID_STORE_PASSWORD'],
     "android.injected.signing.key.alias" => ENV['ANDROID_KEY_ALIAS'],
     "android.injected.signing.key.password" => ENV['ANDROID_STORE_PASSWORD']
   }
 
-  gradle(task: "assemble", build_type: "Release", print_command: false, properties: properties)
+  gradle(task: "assemble", build_type: "Release", print_command: false, properties: production_properties)
 end
 
-# desc "Build Android app (dummy)"
-# lane :assemble_android_dummy_build do
-#   properties = {
-#     "android.injected.signing.store.file" => "dummy-release-key.key",
-#     "android.injected.signing.store.password" => "sertodummy",
-#     "android.injected.signing.key.alias" => "dummy-serto-release-key",
-#     "android.injected.signing.key.password" => "sertodummy"
-#   }
+desc "Build Android app (dummy)"
+lane :assemble_android_dummy_build do
+  dummy_properties = {
+    "android.injected.signing.store.file" => "app/dummy-release-key.key",
+    "android.injected.signing.store.password" => "sertodummy",
+    "android.injected.signing.key.alias" => "dummy-serto-release-key",
+    "android.injected.signing.key.password" => "sertodummy"
+  }
 
-#   gradle(task: "assemble", build_type: "Release", properties: properties)
-# end
+  gradle(task: "assemble", build_type: "Release", properties: dummy_properties)
+end
 
 desc "Clean project"
 lane :clean_android do
