@@ -111,6 +111,36 @@ jobs:
           paths:
             - node_modules
 
+  build_android:
+    working_directory: ~/project/android
+    docker:
+      - image: circleci/android:api-28-node8-alpha
+    steps:
+      - checkout:
+          path: ~/project
+
+      - attach_workspace:
+          at: ~/project
+
+      - *restore_gradle_cache
+      - *android_dependencies
+      - *save_gradle_cache
+
+      - *restore_gems_cache_android
+      - run: bundle install
+      - *save_gems_cache_android
+
+      - *decode_android_key
+      - *create_google_play_key
+
+      - run:
+          name: Build android APK
+          command: bundle exec fastlane assemble_android_build
+
+      - store_artifacts:
+          path: app/build/outputs/apk/
+          destination: /apk/
+
   build_ios:
     macos:
       xcode: '10.1.0'
@@ -141,7 +171,7 @@ jobs:
           working_directory: ios
       - *save_pods_cache_ios
       - run:
-          name: Build iOS ipa
+          name: Build iOS IPA
           command: bundle exec fastlane assemble_ios_build
           working_directory: ios
           no_output_timeout: 30m
@@ -188,9 +218,12 @@ workflows:
             tags:
               only:
                 - /\d+\.\d+\.\d+/
-      - build_ios
-        # requires:
-        #   - verify
+      - build_android:
+          # - requires:
+          #     - verify
+      # - build_ios
+      # requires:
+      #   - verify
       # - deploy_ios:
       #     requires:
       #       - verify

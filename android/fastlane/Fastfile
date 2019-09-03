@@ -15,24 +15,29 @@
 
 default_platform(:android)
 
-platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
-  end
+# android/fastlane/Fastfile
+desc "Build the Android app"
+lane :assemble_android_build do
+  properties = {
+    "android.injected.signing.store.file" => "release-key.keystore",
+    "android.injected.signing.store.password" => ENV['ANDROID_STORE_PASSWORD'],
+    "android.injected.signing.key.alias" => ENV['ANDROID_KEY_ALIAS'],
+    "android.injected.signing.key.password" => ENV['ANDROID_STORE_PASSWORD']
+  }
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
+  gradle(task: "assemble", build_type: "Release", properties: properties)
+end
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
-  end
+desc "Clean project"
+lane :clean_android do
+  gradle(
+    task: "clean"
+  ) 
+end
+
+desc "Build and deploy to Google Play"
+lane :deploy do
+  assemble_build
+  # Can be changed to another track (e.g. 'beta')
+  upload_to_play_store(track: 'alpha')
 end
