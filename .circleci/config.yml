@@ -219,8 +219,8 @@ workflows:
               only:
                 - /\d+\.\d+\.\d+/
       - build_android:
-          - requires:
-              - verify
+          requires:
+            - verify
       # - build_ios
       # requires:
       #   - verify
