@@ -24,7 +24,7 @@ lane :assemble_android_build do
     "android.injected.signing.key.password" => ENV['ANDROID_STORE_PASSWORD']
   }
 
-  gradle(task: "assemble", build_type: "Release", properties: properties)
+  gradle(task: "assemble", build_type: "Release", print_command: false, properties: properties)
 end
 
 # desc "Build Android app (dummy)"
