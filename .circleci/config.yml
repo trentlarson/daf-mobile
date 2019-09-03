@@ -92,7 +92,7 @@ references:
       command: ./gradlew androidDependencies
 
 jobs:
-  verify:
+  verify_unit_tests:
     working_directory: ~/project
     docker:
       - image: circleci/node:10
@@ -212,9 +212,9 @@ jobs:
 
 workflows:
   version: 2
-  deploy:
+  build_platforms:
     jobs:
-      - verify:
+      - verify_unit_tests:
           # This job runs on all branches
           # and for all tags
           filters:
@@ -223,7 +223,10 @@ workflows:
                 - /\d+\.\d+\.\d+/
       - build_android:
           requires:
-            - verify
+            - verify_unit_tests
+      - build_ios:
+          requires:
+            - verify_unit_tests
       # - build_ios
       # requires:
       #   - verify
