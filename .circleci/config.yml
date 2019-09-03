@@ -218,9 +218,9 @@ workflows:
             tags:
               only:
                 - /\d+\.\d+\.\d+/
-      - build_android:
-          # - requires:
-          #     - verify
+      - build_android
+        # - requires:
+        #     - verify
       # - build_ios
       # requires:
       #   - verify
