@@ -1,6 +1,6 @@
 {
   "name": "serto-mobile",
-  "version": "0.0.1",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -162,7 +162,7 @@
   "release": {
     "branch": "master",
     "npmPublish": false,
-    "ci": false,
+    "ci": true,
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
@@ -176,7 +176,7 @@
             "android/app/build.gradle",
             "package.json"
           ],
-          "message": "chore(release): ${nextRelease.version} \n\n${nextRelease.notes}"
+          "message": "chore(release): :rocket: New version ${nextRelease.version} \n\n${nextRelease.notes}"
         }
       ],
       "@semantic-release/github"
