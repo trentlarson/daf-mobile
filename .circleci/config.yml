@@ -1,3 +1,6 @@
+###############################################################
+# References
+###############################################################
 version: 2
 references:
   restore_yarn_cache: &restore_yarn_cache
@@ -91,6 +94,104 @@ references:
       name: Download Android Dependencies
       command: ./gradlew androidDependencies
 
+###############################################################
+# Workflows
+###############################################################
+workflows:
+  version: 2
+  # Trigger workflow for last commit (merge commits) to master
+  # Run unit tests for sanity and if all looks good run semantic release
+  # Semantic release will decide based on commit messages if another release is needed
+  # Always run unit tests on master
+  semantic-release:
+    jobs:
+      - verify_unit_tests:
+          filters:
+            branches:
+              only:
+                - master
+      - verify_release:
+          requires:
+            - verify_unit_tests
+          filters:
+            branches:
+              only:
+                - master
+            tags:
+              # Would be good if we can ignore tagged commits but it won't trigger another build so it's fine
+              ignore: /.*/
+
+  # This gets triggers on every push to all branches except master
+  # It verifies the branch, runs unit tests and builds iOS and Android
+  verify-test-build:
+    jobs:
+      - verify_unit_tests:
+          filters:
+            branches:
+              ignore:
+                - master
+      - build_ios:
+          requires:
+            - verify_unit_tests
+          filters:
+            branches:
+              ignore:
+                - master
+      - build_android:
+          requires:
+            - verify_unit_tests
+          filters:
+            branches:
+              ignore:
+                - master
+
+  deploy-release-tag:
+    jobs:
+      - verify_unit_tests:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - build_ios:
+          requires:
+            - verify_unit_tests
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - build_android:
+          requires:
+            - verify_unit_tests
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - deploy_ios:
+          requires:
+            - verify_unit_tests
+            - build_ios
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - deploy_android:
+          requires:
+            - verify_unit_tests
+            - build_android
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+
+###############################################################
+# Jobs
+###############################################################
+
 jobs:
   verify_unit_tests:
     working_directory: ~/project
@@ -104,12 +205,27 @@ jobs:
           command: yarn --frozen-lockfile
       - *save_yarn_cache
       - run:
-          name: Unit tests
+          name: Run unit tests
           command: yarn test --maxWorkers=2
       - persist_to_workspace:
           root: ~/project
           paths:
             - node_modules
+
+  verify_release:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout:
+          path: ~/project
+
+      - attach_workspace:
+          at: ~/project
+
+      - run:
+          name: Semantic release
+          command: yarn release
 
   build_android:
     working_directory: ~/project/android
@@ -191,68 +307,19 @@ jobs:
       FL_OUTPUT_DIR: output
     shell: /bin/bash --login -o pipefail
     steps:
-      - checkout
-      - *restore_yarn_cache_macos
-      - run:
-          name: Install node modules
-          command: yarn --frozen-lockfile
-      - *save_yarn_cache_macos
+      - checkout:
+          path: ~/project
+
+      - attach_workspace:
+          at: ~/project
 
       - *restore_gems_cache_ios
       - run:
+          name: Bundle install
           command: bundle install
-          working_directory: ios
-      - *save_gems_cache_ios
 
       - run:
           name: Deploy iOS ipa
           command: bundle exec fastlane deploy
           working_directory: ios
           no_output_timeout: 10m
-
-workflows:
-  version: 2
-  build_platforms:
-    jobs:
-      - verify_unit_tests:
-          # This job runs on all branches
-          # and for all tags
-          filters:
-            tags:
-              only:
-                - /\d+\.\d+\.\d+/
-      - build_android:
-          requires:
-            - verify_unit_tests
-      - build_ios:
-          requires:
-            - verify_unit_tests
-      # - build_ios
-      # requires:
-      #   - verify
-      # - deploy_ios:
-      #     requires:
-      #       - verify
-      #     # This job runs on the
-      #     # deploy-ios branch
-      #     # and for tags
-      #     filters:
-      #       branches:
-      #         only:
-      #           - deploy-ios
-      #       tags:
-      #         only:
-      #           - /\d+\.\d+\.\d+/
-      # - deploy_android:
-      #     requires:
-      #       - verify
-      #     # This job runs on the
-      #     # deploy-android branch
-      #     # and for tags
-      #     filters:
-      #       branches:
-      #         only:
-      #           - deploy-android
-      #       tags:
-      #         only:
-      #           - /\d+\.\d+\.\d+/
