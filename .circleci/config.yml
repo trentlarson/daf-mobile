@@ -300,6 +300,7 @@ jobs:
           destination: /Serto.ipa
 
       - persist_to_workspace:
+          root: ~/project
           paths:
             - ios/output
             - vendor/bundle
