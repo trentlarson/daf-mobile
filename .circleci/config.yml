@@ -298,6 +298,11 @@ jobs:
       - store_artifacts:
           path: ios/output/gym/Serto.ipa
           destination: /Serto.ipa
+
+      - persist_to_workspace:
+          paths:
+            - ios/output
+            - vendor/bundle
   # ...
   deploy_ios:
     macos:
@@ -307,17 +312,8 @@ jobs:
       FL_OUTPUT_DIR: output
     shell: /bin/bash --login -o pipefail
     steps:
-      - checkout:
-          path: ~/project
-
-      - attach_workspace:
-          at: ~/project
-
-      - *restore_gems_cache_ios
-      - run:
-          name: Bundle install
-          command: bundle install
-
+      - checkout
+      - attach_workspace
       - run:
           name: Deploy iOS ipa
           command: bundle exec fastlane deploy
