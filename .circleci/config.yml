@@ -250,7 +250,6 @@ jobs:
       - *save_gems_cache_android
 
       - *decode_android_key
-      - *create_google_play_key
 
       - run:
           name: Build android APK
@@ -259,6 +258,12 @@ jobs:
       - store_artifacts:
           path: app/build/outputs/apk/
           destination: /apk/
+
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - android/app/build/outputs/apk
+            - vendor/bundle
 
   build_ios:
     macos:
@@ -296,8 +301,8 @@ jobs:
           no_output_timeout: 30m
 
       - store_artifacts:
-          path: ios/output/gym/Serto.ipa
-          destination: /Serto.ipa
+          path: ios/output/gym/
+          destination: /ipa/
 
       - persist_to_workspace:
           root: ~/project
@@ -320,3 +325,20 @@ jobs:
           command: bundle exec fastlane deploy
           working_directory: ios
           no_output_timeout: 10m
+
+deploy_android:
+  working_directory: ~/project/android
+  docker:
+    - image: circleci/android:api-28-node8-alpha
+  steps:
+    - checkout:
+        path: ~/project
+    - attach_workspace:
+        at: ~/project
+    - *create_google_play_key
+    - run:
+        name: Build and deploy android APK
+        command: bundle exec fastlane deploy_android
+    - store_artifacts:
+        path: app/build/outputs/apk/
+        destination: /apk/

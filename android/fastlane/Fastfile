@@ -15,7 +15,7 @@
 
 default_platform(:android)
 
-desc "Build the Android app"
+desc "Build and sign Android APK"
 lane :assemble_android_build do
   production_properties = {
     "android.injected.signing.store.file" => "release-key.keystore",
@@ -25,6 +25,19 @@ lane :assemble_android_build do
   }
 
   gradle(task: "assemble", build_type: "Release", print_command: false, properties: production_properties)
+end
+
+desc "Build and deploy APK to Google Play"
+lane :deploy_android do
+  # Can be changed to another track (e.g. 'beta')
+  upload_to_play_store(track: 'internal')
+end
+
+desc "Clean project"
+lane :clean_android do
+  gradle(
+    task: "clean"
+  ) 
 end
 
 # Un-comment to run dummy build. Do not commit un-commented code.
@@ -40,17 +53,3 @@ end
 
 #   gradle(task: "assemble", build_type: "Release", properties: dummy_properties)
 # end
-
-desc "Clean project"
-lane :clean_android do
-  gradle(
-    task: "clean"
-  ) 
-end
-
-desc "Build and deploy to Google Play"
-lane :deploy do
-  assemble_build
-  # Can be changed to another track (e.g. 'beta')
-  upload_to_play_store(track: 'alpha')
-end
