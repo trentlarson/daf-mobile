@@ -6,12 +6,21 @@ import { Sentry } from 'react-native-sentry'
 import Config from 'react-native-config'
 import analytics from '@segment/analytics-react-native'
 import { useScreens } from 'react-native-screens'
+import Log from './src/lib/Log'
 
 useScreens()
 
 Sentry.config(Config.SENTRY_DSN).install()
 
-YellowBox.ignoreWarnings(['componentWillUpdate', 'componentWillReceiveProps'])
+const defaultHandler =
+  ErrorUtils.getGlobalHandler && ErrorUtils.getGlobalHandler()
+
+if (defaultHandler) {
+  ErrorUtils.setGlobalHandler((error, isFatal) => {
+    Log.error(error.stack ? error.stack : error.message, 'System')
+    defaultHandler && defaultHandler(error, isFatal)
+  })
+}
 
 analytics.setup(
   Platform.OS === 'ios' ? Config.SEGMENT_IOS : Config.SEGMENT_ANDROID,
@@ -30,7 +39,6 @@ codePush.getUpdateMetadata().then(update => {
 })
 
 const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-  installMode: codePush.InstallMode.ON_NEXT_RESUME,
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
 }
 AppRegistry.registerComponent(appName, () => codePush(codePushOptions)(App))
