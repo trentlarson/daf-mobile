@@ -38,12 +38,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new AsyncStoragePackage(), new RNScreensPackage(), new RNCameraPackage(),
-          new RNAnalyticsPackage(), new RNSentryPackage(), new RNUportSignerPackage(), new RNLocalizePackage(),
-          new RNGestureHandlerPackage(),
-          new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey),
-              getApplicationContext(), BuildConfig.DEBUG, R.string.reactNativeCodePush_PublicKey),
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new AsyncStoragePackage(), new RNScreensPackage(),
+          new RNCameraPackage(), new RNAnalyticsPackage(), new RNSentryPackage(), new RNUportSignerPackage(),
+          new RNLocalizePackage(), new RNGestureHandlerPackage(),
+          new CodePush(BuildConfig.CODE_PUSH_ANDROID, getApplicationContext(), BuildConfig.DEBUG),
           new AppCenterReactNativePackage(MainApplication.this), new ReactNativeConfigPackage());
     }
 
