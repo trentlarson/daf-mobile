@@ -140,6 +140,7 @@ workflows:
               ignore:
                 - master
       - build_ios:
+          staging: true
           requires:
             - verify_unit_tests
           filters:
