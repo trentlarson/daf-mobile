@@ -135,12 +135,12 @@ workflows:
   verify-test-build:
     jobs:
       - verify_unit_tests:
+          staging: true
           filters:
             branches:
               ignore:
                 - master
       - build_ios:
-          staging: true
           requires:
             - verify_unit_tests
           filters:
@@ -158,13 +158,13 @@ workflows:
   deploy-release-tag:
     jobs:
       - verify_unit_tests:
+          production: true
           filters:
             tags:
               only: /^v.*/
             branches:
               ignore: /.*/
       - build_ios:
-          production: true
           requires:
             - verify_unit_tests
           filters:
@@ -208,8 +208,23 @@ jobs:
     working_directory: ~/project
     docker:
       - image: circleci/node:10
+    parameters:
+      production:
+        type: boolean
+        default: false
+      staging:
+        type: boolean
+        default: false
     steps:
       - checkout
+      - when:
+          condition: <<parameters.production>>
+          steps:
+            - *create_production_env_file
+      - when:
+          condition: <<parameters.staging>>
+          steps:
+            - *create_staging_env_file
       - *restore_yarn_cache
       - run:
           name: Install node modules
@@ -222,6 +237,7 @@ jobs:
           root: ~/project
           paths:
             - node_modules
+            - .env
 
   verify_release:
     working_directory: ~/project
@@ -282,23 +298,8 @@ jobs:
     environment:
       FL_OUTPUT_DIR: output
     shell: /bin/bash --login -o pipefail
-    parameters:
-      production:
-        type: boolean
-        default: false
-      staging:
-        type: boolean
-        default: false
     steps:
       - checkout
-      - when:
-          condition: <<parameters.production>>
-          steps:
-            - *create_production_env_file
-      - when:
-          condition: <<parameters.staging>>
-          steps:
-            - *create_staging_env_file
       - run:
           name: Fetch CocoaPods Specs
           command: |
