@@ -12,7 +12,6 @@ import com.reactlibrary.RNUportSignerPackage;
 import com.reactcommunity.rnlocalize.RNLocalizePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.microsoft.codepush.react.CodePush;
-import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -42,7 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
           new RNCameraPackage(), new RNAnalyticsPackage(), new RNSentryPackage(), new RNUportSignerPackage(),
           new RNLocalizePackage(), new RNGestureHandlerPackage(),
           new CodePush(BuildConfig.CODE_PUSH_ANDROID, getApplicationContext(), BuildConfig.DEBUG),
-          new AppCenterReactNativePackage(MainApplication.this), new ReactNativeConfigPackage());
+          new ReactNativeConfigPackage());
     }
 
     @Override

@@ -38,7 +38,6 @@
     "apollo-link-error": "^1.1.10",
     "apollo-link-http": "^1.5.14",
     "apollo-link-logger": "^1.2.3",
-    "appcenter": "^1.13.0",
     "did-jwt": "^0.2.0",
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",

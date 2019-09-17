@@ -18,7 +18,6 @@ target 'Serto' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   # Packages
-  pod 'AppCenterReactNativeShared', '~> 1.13.0'
   pod 'RNAnalytics', :path => '../node_modules/@segment/analytics-react-native'
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
