@@ -15,9 +15,9 @@ useScreens()
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
 
-if (Config.SENTRY_URL) {
+if (Config.SENTRY_DSN) {
   Sentry.init({
-    dsn: Config.SENTRY_URL,
+    dsn: Config.SENTRY_DSN,
     environment: Config.SENTRY_ENVIRONMENT,
     debug: true,
   })
@@ -29,7 +29,7 @@ const defaultHandler =
 if (defaultHandler) {
   ErrorUtils.setGlobalHandler((error, isFatal) => {
     Log.error(error.stack ? error.stack : error.message, 'System')
-    if (Config.SENTRY_URL) {
+    if (Config.SENTRY_DSN) {
       Sentry.captureException(error)
     }
     defaultHandler && defaultHandler(error, isFatal)
