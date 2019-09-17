@@ -39,8 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(), new AsyncStoragePackage(), new RNScreensPackage(),
           new RNCameraPackage(), new RNAnalyticsPackage(), new RNSentryPackage(), new RNUportSignerPackage(),
-          new RNLocalizePackage(), new RNGestureHandlerPackage(),
-          new CodePush(BuildConfig.CODE_PUSH_ANDROID, getApplicationContext(), BuildConfig.DEBUG),
+          new RNLocalizePackage(), new RNGestureHandlerPackage(), new CodePush(BuildConfig.CODE_PUSH_ANDROID,
+              getApplicationContext(), BuildConfig.DEBUG, BuildConfig.CODE_PUSH_PUBLIC_KEY),
           new ReactNativeConfigPackage());
     }
 

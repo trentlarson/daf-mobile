@@ -134,6 +134,7 @@ android {
         debug {
             // Set an empty key for codepush in debug mode. This env variable will different for staging and production
             buildConfigField "String", "CODE_PUSH_ANDROID", '""'
+            buildConfigField "String", "CODE_PUSH_PUBLIC_KEY", '""'
         }
 
         release {
