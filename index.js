@@ -1,4 +1,4 @@
-import { AppRegistry, YellowBox, Platform } from 'react-native'
+import { AppRegistry, NativeModules, Platform } from 'react-native'
 import App from './src/App'
 import { name as appName } from './app.json'
 import codePush from 'react-native-code-push'
@@ -8,7 +8,12 @@ import analytics from '@segment/analytics-react-native'
 import { useScreens } from 'react-native-screens'
 import Log from './src/lib/Log'
 
+const { UIManager } = NativeModules
+
 useScreens()
+
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true)
 
 if (Config.SENTRY_URL) {
   Sentry.init({
