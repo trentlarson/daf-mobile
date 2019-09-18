@@ -115,13 +115,14 @@ workflows:
   semantic-release:
     jobs:
       - verify_unit_tests:
+          name: verify_unit_tests_sanity
           filters:
             branches:
               only:
                 - master
       - verify_release:
           requires:
-            - verify_unit_tests
+            - verify_unit_tests_sanity
           filters:
             branches:
               only:
@@ -135,7 +136,7 @@ workflows:
   verify-test-build:
     jobs:
       - verify_unit_tests:
-          name: verify_unit_tests
+          name: verify_unit_tests_staging
           staging: true
           filters:
             branches:
@@ -143,14 +144,14 @@ workflows:
                 - master
       - build_ios:
           requires:
-            - verify_unit_tests
+            - verify_unit_tests_staging
           filters:
             branches:
               ignore:
                 - master
       - build_android:
           requires:
-            - verify_unit_tests
+            - verify_unit_tests_staging
           filters:
             branches:
               ignore:
