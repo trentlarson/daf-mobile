@@ -135,6 +135,7 @@ workflows:
   verify-test-build:
     jobs:
       - verify_unit_tests:
+          name: verify_unit_tests
           staging: true
           filters:
             branches:
@@ -158,6 +159,7 @@ workflows:
   deploy-release-tag:
     jobs:
       - verify_unit_tests:
+          name: verify_unit_tests_prod
           production: true
           filters:
             tags:
@@ -166,7 +168,7 @@ workflows:
               ignore: /.*/
       - build_ios:
           requires:
-            - verify_unit_tests
+            - verify_unit_tests_prod
           filters:
             tags:
               only: /^v.*/
@@ -174,7 +176,7 @@ workflows:
               ignore: /.*/
       - build_android:
           requires:
-            - verify_unit_tests
+            - verify_unit_tests_prod
           filters:
             tags:
               only: /^v.*/
@@ -182,7 +184,7 @@ workflows:
               ignore: /.*/
       - deploy_ios:
           requires:
-            - verify_unit_tests
+            - verify_unit_tests_prod
             - build_ios
           filters:
             tags:
@@ -191,7 +193,7 @@ workflows:
               ignore: /.*/
       - deploy_android:
           requires:
-            - verify_unit_tests
+            - verify_unit_tests_prod
             - build_android
           filters:
             tags:
