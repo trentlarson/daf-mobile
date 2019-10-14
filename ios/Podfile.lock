@@ -253,9 +253,9 @@ PODS:
   - RNSentry (1.0.6):
     - React
     - Sentry (~> 4.4.0)
-  - RNUportSigner (1.6.0):
+  - RNUportSigner (1.6.1):
     - React
-    - UPTEthereumSigner
+    - UPTEthereumSigner (~> 1.1.5)
   - RNVectorIcons (6.6.0):
     - React
   - Sentry (4.4.0):
@@ -436,7 +436,7 @@ SPEC CHECKSUMS:
   RNLocalize: f42aea3133d91d7fa3ec01284a6895019af1a83f
   RNScreens: 402a99b0a27c0c32f079cec12d3ccbd35e20cd7f
   RNSentry: f1c8e34f9109a94b77e946d0ca50803375c1c19e
-  RNUportSigner: 4eba00a001717d1dcb9aecc24b757242dd8f56cd
+  RNUportSigner: 6f4968dd61b4e856bc6e93fa216b2a7268561923
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Sentry: 26650184fe71eb7476dfd2737acb5ea6cc64b4b1
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
