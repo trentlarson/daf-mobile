@@ -5,10 +5,10 @@
 import React, { useState } from 'react'
 import { Container, FabButton, Screen } from '@kancha/kancha-ui'
 import { RNCamera } from 'react-native-camera'
-import { NavigationScreen } from '../../navigators'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Colors, Icons } from '../../theme'
 
-export default (props: NavigationScreen) => {
+export default (props: NavigationStackScreenProps) => {
   const onBarCodeRead = (e: any) => {
     props.navigation.navigate('App')
     const loadRequest = props.navigation.getParam('loadRequest', null)
