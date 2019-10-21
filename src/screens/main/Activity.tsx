@@ -18,7 +18,7 @@ const chartConfig = {
   backgroundGradientFromOpacity: 1,
   backgroundGradientTo: '#FFFFFF',
   backgroundGradientToOpacity: 1,
-  color: (opacity = 1) => hexToRgba(Colors.BRAND, opacity),
+  color: (opacity = 1) => hexToRgba(Colors.BLACK, opacity),
   strokeWidth: 1, // optional, default 3
   barPercentage: 0.5,
   strokeColor: Colors.BRAND,
@@ -29,7 +29,7 @@ const data = {
   datasets: [
     {
       data: [20, 45, 28, 80, 99, 43],
-      color: (opacity = 1) => hexToRgba(Colors.ACCENT, opacity),
+      color: (opacity = 1) => hexToRgba(Colors.BRAND, opacity),
       strokeWidth: 2, // optional
     },
   ],

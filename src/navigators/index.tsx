@@ -14,14 +14,8 @@ import {
   StackViewTransitionConfigs,
 } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import {
-  Container,
-  Icon,
-  Avatar,
-  FabButton,
-  ActivityItem,
-} from '@kancha/kancha-ui'
-import { Icons, Colors } from '../theme'
+import { Icon, Avatar, FabButton, ActivityItem } from '@kancha/kancha-ui'
+import { Colors } from '../theme'
 
 const avatar = require('../assets/images/kitten-avatar.jpg')
 
@@ -63,10 +57,7 @@ import Profile from '../screens/main/Profile'
 import Onboarding from '../screens/main/Onboarding'
 
 import Scanner from '../screens/main/Scanner'
-// import DrawerRight from './DrawerRight'
-// import DrawerLeft from './DrawerLeft'
 import Request from '../screens/main/Request'
-// import IdentitySelectModal from '../screens/main/IdentitySelectionModal'
 import Credential from '../screens/main/Credential'
 
 // Settings & Internal Demo Screens
@@ -86,89 +77,103 @@ import Credentials from '../screens/settings/Credentials'
 import DisclosureRequest from '../screens/settings/DisclosureRequest'
 import ModalDemo from '../screens/settings/ModalDemo'
 
-const SettingsNavigator = createStackNavigator({
-  [Screens.Settings.screen]: {
-    screen: Settings,
-  },
-  [Screens.Messages.screen]: {
-    screen: Messages,
-    navigationOptions: {
-      title: i18n.t('Messages'),
+const SettingsNavigator = createStackNavigator(
+  {
+    [Screens.Settings.screen]: {
+      screen: Settings,
+      navigationOptions: {
+        title: i18n.t('Settings'),
+      },
+    },
+    [Screens.Messages.screen]: {
+      screen: Messages,
+      navigationOptions: {
+        title: i18n.t('Messages'),
+      },
+    },
+    [Screens.TrustGraphEdges.screen]: {
+      screen: TrustGraphEdges,
+      navigationOptions: {
+        title: i18n.t('Trust Graph Edges'),
+      },
+    },
+    [Screens.Connections.screen]: {
+      screen: Connections,
+      navigationOptions: {
+        title: i18n.t('Connections'),
+      },
+    },
+    [Screens.Logs.screen]: {
+      screen: Logs,
+      navigationOptions: {
+        title: i18n.t('Logs'),
+      },
+    },
+    [Screens.Codepush.screen]: {
+      screen: Codepush,
+      navigationOptions: {
+        title: i18n.t('Codepush'),
+      },
+    },
+    [Screens.Signer.screen]: {
+      screen: Signer,
+      navigationOptions: {
+        title: i18n.t('Signer'),
+      },
+    },
+    [Screens.Config.screen]: {
+      screen: Config,
+      navigationOptions: {
+        title: i18n.t('Configuration'),
+      },
+    },
+    [Screens.Crash.screen]: {
+      screen: Crash,
+      navigationOptions: {
+        title: i18n.t('CrashReporting'),
+      },
+    },
+    [Screens.Config.screen]: {
+      screen: Config,
+      navigationOptions: {
+        title: i18n.t('Configuration'),
+      },
+    },
+    [Screens.DidViewer.screen]: {
+      screen: DidViewer,
+      navigationOptions: {
+        title: i18n.t('Did Viewer'),
+      },
+    },
+    [Screens.Credentials.screen]: {
+      screen: Credentials,
+      navigationOptions: {
+        title: i18n.t('Credentials'),
+      },
+    },
+    [Screens.Claim.screen]: {
+      screen: Claim,
+      navigationOptions: {
+        title: i18n.t('Claim Viewer'),
+      },
+    },
+    [Screens.SignJwt.screen]: {
+      screen: SignJwt,
+      navigationOptions: {
+        title: i18n.t('Sign Jwt'),
+      },
     },
   },
-  [Screens.TrustGraphEdges.screen]: {
-    screen: TrustGraphEdges,
-    navigationOptions: {
-      title: i18n.t('Trust Graph Edges'),
+  {
+    defaultNavigationOptions: {
+      headerTintColor: Colors.BLACK,
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerBackTitle: null,
     },
   },
-  [Screens.Connections.screen]: {
-    screen: Connections,
-    navigationOptions: {
-      title: i18n.t('Connections'),
-    },
-  },
-  [Screens.Logs.screen]: {
-    screen: Logs,
-    navigationOptions: {
-      title: i18n.t('Logs'),
-    },
-  },
-  [Screens.Codepush.screen]: {
-    screen: Codepush,
-    navigationOptions: {
-      title: i18n.t('Codepush'),
-    },
-  },
-  [Screens.Signer.screen]: {
-    screen: Signer,
-    navigationOptions: {
-      title: i18n.t('Signer'),
-    },
-  },
-  [Screens.Config.screen]: {
-    screen: Config,
-    navigationOptions: {
-      title: i18n.t('Configuration'),
-    },
-  },
-  [Screens.Crash.screen]: {
-    screen: Crash,
-    navigationOptions: {
-      title: i18n.t('CrashReporting'),
-    },
-  },
-  [Screens.Config.screen]: {
-    screen: Config,
-    navigationOptions: {
-      title: i18n.t('Configuration'),
-    },
-  },
-  [Screens.DidViewer.screen]: {
-    screen: DidViewer,
-    navigationOptions: {
-      title: i18n.t('Did Viewer'),
-    },
-  },
-  [Screens.Credentials.screen]: {
-    screen: Credentials,
-    navigationOptions: {
-      title: i18n.t('Credentials'),
-    },
-  },
-  [Screens.Claim.screen]: {
-    screen: Claim,
-    navigationOptions: {
-      title: i18n.t('Claim Viewer'),
-    },
-  },
-  [Screens.SignJwt.screen]: {
-    screen: SignJwt,
-    navigationOptions: {
-      title: i18n.t('Sign Jwt'),
-    },
-  },
-})
+)
 
 const ActivityNavigator = createStackNavigator(
   {
@@ -198,9 +203,20 @@ const ActivityNavigator = createStackNavigator(
   },
 )
 
-const ExploreNavigator = createStackNavigator({
-  Explore,
-})
+const ExploreNavigator = createStackNavigator(
+  {
+    Explore,
+  },
+  {
+    defaultNavigationOptions: {
+      headerTintColor: Colors.BLACK,
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerBackTitle: null,
+    },
+  },
+)
 
 const ProfileNavigator = createStackNavigator({
   Profile,
