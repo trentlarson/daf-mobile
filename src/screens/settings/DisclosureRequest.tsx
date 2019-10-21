@@ -19,7 +19,6 @@ const bannerImage = require('../../assets/images/space-x-banner.jpg')
 const Component: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
   return (
     <Screen
-      statusBarHidden={true}
       safeAreaBottom={true}
       safeAreaBottomBackground={Colors.WHITE}
       scrollEnabled={true}

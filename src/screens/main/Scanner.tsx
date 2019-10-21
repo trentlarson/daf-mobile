@@ -2,23 +2,13 @@
  * Serto Mobile App
  *
  */
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, FabButton, Screen } from '@kancha/kancha-ui'
 import { RNCamera } from 'react-native-camera'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Colors, Icons } from '../../theme'
 
-export default (props: NavigationStackScreenProps) => {
-  const onBarCodeRead = (e: any) => {
-    props.navigation.navigate('App')
-    const loadRequest = props.navigation.getParam('loadRequest', null)
-    if (loadRequest) {
-      loadRequest({
-        type: 'DISCLOSURE',
-        data: e.data,
-      })
-    }
-  }
+export default (props: any) => {
+  const onBarCodeRead = (e: any) => {}
 
   return (
     <Screen
@@ -27,7 +17,7 @@ export default (props: NavigationStackScreenProps) => {
           <FabButton
             testID={'CANCEL_SCAN_BTN'}
             color={Colors.CHARCOAL}
-            onPress={() => props.navigation.navigate('App')}
+            onPress={() => props.navigation.goBack()}
             icon={Icons.CLOSE}
           />
         </Container>

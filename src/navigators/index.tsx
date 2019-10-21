@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Animated, Easing } from 'react-native'
+import { Animated, Easing } from 'react-native'
 import {
   createAppContainer,
   NavigationParams,
@@ -9,11 +9,12 @@ import {
 } from 'react-navigation'
 import i18n from '../lib/I18n'
 
-import { createDrawerNavigator } from 'react-navigation-drawer'
-import { createStackNavigator } from 'react-navigation-stack'
+import {
+  createStackNavigator,
+  StackViewTransitionConfigs,
+} from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-
-import { Container, Icon, Button, Constants, Avatar } from '@kancha/kancha-ui'
+import { Container, Icon, Avatar, FabButton } from '@kancha/kancha-ui'
 import { Icons, Colors } from '../theme'
 
 const avatar = require('../assets/images/kitten-avatar.jpg')
@@ -55,7 +56,7 @@ import Explore from '../screens/main/Explore'
 import Profile from '../screens/main/Profile'
 import Onboarding from '../screens/main/Onboarding'
 
-// import Scanner from '../screens/main/Scanner'
+import Scanner from '../screens/main/Scanner'
 // import DrawerRight from './DrawerRight'
 // import DrawerLeft from './DrawerLeft'
 import Request from '../screens/main/Request'
@@ -175,6 +176,9 @@ const ProfileNavigator = createStackNavigator({
   Profile,
 })
 
+/**
+ * Main TabNavigator
+ */
 const TabNavigator = createBottomTabNavigator(
   {
     Activity: {
@@ -193,13 +197,18 @@ const TabNavigator = createBottomTabNavigator(
         },
       },
     },
-    Profile: {
-      screen: ProfileNavigator,
-      navigationOptions: {
-        tabBarIcon: () => {
-          return <Avatar source={avatar} />
-        },
-      },
+    Scan: {
+      screen: () => null, // Empty screen
+      navigationOptions: props => ({
+        tabBarVisible: false,
+        tabBarIcon: (
+          <FabButton
+            shadowOpacity={0.1}
+            onPress={() => props.navigation.navigate('Scanner')}
+            icon={{ name: 'ios-qr-scanner', iconFamily: 'Ionicons' }}
+          />
+        ),
+      }),
     },
     Settings: {
       screen: SettingsNavigator,
@@ -211,32 +220,65 @@ const TabNavigator = createBottomTabNavigator(
         },
       },
     },
+    Profile: {
+      screen: ProfileNavigator,
+      navigationOptions: {
+        tabBarIcon: () => {
+          return <Avatar source={avatar} />
+        },
+      },
+    },
   },
   {
+    initialRouteName: 'Activity',
+    backBehavior: 'initialRoute',
     tabBarOptions: {
       showLabel: false,
     },
   },
 )
 
-const ModalStackNavigator = createStackNavigator(
+/**
+ * Remove modal animation from these screens
+ */
+const NO_MODAL_ANIM = ['Scanner']
+
+let dynamicModalTransition = (
+  transitionProps: any,
+  prevTransitionProps: any,
+) => {
+  const notModal = NO_MODAL_ANIM.some(
+    screenName =>
+      screenName === transitionProps.scene.route.routeName ||
+      (prevTransitionProps &&
+        screenName === prevTransitionProps.scene.route.routeName),
+  )
+  return notModal
+    ? StackViewTransitionConfigs.NoAnimation
+    : StackViewTransitionConfigs.ModalSlideFromBottomIOS
+}
+
+const App = createStackNavigator(
   {
     Tabs: TabNavigator,
     ModalDemo: ModalDemo,
     DisclosureRequest: DisclosureRequest,
     Request: Request,
     Credential: Credential,
+    Scanner: Scanner,
   },
   {
     headerMode: 'none',
+    transparentCard: true,
     mode: 'modal',
+    transitionConfig: dynamicModalTransition,
   },
 )
 
 const RootNavigator = createSwitchNavigator(
   {
-    App: ModalStackNavigator,
-    Onboarding: Onboarding,
+    App,
+    Onboarding,
   },
   { initialRouteName: 'Onboarding' },
 )

@@ -13,7 +13,11 @@ import analytics from '@segment/analytics-react-native'
 import { useScreens } from 'react-native-screens'
 import Log from './src/lib/Log'
 
-YellowBox.ignoreWarnings(['componentWillUpdate', 'componentWillReceiveProps'])
+YellowBox.ignoreWarnings([
+  'componentWillUpdate',
+  'componentWillReceiveProps',
+  'RCTRootView cancelTouches',
+])
 
 const { UIManager } = NativeModules
 

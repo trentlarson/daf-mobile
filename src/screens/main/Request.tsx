@@ -150,7 +150,6 @@ const Component: React.FC<NavigationStackScreenProps> = props => {
 
   return (
     <Screen
-      statusBarHidden={false}
       safeAreaBottom={true}
       safeAreaBottomBackground={Colors.WHITE}
       scrollEnabled={true}
