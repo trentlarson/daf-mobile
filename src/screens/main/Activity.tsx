@@ -41,6 +41,10 @@ const avatar1 = require('../../assets/images/space-x-logo.jpg')
 interface Props extends NavigationStackScreenProps {}
 
 const Activity: React.FC<Props> = ({ navigation }) => {
+  const viewProfile = (id: any) => {
+    navigation.navigate('Profile', { id })
+  }
+
   const showAttachments = (attachment: any) => {
     console.log(attachment)
     navigation.navigate('Credential')
@@ -78,7 +82,7 @@ const Activity: React.FC<Props> = ({ navigation }) => {
           subject={{ name: 'you', did: '1234', avatar: { uri: '' } }}
           activity={'sent you 5 credentials'}
           reason={'can go to the Moon'}
-          profileAction={() => {}}
+          profileAction={(id: string) => viewProfile(id)}
           attachmentsAction={(attachment: any) => showAttachments(attachment)}
           attachments={[
             {
@@ -109,7 +113,7 @@ const Activity: React.FC<Props> = ({ navigation }) => {
           subject={{ name: 'you', did: '1234', avatar: { uri: '' } }}
           activity={'shared information with'}
           reason={'can go to Mars'}
-          profileAction={() => {}}
+          profileAction={(id: string) => viewProfile(id)}
         />
         <ActivityItem
           id={'000001'}
@@ -119,7 +123,7 @@ const Activity: React.FC<Props> = ({ navigation }) => {
           subject={{ name: 'you', did: '1234', avatar: { uri: '' } }}
           activity={'requested information from you'}
           reason={'can go to Mars'}
-          profileAction={() => {}}
+          profileAction={(id: string) => viewProfile(id)}
         />
         <ActivityItem
           id={'000001'}
@@ -132,7 +136,7 @@ const Activity: React.FC<Props> = ({ navigation }) => {
           }}
           subject={{ name: 'you', did: '1234', avatar: { uri: '' } }}
           activity={'sent you a credential'}
-          profileAction={() => {}}
+          profileAction={(id: string) => viewProfile(id)}
           attachmentsAction={(attachment: any) => showAttachments(attachment)}
           attachments={[
             {

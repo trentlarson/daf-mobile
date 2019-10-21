@@ -1,5 +1,5 @@
 import React from 'react'
-import { Animated, Easing } from 'react-native'
+import { Image } from 'react-native'
 import {
   createAppContainer,
   NavigationParams,
@@ -14,7 +14,13 @@ import {
   StackViewTransitionConfigs,
 } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import { Container, Icon, Avatar, FabButton } from '@kancha/kancha-ui'
+import {
+  Container,
+  Icon,
+  Avatar,
+  FabButton,
+  ActivityItem,
+} from '@kancha/kancha-ui'
 import { Icons, Colors } from '../theme'
 
 const avatar = require('../assets/images/kitten-avatar.jpg')
@@ -164,9 +170,33 @@ const SettingsNavigator = createStackNavigator({
   },
 })
 
-const ActivityNavigator = createStackNavigator({
-  Activity,
-})
+const ActivityNavigator = createStackNavigator(
+  {
+    Activity: {
+      screen: Activity,
+      navigationOptions: {
+        headerTitle: () => (
+          <Image
+            source={require('../assets/images/uport_black_horizontal.png')}
+            style={{ height: 50 }}
+            resizeMode={'contain'}
+          />
+        ),
+      },
+    },
+    Profile,
+  },
+  {
+    initialRouteName: 'Activity',
+    defaultNavigationOptions: {
+      headerTintColor: Colors.BLACK,
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerBackTitle: null,
+    },
+  },
+)
 
 const ExploreNavigator = createStackNavigator({
   Explore,
@@ -198,13 +228,13 @@ const TabNavigator = createBottomTabNavigator(
       },
     },
     Scan: {
-      screen: () => null, // Empty screen
-      navigationOptions: props => ({
+      screen: () => null,
+      navigationOptions: ({ navigation }) => ({
         tabBarVisible: false,
         tabBarIcon: (
           <FabButton
             shadowOpacity={0.1}
-            onPress={() => props.navigation.navigate('Scanner')}
+            onPress={() => navigation.navigate('Scanner')}
             icon={{ name: 'ios-qr-scanner', iconFamily: 'Ionicons' }}
           />
         ),
