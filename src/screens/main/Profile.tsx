@@ -1,4 +1,4 @@
-import React, { createRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Container,
   Text,
@@ -12,12 +12,12 @@ import {
   NavigationStackScreenProps,
   NavigationStackOptions,
 } from 'react-navigation-stack'
+import { useApolloClient, useQuery } from '@apollo/react-hooks'
+import { getSelectedDidQuery } from '../../lib/Signer'
 
 const SWITCH_IDENTITY = 'SWITCH_IDENTITY'
 // tslint:disable-next-line:no-var-requires
 const avatar1 = require('../../assets/images/space-x-logo.jpg')
-// tslint:disable-next-line:no-var-requires
-const avatar2 = require('../../assets/images/kitten-avatar.jpg')
 
 interface Props extends NavigationStackScreenProps {}
 
@@ -25,11 +25,27 @@ const Profile: React.FC<Props> & {
   navigationOptions: NavigationStackOptions
 } = ({ navigation }) => {
   const id = navigation.getParam('id', null)
+  const {
+    data: { selectedDid },
+  }: any = useQuery(getSelectedDidQuery)
+
+  useEffect(() => {
+    navigation.setParams({ selectedDid })
+  }, [selectedDid])
 
   return (
     <Screen scrollEnabled background={'primary'}>
       <Container padding flex={1}>
-        <Avatar source={id ? avatar1 : avatar2} type={'rounded'} size={60} />
+        {id ? (
+          <Avatar type={'rounded'} size={60} source={avatar1} />
+        ) : (
+          <Avatar
+            type={'rounded'}
+            size={60}
+            address={selectedDid}
+            gravatarType={'retro'}
+          />
+        )}
         <Container marginTop={8}>
           <Text type={Constants.TextTypes.H3} bold>
             {id ? 'Space X' : 'Sarah Macintosh'}
@@ -70,10 +86,10 @@ Profile.navigationOptions = ({ navigation }: any) => {
    */
   const params = navigation.state.params || {}
   return {
-    headerRight: !params.id && (
+    headerRight: params.id == null && (
       <Button
         onPress={() => BottomSnap.to(1, SWITCH_IDENTITY)}
-        icon={<Avatar source={avatar2} />}
+        icon={<Avatar address={params.selectedDid} gravatarType={'retro'} />}
         iconButton
       />
     ),

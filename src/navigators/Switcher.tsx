@@ -2,8 +2,13 @@ import React, { createRef, useEffect } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 import { BottomSheet, ListItem, Avatar } from '@kancha/kancha-ui'
 import { Theme } from '../theme'
-import { getDidsQuery as GET_DIDS, Did } from '../lib/Signer'
-import { useQuery, useApolloClient } from '@apollo/react-hooks'
+import {
+  getSelectedDidQuery,
+  getDidsQuery as GET_DIDS,
+  Did,
+} from '../lib/Signer'
+import { useQuery } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/react-hooks'
 
 interface SwitcherProps {
   id: string
@@ -36,7 +41,8 @@ const Switcher: React.FC<SwitcherProps> = ({ id }) => {
                   key={identity.did}
                   hideForwardArrow
                   onPress={() => {
-                    client.writeData({
+                    client.writeQuery({
+                      query: getSelectedDidQuery,
                       data: { selectedDid: identity.did },
                     })
                     refetch()
