@@ -13,8 +13,7 @@ import {
   NavigationStackScreenProps,
   NavigationStackOptions,
 } from 'react-navigation-stack'
-import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-import { Colors } from '../../theme'
+import SearchBar from '../../navigators/SearchBar'
 import {
   sertoVerifiableCredential,
   bankVerifiableCredential,
@@ -119,39 +118,14 @@ const Explore: React.FC<Props> & {
 
 Explore.navigationOptions = ({ navigation }: any) => {
   const params = navigation.state.params || {}
-  const inputRef = createRef<any>()
-
-  const cancelSearch = () => {
-    params.toggleSearch(false)
-    inputRef.current.blur()
-  }
 
   return {
     headerTitle: () => (
-      <>
-        <Container flex={1} marginLeft marginRight>
-          <TextInput
-            autoCapitalize={'none'}
-            autoCorrect={false}
-            autoCompleteType={'off'}
-            ref={inputRef}
-            onFocus={() => params.toggleSearch(true)}
-            clearButtonMode={'while-editing'}
-            placeholder={'Search data'}
-            style={{
-              backgroundColor: Colors.LIGHTEST_GREY,
-              paddingVertical: 8,
-              paddingHorizontal: 10,
-              borderRadius: 10,
-            }}
-          />
-        </Container>
-        {params.searchActive && (
-          <HeaderButtons>
-            <Item title={'Cancel'} onPress={() => cancelSearch()} />
-          </HeaderButtons>
-        )}
-      </>
+      <SearchBar
+        onFocus={() => params.toggleSearch(true)}
+        cancel={() => params.toggleSearch(false)}
+        searchActive={params.searchActive}
+      />
     ),
   }
 }
