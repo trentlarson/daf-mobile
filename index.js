@@ -20,8 +20,6 @@ YellowBox.ignoreWarnings([
   'RCTRootView cancelTouches',
 ])
 
-// useScreens()
-
 if (Device.isIOS) {
   useScreens()
 }
