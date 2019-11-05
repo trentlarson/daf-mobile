@@ -7,8 +7,8 @@ import {
   Credential,
   ListItem,
   Avatar,
+  Device,
 } from '@kancha/kancha-ui'
-import { TextInput } from 'react-native'
 import {
   NavigationStackScreenProps,
   NavigationStackOptions,
@@ -120,13 +120,17 @@ Explore.navigationOptions = ({ navigation }: any) => {
   const params = navigation.state.params || {}
 
   return {
-    headerTitle: () => (
-      <SearchBar
-        onFocus={() => params.toggleSearch(true)}
-        cancel={() => params.toggleSearch(false)}
-        searchActive={params.searchActive}
-      />
-    ),
+    headerTitle: () => {
+      return (
+        Device.isIOS && (
+          <SearchBar
+            onFocus={() => params.toggleSearch(true)}
+            cancel={() => params.toggleSearch(false)}
+            searchActive={params.searchActive}
+          />
+        )
+      )
+    },
   }
 }
 

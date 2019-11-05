@@ -17,7 +17,7 @@ export default ({ onFocus, cancel, searchActive }: SearchBarProps) => {
   const [active, toggleActive] = useState(searchActive)
 
   const transition = (
-    <Transition.Change durationMs={200} interpolation={'easeInOut'} />
+    <Transition.Change durationMs={150} interpolation={'easeInOut'} />
   )
 
   const cancelAndBlur = () => {

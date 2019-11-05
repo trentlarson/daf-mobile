@@ -3,7 +3,7 @@ global.Buffer = global.Buffer || require('buffer/').Buffer
 // Temporary to stop crashes
 import 'react-native-gesture-handler'
 
-import { AppRegistry, NativeModules, Platform, YellowBox } from 'react-native'
+import { AppRegistry, UIManager, Platform, YellowBox } from 'react-native'
 import App from './src/App'
 import { name as appName } from './app.json'
 import codePush from 'react-native-code-push'
@@ -11,6 +11,7 @@ import Config from 'react-native-config'
 import * as Sentry from '@sentry/react-native'
 import analytics from '@segment/analytics-react-native'
 import { useScreens } from 'react-native-screens'
+import { Device } from '@kancha/kancha-ui'
 import Log from './src/lib/Log'
 
 YellowBox.ignoreWarnings([
@@ -19,12 +20,11 @@ YellowBox.ignoreWarnings([
   'RCTRootView cancelTouches',
 ])
 
-const { UIManager } = NativeModules
+// useScreens()
 
-useScreens()
-
-UIManager.setLayoutAnimationEnabledExperimental &&
-  UIManager.setLayoutAnimationEnabledExperimental(true)
+if (Device.isIOS) {
+  useScreens()
+}
 
 if (Config.SENTRY_DSN) {
   Sentry.init({
