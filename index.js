@@ -10,7 +10,7 @@ import codePush from 'react-native-code-push'
 import Config from 'react-native-config'
 import * as Sentry from '@sentry/react-native'
 import analytics from '@segment/analytics-react-native'
-import { useScreens } from 'react-native-screens'
+import { enableScreens } from 'react-native-screens'
 import { Device } from '@kancha/kancha-ui'
 import Log from './src/lib/Log'
 
@@ -21,7 +21,7 @@ YellowBox.ignoreWarnings([
 ])
 
 if (Device.isIOS) {
-  useScreens()
+  enableScreens()
 }
 
 if (Config.SENTRY_DSN) {
