@@ -1,9 +1,12 @@
+import { startOfYesterday, getTime, endOfTomorrow } from 'date-fns'
+
 export const sertoVerifiableCredential = {
   iss: 'Serto Identity Platform',
   sub: 'did:ethr:0xf3beac30c498d9e26865f34fcaa57dbb935b0d74',
   type: 'Serto ID',
   iat: 1562769371,
   exp: 1579478400,
+  revoked: false,
   claim: {
     'Serto ID': {
       name: 'Sarah Adamson',
@@ -29,13 +32,31 @@ export const bankVerifiableCredential = {
   sub: 'did:ethr:0xf3beac30c498d9e26865f34fcaa57dbb935b0d74',
   type: 'Credit Worthy',
   iat: 1562769371,
-  exp: 1579478400,
+  exp: getTime(startOfYesterday()),
+  revoked: false,
   claim: {
     'Credit Worthy': {
       name: 'Alice Chainy',
       dateOfBirth: '22-01-75',
       country: 'China',
       approvedLimit: 30000000,
+    },
+  },
+  vc: [],
+}
+
+export const galleryAdmission = {
+  iss: 'Museum of Identity',
+  sub: 'did:ethr:0xf3beac30c498d9e26865f34fcaa57dbb935b0d74',
+  type: 'Admit One',
+  iat: 1562769371,
+  exp: getTime(endOfTomorrow()),
+  revoked: true,
+  claim: {
+    'Admit One': {
+      addmission: 'One Person',
+      access: 'Zone A - Zone F',
+      type: 'Single Use',
     },
   },
   vc: [],

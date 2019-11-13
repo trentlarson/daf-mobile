@@ -33,7 +33,13 @@ const Credential: React.FC<Props> = ({ navigation }) => {
             avatar={avatar1}
             backgroundImage={bannerImage}
           />
-          <ClaimExplore claim={vc.claim} />
+          <ClaimExplore
+            claim={vc.claim}
+            jwt={'jwt.jwt.jwt'}
+            qrText={'Present for scanning'}
+            revoked={vc.revoked || false}
+            exp={vc.exp || 0}
+          />
         </Container>
       )}
       {vp && (
@@ -49,7 +55,13 @@ const Credential: React.FC<Props> = ({ navigation }) => {
                     avatar={avatar1}
                     backgroundImage={bannerImage}
                   />
-                  <ClaimExplore claim={vc.claim} />
+                  <ClaimExplore
+                    claim={vc.claim}
+                    jwt={'jwt.jwt.jwt'}
+                    qrText={'Present for scanning'}
+                    revoked={vc.revoked || false}
+                    exp={vc.exp || 0}
+                  />
                 </ScrollView>
               )
             })}
