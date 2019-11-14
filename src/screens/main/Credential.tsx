@@ -37,8 +37,10 @@ const Credential: React.FC<Props> = ({ navigation }) => {
             claim={vc.claim}
             jwt={'jwt.jwt.jwt'}
             qrText={'Present for scanning'}
-            revoked={vc.revoked || false}
-            exp={vc.exp || 0}
+            // @ts-ignore - Need to fix these
+            revoked={vc.revoked}
+            // @ts-ignore
+            exp={vc.exp}
           />
         </Container>
       )}
@@ -55,13 +57,17 @@ const Credential: React.FC<Props> = ({ navigation }) => {
                     avatar={avatar1}
                     backgroundImage={bannerImage}
                   />
-                  <ClaimExplore
-                    claim={vc.claim}
-                    jwt={'jwt.jwt.jwt'}
-                    qrText={'Present for scanning'}
-                    revoked={vc.revoked || false}
-                    exp={vc.exp || 0}
-                  />
+                  {
+                    <ClaimExplore
+                      claim={vc.claim}
+                      jwt={'jwt.jwt.jwt'}
+                      qrText={'Present for scanning'}
+                      // @ts-ignore - Need to fix these
+                      revoked={vc.revoked}
+                      // @ts-ignore
+                      exp={vc.exp}
+                    />
+                  }
                 </ScrollView>
               )
             })}

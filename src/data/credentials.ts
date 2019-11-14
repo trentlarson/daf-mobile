@@ -1,11 +1,16 @@
-import { startOfYesterday, getTime, endOfTomorrow } from 'date-fns'
+import {
+  startOfYesterday,
+  getTime,
+  endOfTomorrow,
+  endOfYesterday,
+} from 'date-fns'
 
 export const sertoVerifiableCredential = {
   iss: 'Serto Identity Platform',
   sub: 'did:ethr:0xf3beac30c498d9e26865f34fcaa57dbb935b0d74',
   type: 'Serto ID',
   iat: 1562769371,
-  exp: 1579478400,
+  exp: getTime(endOfTomorrow()),
   revoked: false,
   claim: {
     'Serto ID': {
@@ -32,8 +37,8 @@ export const bankVerifiableCredential = {
   sub: 'did:ethr:0xf3beac30c498d9e26865f34fcaa57dbb935b0d74',
   type: 'Credit Worthy',
   iat: 1562769371,
-  exp: getTime(startOfYesterday()),
-  revoked: false,
+  exp: getTime(endOfYesterday()),
+  revoked: true,
   claim: {
     'Credit Worthy': {
       name: 'Alice Chainy',
@@ -51,7 +56,7 @@ export const galleryAdmission = {
   type: 'Admit One',
   iat: 1562769371,
   exp: getTime(endOfTomorrow()),
-  revoked: true,
+  revoked: false,
   claim: {
     'Admit One': {
       addmission: 'One Person',

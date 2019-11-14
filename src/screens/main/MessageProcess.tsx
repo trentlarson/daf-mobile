@@ -11,11 +11,6 @@ const MessageProcess: React.FC<MessageProcess> = () => {
   const [parsingMessage, setParsing] = useState(true)
   const raw = useNavigationParam('message')
   const navigation = useNavigation()
-
-  // extend type Mutation {
-  //   newMessage(raw: String!, sourceType: String!, sourceId: String): Message
-  // }
-
   const [parseMessage] = useMutation(NEW_MESSAGE, {
     onCompleted(resp) {
       setParsing(false)
