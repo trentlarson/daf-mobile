@@ -2,34 +2,41 @@ import React, { useState, useEffect } from 'react'
 import { Screen, Container, Text, Constants, Button } from '@kancha/kancha-ui'
 import { ActivityIndicator } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
-import { core } from '../../lib/setup'
+import { useMutation } from '@apollo/react-hooks'
+import { NEW_MESSAGE } from '../../lib/graphql/queries'
 
 interface MessageProcess {}
 
 const MessageProcess: React.FC<MessageProcess> = () => {
   const [parsingMessage, setParsing] = useState(true)
-  const message = useNavigationParam('message')
+  const raw = useNavigationParam('message')
   const navigation = useNavigation()
 
-  const parseMessage = (raw: string) => {
-    core
-      .onRawMessage({
-        raw,
-        meta: [
-          {
-            sourceType: 'qrCode',
-          },
-        ],
-      })
-      .then(parsed => {
+  // extend type Mutation {
+  //   newMessage(raw: String!, sourceType: String!, sourceId: String): Message
+  // }
+
+  const [parseMessage] = useMutation(NEW_MESSAGE, {
+    onCompleted(resp) {
+      setParsing(false)
+      console.log('Success', resp)
+    },
+    onError(err) {
+      if (err) {
         setParsing(false)
-        console.log('Success', parsed)
-      })
-  }
+        console.log('Error', err)
+      }
+    },
+  })
 
   useEffect(() => {
-    if (message) {
-      parseMessage(message)
+    if (raw) {
+      parseMessage({
+        variables: {
+          raw,
+          sourceType: 'qrCode',
+        },
+      })
     }
   }, [])
 
@@ -37,19 +44,21 @@ const MessageProcess: React.FC<MessageProcess> = () => {
     <Screen
       safeAreaBottom
       footerComponent={
-        <Container paddingHorizontal={true} paddingBottom={true}>
-          <Container alignItems={'center'}>
-            <Container w={300}>
-              <Button
-                fullWidth
-                type={Constants.BrandOptions.Primary}
-                block={Constants.ButtonBlocks.Outlined}
-                buttonText={'Done'}
-                onPress={() => navigation.dismiss()}
-              />
+        !parsingMessage && (
+          <Container paddingHorizontal={true} paddingBottom={true}>
+            <Container alignItems={'center'}>
+              <Container w={300}>
+                <Button
+                  fullWidth
+                  type={Constants.BrandOptions.Primary}
+                  block={Constants.ButtonBlocks.Outlined}
+                  buttonText={'Done'}
+                  onPress={() => navigation.dismiss()}
+                />
+              </Container>
             </Container>
           </Container>
-        </Container>
+        )
       }
     >
       <Container padding marginTop={100}>

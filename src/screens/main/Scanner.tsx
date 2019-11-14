@@ -6,9 +6,6 @@ import React, { useState } from 'react'
 import { Container, FabButton, Screen } from '@kancha/kancha-ui'
 import { RNCamera } from 'react-native-camera'
 import { Colors, Icons } from '../../theme'
-import { withNavigationFocus } from 'react-navigation'
-// import { core } from '../../lib/setup'
-// import lodash from 'lodash'
 
 export default (props: any) => {
   const [scannerActive, toggleScanner] = useState(true)
