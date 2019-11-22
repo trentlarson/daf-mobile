@@ -1032,10 +1032,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@kancha/kancha-ui@^1.0.0-beta.31":
-  version "1.0.0-beta.31"
-  resolved "https://registry.yarnpkg.com/@kancha/kancha-ui/-/kancha-ui-1.0.0-beta.31.tgz#3f7a097b2764c139844cec9a1a2ca304ed9cff57"
-  integrity sha512-vhKOwrQTH8stKpqoaDLiK3fidVmJ6crpHaM1IHp1Mw/q1hh4GsoLWOWi3whuEEzpN17mfQko8rLzq2Um9ajXyA==
+"@kancha/kancha-ui@^1.0.0-beta.32":
+  version "1.0.0-beta.32"
+  resolved "https://registry.yarnpkg.com/@kancha/kancha-ui/-/kancha-ui-1.0.0-beta.32.tgz#bd3306e3ae775cddb35695f051b83bb1441d265f"
+  integrity sha512-rbKKEkxiPVVauleSvPWnDkeWLRpwUtw7/JL9jft7Ex/Dyx+Kssr8yO1K+Jr7nsgUQHU5rxyrP2q5OjIrVijoIQ==
   dependencies:
     "@callstack/react-theme-provider" "^3.0.0"
     date-fns "^2.5.0"
