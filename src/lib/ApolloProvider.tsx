@@ -7,10 +7,12 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { from } from 'apollo-link'
 import { SchemaLink } from 'apollo-link-schema'
 import { makeExecutableSchema } from 'graphql-tools'
-import { Container, Screen, Toaster } from '@kancha/kancha-ui'
-
+import { Container, Screen } from '@kancha/kancha-ui'
+import * as Daf from 'daf-core'
 import { core, dataStore, db, resolvers, typeDefs } from './setup'
-import { Colors } from '../theme'
+import Debug from 'debug'
+Debug.enable('*')
+const debug = Debug('Provider')
 
 export const schema = makeExecutableSchema({
   typeDefs,
@@ -31,6 +33,16 @@ export const client = new ApolloClient({
   cache,
   link,
 })
+
+core.on(
+  Daf.EventTypes.validatedMessage,
+  async (eventType: string, message: Daf.Types.ValidatedMessage) => {
+    debug('New message %O', message)
+    await dataStore.saveMessage(message)
+
+    client.reFetchObservableQueries()
+  },
+)
 
 interface Props {}
 
