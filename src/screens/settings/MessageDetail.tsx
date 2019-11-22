@@ -15,6 +15,12 @@ import { Colors } from '../../theme'
 
 const Component: React.FC<NavigationScreen> = () => {
   const message = useNavigationParam('message')
+  const issProfileSource = message.iss.profileImage
+    ? { source: { uri: message.iss.profileImage } }
+    : {}
+  const subProfileSource = message.sub.profileImage
+    ? { source: { uri: message.sub.profileImage } }
+    : {}
 
   return (
     <Screen scrollEnabled={true} background={'primary'}>
@@ -26,6 +32,10 @@ const Component: React.FC<NavigationScreen> = () => {
           <Text type={Constants.TextTypes.ActivitySubTitle}>
             {(message.nbf && formatDistanceToNow(message.nbf * 1000)) +
               ' ago' || 'Some time ago'}
+            {' • '}
+            Message type: {message.type}
+            {' • '}
+            Tag: {message.tag}
           </Text>
           <Container paddingTop>
             <Text>
@@ -54,18 +64,19 @@ const Component: React.FC<NavigationScreen> = () => {
           >
             <Container alignItems={'center'}>
               <Avatar
+                {...issProfileSource}
                 type={'circle'}
                 gravatarType={'retro'}
                 address={message.iss.did}
                 size={50}
               />
               <Container paddingTop={8}>
-                <Text type={Constants.TextTypes.ActivitySubTitle}>
-                  {message.iss.did.slice(9, 20)}
+                <Text type={Constants.TextTypes.ActivityTitle}>
+                  {message.iss.shortId}
                 </Text>
               </Container>
             </Container>
-            <Container flexDirection={'row'} marginLeft={32} marginRight={32}>
+            <Container flexDirection={'row'} marginLeft={25} marginRight={25}>
               <Icon
                 icon={{ name: 'ios-arrow-forward', iconFamily: 'Ionicons' }}
                 size={30}
@@ -73,14 +84,15 @@ const Component: React.FC<NavigationScreen> = () => {
             </Container>
             <Container alignItems={'center'}>
               <Avatar
+                {...subProfileSource}
                 type={'circle'}
                 gravatarType={'retro'}
                 address={message.sub.did}
                 size={50}
               />
               <Container paddingTop={8}>
-                <Text type={Constants.TextTypes.ActivitySubTitle}>
-                  {message.sub.did.slice(9, 20)}
+                <Text type={Constants.TextTypes.ActivityTitle}>
+                  {message.sub.shortId}
                 </Text>
               </Container>
             </Container>
@@ -92,7 +104,7 @@ const Component: React.FC<NavigationScreen> = () => {
             marginBottom
             marginLeft
           >
-            <Text>
+            <Text selectable>
               <Text type={Constants.TextTypes.SubTitle}>from: </Text>
               {message.iss.did}
             </Text>
@@ -104,8 +116,8 @@ const Component: React.FC<NavigationScreen> = () => {
             marginBottom
             marginLeft
           >
-            <Text>
-              <Text type={Constants.TextTypes.SubTitle}>to: </Text>
+            <Text selectable>
+              <Text type={Constants.TextTypes.SubTitle}>to:</Text>
               {message.sub.did}
             </Text>
           </Container>
@@ -160,7 +172,7 @@ const Component: React.FC<NavigationScreen> = () => {
             </Text>
           </Container>
           <Container background={'secondary'} br={10} padding marginBottom>
-            <Text>{message.hash}</Text>
+            <Text selectable>{message.hash}</Text>
           </Container>
         </Container>
         <Container>
@@ -170,7 +182,7 @@ const Component: React.FC<NavigationScreen> = () => {
             </Text>
           </Container>
           <Container background={'secondary'} br={10} padding marginBottom>
-            <Text>{message.jwt}</Text>
+            <Text selectable>{message.jwt}</Text>
           </Container>
         </Container>
       </Container>
