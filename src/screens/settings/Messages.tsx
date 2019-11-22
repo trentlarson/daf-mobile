@@ -25,9 +25,13 @@ const VIEWER_MESSAGES = gql`
       messagesReceived {
         iss {
           did
+          shortId
+          profileImage
         }
         sub {
           did
+          shortId
+          profileImage
         }
         aud {
           did
