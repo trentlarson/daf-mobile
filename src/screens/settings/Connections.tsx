@@ -8,7 +8,14 @@ import { useTranslation } from 'react-i18next'
 import { FlatList, Image } from 'react-native'
 import { Query, QueryResult } from 'react-apollo'
 import { Types } from 'daf-data-store'
-import { Container, Screen, ListItem, Text, Avatar } from '@kancha/kancha-ui'
+import {
+  Container,
+  Screen,
+  ListItem,
+  Text,
+  Avatar,
+  Constants,
+} from '@kancha/kancha-ui'
 import { Colors } from '../../theme'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import gql from 'graphql-tag'
@@ -71,7 +78,17 @@ const Connections: React.FC<Props> = props => {
                 keyExtractor={item => item.did}
                 onRefresh={refetch}
                 refreshing={loading}
-                ListEmptyComponent={<Text>No connections</Text>}
+                ListEmptyComponent={
+                  <Container padding>
+                    <Text
+                      type={Constants.TextTypes.H3}
+                      bold
+                      textColor={Colors.DARK_GREY}
+                    >
+                      No Connections
+                    </Text>
+                  </Container>
+                }
               />
             )
           }

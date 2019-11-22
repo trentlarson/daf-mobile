@@ -10,6 +10,7 @@ import {
   Text,
   MessageItem,
   DAFMessage,
+  Constants,
 } from '@kancha/kancha-ui'
 import { FlatList } from 'react-native'
 import { useQuery } from 'react-apollo'
@@ -93,6 +94,17 @@ export default () => {
             keyExtractor={(item, index) => item.hash + index}
             onRefresh={syncAndRefetch}
             refreshing={loading}
+            ListEmptyComponent={
+              <Container padding>
+                <Text
+                  type={Constants.TextTypes.H3}
+                  bold
+                  textColor={Colors.DARK_GREY}
+                >
+                  No messages
+                </Text>
+              </Container>
+            }
           />
         )}
       </Container>

@@ -95,23 +95,15 @@ export const Credentials: React.FC<Props> = props => {
                 keyExtractor={item => item.rowId}
                 onRefresh={refetch}
                 refreshing={loading}
-                ListHeaderComponent={
-                  <Container padding>
-                    <Text type={Constants.TextTypes.H3} bold>
-                      Credentials
-                    </Text>
-                  </Container>
-                }
                 ListEmptyComponent={
                   !loading ? (
-                    <Container
-                      padding
-                      flex={1}
-                      alignItems={'center'}
-                      justifyContent={'center'}
-                    >
-                      <Text type={Constants.TextTypes.Body}>
-                        This did has no credentials available
+                    <Container padding>
+                      <Text
+                        type={Constants.TextTypes.H3}
+                        bold
+                        textColor={Colors.DARK_GREY}
+                      >
+                        No Credentials
                       </Text>
                     </Container>
                   ) : (
