@@ -9,6 +9,8 @@ export const Screens = {
   MessageProcess: { screen: 'MessageProcess', title: 'Message Process' },
   Messages: { screen: 'Messages', title: 'Messages' },
   MessageDetail: { screen: 'MessageDetail', title: 'Message Detail' },
+  CreateClaim: { screen: 'CreateClaim', title: 'Create Claim' },
+  ShareClaim: { screen: 'ShareClaim', title: 'Share Claim' },
   Connections: { screen: 'Connections', title: 'Connections' },
   DidViewer: { screen: 'DidViewer', title: 'DidViewer' },
   ModalDemo: { screen: 'ModalDemo', title: 'Modal Demo' },
