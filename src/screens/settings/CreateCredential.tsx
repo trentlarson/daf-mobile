@@ -47,7 +47,7 @@ export default () => {
   const [identityBrowseOpen, toggleIdentityBrowse] = useState(false)
 
   const signClaim = () => {
-    navigation.navigate('ShareClaim', {
+    navigation.navigate('ShareCredential', {
       claim: {
         fields,
         issuer: data.viewer.did,
