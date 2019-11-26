@@ -78,7 +78,7 @@ export default () => {
       <Container padding>
         <Container marginBottom>
           <Text type={Constants.TextTypes.H3} bold>
-            Create Claim
+            Create Credential
           </Text>
           <Container marginTop>
             <Text type={Constants.TextTypes.SubTitle}>

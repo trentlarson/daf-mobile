@@ -12,6 +12,7 @@ import JSONTree from 'react-native-json-tree'
 import { useNavigationParam } from 'react-navigation-hooks'
 import { formatDistanceToNow } from 'date-fns'
 import { Colors } from '../../theme'
+import { decodeJWT } from 'did-jwt'
 
 const Component: React.FC<NavigationScreen> = () => {
   const message = useNavigationParam('message')
@@ -21,6 +22,8 @@ const Component: React.FC<NavigationScreen> = () => {
   const subProfileSource = message.sub.profileImage
     ? { source: { uri: message.sub.profileImage } }
     : {}
+
+  console.log(message.vc)
 
   return (
     <Screen scrollEnabled={true} background={'primary'}>
@@ -125,7 +128,7 @@ const Component: React.FC<NavigationScreen> = () => {
         <Container>
           <Container marginBottom>
             <Text type={Constants.TextTypes.H5} bold>
-              Attachments (Claims)
+              Attachments (Credentials)
             </Text>
           </Container>
           {message.vc.map((vc: any, index: number) => {
@@ -178,7 +181,40 @@ const Component: React.FC<NavigationScreen> = () => {
         <Container>
           <Container marginBottom>
             <Text type={Constants.TextTypes.H5} bold>
-              Message JWT
+              Decoded Message JWT
+            </Text>
+          </Container>
+          <Container background={'secondary'} br={10} padding marginBottom>
+            <JSONTree
+              hideRoot={true}
+              data={decodeJWT(message.jwt)}
+              invertTheme={false}
+              theme={{
+                scheme: 'brewer',
+                base00: Colors.LIGHTEST_GREY,
+                base01: '#2e2f30',
+                base02: '#515253',
+                base03: '#737475',
+                base04: '#959697',
+                base05: '#b7b8b9',
+                base06: '#dadbdc',
+                base07: '#fcfdfe',
+                base08: '#e31a1c',
+                base09: '#e6550d',
+                base0A: '#dca060',
+                base0B: '#31a354',
+                base0C: '#80b1d3',
+                base0D: '#3182bd',
+                base0E: '#756bb1',
+                base0F: '#b15928',
+              }}
+            />
+          </Container>
+        </Container>
+        <Container>
+          <Container marginBottom>
+            <Text type={Constants.TextTypes.H5} bold>
+              Raw Message JWT
             </Text>
           </Container>
           <Container background={'secondary'} br={10} padding marginBottom>

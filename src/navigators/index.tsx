@@ -41,8 +41,8 @@ import Config from '../screens/settings/Config'
 import Crash from '../screens/settings/Crash'
 import Messages from '../screens/settings/Messages'
 import MessageDetail from '../screens/settings/MessageDetail'
-import CreateClaim from '../screens/settings/CreateClaim'
-import ShareClaim from '../screens/settings/ShareClaim'
+import CreateCredential from '../screens/settings/CreateCredential'
+import ShareCredential from '../screens/settings/ShareCredential'
 import Connections from '../screens/settings/Connections'
 import DidViewer from '../screens/settings/DidViewer'
 import Claim from '../screens/settings/Claim'
@@ -79,13 +79,13 @@ const SettingsNavigator = createStackNavigator(
       },
     },
     [Screens.CreateClaim.screen]: {
-      screen: CreateClaim,
+      screen: CreateCredential,
       navigationOptions: {
         title: i18n.t('Create Claim'),
       },
     },
     [Screens.ShareClaim.screen]: {
-      screen: ShareClaim,
+      screen: ShareCredential,
       navigationOptions: {
         title: i18n.t('Share Claim'),
       },

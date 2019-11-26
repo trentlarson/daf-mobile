@@ -24,8 +24,8 @@ const Settings: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
           <ListItem onPress={() => navigation.navigate('Messages')}>
             {t('Messages')}
           </ListItem>
-          <ListItem onPress={() => navigation.navigate('CreateClaim')}>
-            {t('Create Claim')}
+          <ListItem onPress={() => navigation.navigate('CreateCredential')}>
+            {t('Create Credential')}
           </ListItem>
           <ListItem onPress={() => navigation.navigate('Connections')}>
             {t('Connections')}
