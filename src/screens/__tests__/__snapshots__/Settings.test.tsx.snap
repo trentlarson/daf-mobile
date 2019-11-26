@@ -625,7 +625,7 @@ exports[`renders correctly 1`] = `
                             }
                           }
                         >
-                          Create Claim
+                          Create Credential
                         </Text>
                       </View>
                     </View>
