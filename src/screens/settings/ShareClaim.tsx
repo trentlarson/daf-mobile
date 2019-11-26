@@ -53,21 +53,15 @@ export default () => {
     onCompleted: response => {
       if (response && response.actionSignVc) {
         setJwt(response.actionSignVc)
-
-        if (claim.subject !== claim.issuer) {
-          setSending(true)
-
-          actionSendJwt({
-            variables: {
-              from: claim.issuer,
-              to: claim.subject,
-              jwt: response.actionSignVc,
-            },
-          })
-          setLoading(false)
-        } else {
-          setLoading(false)
-        }
+        setLoading(false)
+        setSending(true)
+        actionSendJwt({
+          variables: {
+            from: claim.issuer,
+            to: claim.subject,
+            jwt: response.actionSignVc,
+          },
+        })
       }
     },
   })
