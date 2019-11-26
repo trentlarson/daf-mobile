@@ -42,10 +42,6 @@ const Component: React.FC<NavigationScreen> = () => {
             {' • '}
             Tag: {message.tag}
           </Text>
-          <Container paddingTop></Container>
-          <Container alignItems={'center'} marginTop>
-            <QRCode value={message.jwt} size={Device.width - 100} />
-          </Container>
         </Container>
         <Container>
           <Container marginBottom>
@@ -220,6 +216,16 @@ const Component: React.FC<NavigationScreen> = () => {
           </Container>
           <Container background={'secondary'} br={10} padding marginBottom>
             <Text selectable>{message.jwt}</Text>
+          </Container>
+        </Container>
+        <Container>
+          <Container marginBottom>
+            <Text type={Constants.TextTypes.H5} bold>
+              Message QRCode
+            </Text>
+          </Container>
+          <Container alignItems={'center'} padding marginBottom>
+            <QRCode value={message.jwt} size={Device.width - 100} />
           </Container>
         </Container>
       </Container>
