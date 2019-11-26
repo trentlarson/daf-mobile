@@ -18,7 +18,7 @@ import {
 import { TextInput } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
 import { useQuery } from 'react-apollo'
-import { GET_VIEWER } from '../../lib/graphql/queries'
+import { GET_VIEWER, GET_ALL_IDENTITIES } from '../../lib/graphql/queries'
 
 import { Colors } from '../../theme'
 
@@ -35,7 +35,9 @@ export default () => {
   const navigation = useNavigation()
 
   const { data } = useQuery(GET_VIEWER)
+  const getAllIdentitiesResp = useQuery(GET_ALL_IDENTITIES)
 
+  const [identities, setIdentities] = useState<any[]>([])
   const [subject, updateSubject] = useState()
   const [claimValue, updateClaimValue] = useState('')
   const [claimType, updateClaimType] = useState('')
@@ -61,6 +63,10 @@ export default () => {
   useEffect(() => {
     if (data && data.viewer) {
       updateSubject(data.viewer.did)
+    }
+
+    if (getAllIdentitiesResp.data && getAllIdentitiesResp.data.identities) {
+      setIdentities(getAllIdentitiesResp.data.identities)
     }
   }, [])
 
@@ -98,6 +104,9 @@ export default () => {
             onChangeText={updateSubject}
             value={subject}
           ></TextInput>
+          {identities.map(identity => {
+            return <Text>{identity.shortId}</Text>
+          })}
         </Container>
         <Container marginTop>
           {fields.map((field, i) => {
