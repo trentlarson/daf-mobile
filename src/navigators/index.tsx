@@ -44,6 +44,7 @@ import MessageDetail from '../screens/settings/MessageDetail'
 import CreateCredential from '../screens/settings/CreateCredential'
 import ShareCredential from '../screens/settings/ShareCredential'
 import Connections from '../screens/settings/Connections'
+import CredentialField from '../screens/settings/CredentialField'
 import DidViewer from '../screens/settings/DidViewer'
 import Claim from '../screens/settings/Claim'
 import Credentials from '../screens/settings/Credentials'
@@ -94,6 +95,12 @@ const SettingsNavigator = createStackNavigator(
       screen: Connections,
       navigationOptions: {
         title: i18n.t('Connections'),
+      },
+    },
+    [Screens.CredentialField.screen]: {
+      screen: CredentialField,
+      navigationOptions: {
+        title: i18n.t(Screens.CredentialField.title),
       },
     },
     [Screens.Codepush.screen]: {

@@ -67,3 +67,11 @@ export const GET_ALL_IDENTITIES = gql`
     }
   }
 `
+
+export const GET_MESSAGE = gql`
+  query GetMessage($hash: String!) {
+    message(hash: $hash) {
+      jwt
+    }
+  }
+`

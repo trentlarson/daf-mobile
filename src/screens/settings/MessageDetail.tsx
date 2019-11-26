@@ -6,6 +6,7 @@ import {
   Constants,
   Avatar,
   Icon,
+  Device,
 } from '@kancha/kancha-ui'
 import { NavigationScreen } from '../../navigators'
 import JSONTree from 'react-native-json-tree'
@@ -13,6 +14,7 @@ import { useNavigationParam } from 'react-navigation-hooks'
 import { formatDistanceToNow } from 'date-fns'
 import { Colors } from '../../theme'
 import { decodeJWT } from 'did-jwt'
+import QRCode from 'react-native-qrcode-svg'
 
 const Component: React.FC<NavigationScreen> = () => {
   const message = useNavigationParam('message')
@@ -40,10 +42,9 @@ const Component: React.FC<NavigationScreen> = () => {
             {' • '}
             Tag: {message.tag}
           </Text>
-          <Container paddingTop>
-            <Text>
-              This is a debug view to show the data within a raw message item
-            </Text>
+          <Container paddingTop></Container>
+          <Container alignItems={'center'} marginTop>
+            <QRCode value={message.jwt} size={Device.width - 100} />
           </Container>
         </Container>
         <Container>

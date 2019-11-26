@@ -12,6 +12,7 @@ export const Screens = {
   CreateClaim: { screen: 'CreateCredential', title: 'Create Credential' },
   ShareClaim: { screen: 'ShareCredential', title: 'Share Credential' },
   Connections: { screen: 'Connections', title: 'Connections' },
+  CredentialField: { screen: 'CredentialField', title: 'Credential Field' },
   DidViewer: { screen: 'DidViewer', title: 'DidViewer' },
   ModalDemo: { screen: 'ModalDemo', title: 'Modal Demo' },
   IdentitySelectModal: { screen: 'IdentitySelectModal', title: 'Identities' },
