@@ -325,6 +325,9 @@ jobs:
           name: Install node modules
           command: yarn --frozen-lockfile
       - *save_yarn_cache_macos
+      - run:
+          name: Install ruby 2.4.0
+          command: ruby-install ruby 2.4.0 && ruby --version
       - *restore_gems_cache_ios
       - run:
           name: Bundle install
