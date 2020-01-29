@@ -29,10 +29,10 @@ jobs:
       - name: Build iOS target
         if: "!contains(github.event.head_commit.message, '[skip ci]')"
         run: |
-          yarn detox build -c ios.sim.release
+          yarn detox build -c ios.sim.release.11
       - name: iOS test
         timeout-minutes: 10
         if: "!contains(github.event.head_commit.message, '[skip ci]')"
         run: |
           yarn detox clean-framework-cache && yarn detox build-framework-cache
-          yarn detox test -c ios.sim.release --cleanup
+          yarn detox test -c ios.sim.release.11 --cleanup

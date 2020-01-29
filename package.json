@@ -222,6 +222,12 @@
         "build": "xcodebuild -workspace ios/DafMobile.xcworkspace -scheme DafMobile -configuration Release -sdk iphonesimulator -derivedDataPath ios/DerivedData/DafMobile -UseModernBuildSystem=NO",
         "type": "ios.simulator",
         "name": "iPhone X"
+      },
+      "ios.sim.release.11": {
+        "binaryPath": "ios/DerivedData/DafMobile/Build/Products/Release-iphonesimulator/DafMobile.app",
+        "build": "xcodebuild -workspace ios/DafMobile.xcworkspace -scheme DafMobile -configuration Release -sdk iphonesimulator -derivedDataPath ios/DerivedData/DafMobile -UseModernBuildSystem=NO",
+        "type": "ios.simulator",
+        "name": "iPhone 11 Pro"
       }
     }
   },
