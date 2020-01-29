@@ -10,6 +10,7 @@
     "test": "jest --verbose --coverage",
     "format": "prettier --config prettier.json --write \"./src/**/*.{jsx,ts,tsx}\" && git status",
     "coverage": "jest --coverage",
+    "detox": "detox",
     "test:ios:release": "detox build -c ios.sim.release && detox test -c ios.sim.release --cleanup",
     "test:ios:debug": "detox build -c ios.sim.debug && detox test -c ios.sim.debug",
     "package-android": "mkdir -p android/app/build/jsbundle/assets/ && mkdir -p android/app/build/jsbundle/res && node node_modules/react-native/local-cli/cli.js bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/jsbundle/assets/index.android.bundle --assets-dest android/app/build/jsbundle/res",

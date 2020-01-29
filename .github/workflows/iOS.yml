@@ -1,0 +1,38 @@
+name: iOS
+
+on: [push]
+
+jobs:
+  some-job:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout project
+        if: "!contains(github.event.head_commit.message, '[skip ci]')"
+        uses: actions/checkout@v1
+
+      - name: Specify node version
+        if: "!contains(github.event.head_commit.message, '[skip ci]')"
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Detox setup
+        if: "!contains(github.event.head_commit.message, '[skip ci]')"
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+      - name: Install node_modules & deploy with specific XCode version
+        if: "!contains(github.event.head_commit.message, '[skip ci]')"
+        run: |
+          yarn install --frozen-lockfile
+      - name: Build iOS target
+        if: "!contains(github.event.head_commit.message, '[skip ci]')"
+        run: |
+          yarn detox build -c ios.sim.release
+      - name: iOS test
+        timeout-minutes: 10
+        if: "!contains(github.event.head_commit.message, '[skip ci]')"
+        run: |
+          yarn detox clean-framework-cache && yarn detox build-framework-cache
+          yarn detox test -c ios.sim.release --cleanup
