@@ -200,6 +200,24 @@
       ]
     ]
   },
+  "detox": {
+    "test-runner": "mocha",
+    "runner-config": "e2e/mocha.opts",
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/DerivedData/DafMobile/Build/Products/Debug-iphonesimulator/DafMobile.app",
+        "build": "xcodebuild -workspace ios/DafMobile.xcworkspace -scheme DafMobile -configuration Debug -sdk iphonesimulator -derivedDataPath ios/DerivedData/DafMobile -UseModernBuildSystem=NO",
+        "type": "ios.simulator",
+        "name": "iPhone X"
+      },
+      "ios.sim.release": {
+        "binaryPath": "ios/DerivedData/DafMobile/Build/Products/Release-iphonesimulator/DafMobile.app",
+        "build": "xcodebuild -workspace ios/DafMobile.xcworkspace -scheme DafMobile -configuration Release -sdk iphonesimulator -derivedDataPath ios/DerivedData/DafMobile -UseModernBuildSystem=NO",
+        "type": "ios.simulator",
+        "name": "iPhone X"
+      }
+    }
+  },
   "jest-junit": {
     "outputDirectory": "./test-results/jest/",
     "outputName": "results.xml"
