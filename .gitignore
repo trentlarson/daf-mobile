@@ -80,3 +80,6 @@ Serto.app.dSYM.zip
 .env
 
 ios/Pods
+
+#circleci
+process.yml
