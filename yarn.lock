@@ -9440,6 +9440,10 @@ react-native-gesture-handler@^1.4.1:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-icloudstore@manicakes/react-native-icloudstore:
+  version "0.9.0"
+  resolved "https://codeload.github.com/manicakes/react-native-icloudstore/tar.gz/7aeb7eabbe8950fe61f076347b918373f200f2d9"
+
 react-native-iphone-x-helper@^1.0.3:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"

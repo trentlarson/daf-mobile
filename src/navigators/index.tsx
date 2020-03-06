@@ -27,6 +27,7 @@ import Profile from '../screens/main/Profile'
 import Onboarding from '../screens/main/Onboarding'
 import Restore from '../screens/main/Restore'
 import Intro from '../screens/main/Intro'
+import CloudRestore from '../screens/main/CloudRestore'
 
 import Scanner from '../screens/main/Scanner'
 import MessageProcess from '../screens/main/MessageProcess'
@@ -368,6 +369,13 @@ const Onboard = createStackNavigator(
     },
     Restore: {
       screen: Restore,
+      navigationOptions: {
+        headerTitle: headerLogo,
+        headerStyle: { borderBottomWidth: 0 },
+      },
+    },
+    CloudRestore: {
+      screen: CloudRestore,
       navigationOptions: {
         headerTitle: headerLogo,
         headerStyle: { borderBottomWidth: 0 },

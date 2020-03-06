@@ -80,12 +80,15 @@ const identityProviders = [
     kms: new KeyManagementSystem(new KeyStore('rinkeby-keystore')),
     network: 'rinkeby',
     rpcUrl: 'https://rinkeby.infura.io/v3/5ffc47f65c4042ce847ef66a3fa70d4c',
+    // @ts-ignore
+    resolver: '',
   }),
 ]
 
 const messageValidator = new DBG.MessageValidator()
 messageValidator
   .setNext(new URL.MessageValidator())
+  // @ts-ignore
   .setNext(new DIDComm.MessageValidator())
   .setNext(new DidJwt.MessageValidator())
   .setNext(new W3c.MessageValidator())
@@ -93,16 +96,17 @@ messageValidator
 
 const actionHandler = new DBG.ActionHandler()
 actionHandler
+  // @ts-ignore
   .setNext(new DIDComm.ActionHandler())
   .setNext(new TG.ActionHandler())
   .setNext(new W3c.ActionHandler())
   .setNext(new SD.ActionHandler())
 
-const serviceControllers = [TG.ServiceController]
+// const serviceControllers = [TG.ServiceController]
 
 export const core = new Daf.Core({
   identityProviders,
-  serviceControllers,
+  serviceControllers: [],
   didResolver,
   messageValidator,
   actionHandler,

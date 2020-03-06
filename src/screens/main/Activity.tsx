@@ -14,12 +14,14 @@ import {
 } from '@kancha/kancha-ui'
 import { Colors } from '../../theme'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { useQuery, useLazyQuery } from 'react-apollo'
+import { useQuery, useLazyQuery, useMutation } from 'react-apollo'
 import { core, dataStore } from '../../lib/setup'
 import {
   VIEWER_MESSAGES,
   GET_VIEWER,
   GET_ALL_IDENTITIES,
+  RUN_CLOUD_BACKUP,
+  CHECK_CLOUD_BACKUP_PREF,
 } from '../../lib/graphql/queries'
 import { FlatList } from 'react-native'
 import { SharedElement } from 'react-navigation-shared-element'
@@ -38,6 +40,8 @@ const Activity: React.FC<Props> = ({ navigation }) => {
   const viewerResponse = useQuery(GET_VIEWER)
   const identitiesResponse = useQuery(GET_ALL_IDENTITIES)
   const [getMessages, { loading, data, error }] = useLazyQuery(VIEWER_MESSAGES)
+  const { data: checkLocal } = useQuery(CHECK_CLOUD_BACKUP_PREF)
+  const [runCloudBackup] = useMutation(RUN_CLOUD_BACKUP)
 
   const fetchMessages = () => {
     if (viewerResponse && viewerResponse.data && viewerResponse.data.viewer) {
@@ -83,7 +87,18 @@ const Activity: React.FC<Props> = ({ navigation }) => {
   }, [])
 
   useEffect(() => {
+    if (checkLocal && checkLocal.hasCloudBackupPref && Device.isIOS) {
+      setInterval(() => {
+        runCloudBackup()
+        console.log('Backing up your data')
+      }, 10000)
+    }
+  }, [checkLocal])
+
+  useEffect(() => {
     identitiesResponse && identitiesResponse.refetch()
+
+    console.log(data)
   }, [data])
 
   const confirmRequest = (msg: any) => {

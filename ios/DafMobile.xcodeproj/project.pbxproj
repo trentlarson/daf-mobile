@@ -19,6 +19,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* DafMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DafMobileTests.m */; };
 		6D27C00F2E8A9BE0DF3C79AA /* libPods-DafMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DECCCE326F43132A904E12 /* libPods-DafMobileTests.a */; };
 		7010C9ED227B270200642EEA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010C9EC227B270200642EEA /* libz.tbd */; };
+		962A7D232411472E00D75220 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962A7D222411472E00D75220 /* CloudKit.framework */; };
 		96889E46234B4373006EAA84 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96889E43234B4343006EAA84 /* libReactNativeConfig.a */; };
 		D25D594E501F2E00E6916F25 /* libPods-DafMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBEE661503113C7BD8FF6F19 /* libPods-DafMobile-tvOS.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
@@ -94,6 +95,7 @@
 		70AFD2B522C3C10B00C7808E /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		7FBD2D21B3B1C2EDD4BBAB3A /* Pods-DafMobile-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobile-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-DafMobile-tvOSTests/Pods-DafMobile-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		924ABD49744AF22892B40E78 /* Pods-DafMobile-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobile-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-DafMobile-tvOSTests/Pods-DafMobile-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		962A7D222411472E00D75220 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9685348222BD26A300EED8BB /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		9685348322BD26A300EED8BB /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Brands.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		9685348422BD26A300EED8BB /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				962A7D232411472E00D75220 /* CloudKit.framework in Frameworks */,
 				96889E46234B4373006EAA84 /* libReactNativeConfig.a in Frameworks */,
 				7010C9ED227B270200642EEA /* libz.tbd in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
@@ -199,6 +202,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				962A7D222411472E00D75220 /* CloudKit.framework */,
 				968D41182346149C00720469 /* libRNUportSigner.a */,
 				7010C9EC227B270200642EEA /* libz.tbd */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,

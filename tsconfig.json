@@ -3,7 +3,7 @@
     "target": "es2015",
     "module": "es2015",
     "importHelpers": true,
-    "lib": ["es2017"],
+    "lib": ["es2017", "es2020"],
     "jsx": "react-native",
     "noEmit": true,
     "strict": true,

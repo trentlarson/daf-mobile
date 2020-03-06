@@ -3,6 +3,7 @@ const OnboardingScreens = {
   Intro: { screen: 'Intro', title: 'Intro' },
   CreatingWallet: { screen: 'CreatingWallet', title: 'Creating Wallet' },
   Onboarding: { screen: 'Onboarding', title: 'Onboarding' },
+  CloudRestore: { screen: 'CloudRestore', title: 'Cloud Restore' },
 }
 
 const MainScreens = {

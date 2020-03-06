@@ -10,6 +10,36 @@ export const GET_VIEWER = gql`
   }
 `
 
+export const CHECK_CLOUD_BACKUP = gql`
+  query checkCloudBackup {
+    hasCloudBackup
+  }
+`
+
+export const CHECK_CLOUD_BACKUP_PREF = gql`
+  query checkCloudBackupPref {
+    hasCloudBackupPref
+  }
+`
+
+export const RESTORE_CLOUD_BACKUP = gql`
+  mutation restoreCloudBackup {
+    restoreCloudBackup
+  }
+`
+
+export const RUN_CLOUD_BACKUP = gql`
+  mutation runCloudBackup {
+    runCloudBackup
+  }
+`
+
+export const DISABLE_CLOUD_BACKUP = gql`
+  mutation disableCloudBackup {
+    disableCloudBackup
+  }
+`
+
 export const GET_SECRET_KEY = gql`
   query managedIdentitySecret($did: String, $type: String) {
     managedIdentitySecret(did: $did, type: $type)
@@ -129,6 +159,14 @@ export const GET_MESSAGE = gql`
   query GetMessage($hash: String!) {
     message(hash: $hash) {
       jwt
+    }
+  }
+`
+
+export const VIEWER_RAW_MESSAGES = gql`
+  query AllMessages {
+    messages {
+      raw
     }
   }
 `
