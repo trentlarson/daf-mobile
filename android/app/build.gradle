@@ -141,8 +141,8 @@ android {
         applicationId "com.dafmobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 18
-        versionName "1.33.0"
+        versionCode 19
+        versionName "1.33.1"
         missingDimensionStrategy 'react-native-camera', 'general'
     }
 
