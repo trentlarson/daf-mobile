@@ -122,6 +122,8 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
             meta: [{ type: 'selfSigned' }],
           },
         })
+
+        navigation.dismiss()
       }
     },
   })
@@ -138,6 +140,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
             ...claimToObject(claimFields),
           },
         },
+        save: true,
       },
     })
   }
