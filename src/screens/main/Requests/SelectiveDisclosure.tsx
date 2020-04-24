@@ -90,8 +90,9 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
                 to: message.from.did,
                 from: selectedIdentity,
                 body: response.signPresentationJwt.raw,
+                type: 'DIDComm',
               },
-              url: requestMessage.replyUrl,
+              url: message.replyUrl,
             },
           })
         }
@@ -114,7 +115,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
           data: {
             issuer: selectedIdentity,
             audience: message && message.from.did,
-            // tag: message && message.threadId,
+            tag: message && message.threadId,
             context: ['https://www.w3.org/2018/credentials/v1'],
             type: ['VerifiablePresentation'],
             verifiableCredential: selectedVp,
@@ -196,7 +197,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
             <Button
               type={'secondary'}
               fullWidth
-              buttonText={'Reject'}
+              buttonText={'Later'}
               onPress={rejectCallRequest}
               block={'outlined'}
             />
@@ -225,8 +226,10 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
           }}
         />
         <Indicator
-          text={`${peerMeta && peerMeta.name} has requested credentials`}
+          text={`${(peerMeta && peerMeta.name) ||
+            'Unknown'} has requested credentials`}
         />
+
         <Container>
           {message &&
             message.sdr &&
