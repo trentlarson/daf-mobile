@@ -200,6 +200,7 @@ export const GET_MESSAGE_SDR = gql`
         claimValue
         credentialType
         essential
+        reason
         issuers {
           did {
             did
