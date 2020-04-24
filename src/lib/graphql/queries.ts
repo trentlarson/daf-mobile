@@ -239,7 +239,7 @@ export const ALL_MESSAGES = gql`
     profileImage: latestClaimValue(type: "profileImage")
   }
   query AllMessages {
-    messages {
+    messages(input: { order: [{ column: saveDate, direction: DESC }] }) {
       id
       saveDate
       updateDate

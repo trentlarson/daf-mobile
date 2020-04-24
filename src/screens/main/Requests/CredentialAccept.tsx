@@ -117,7 +117,6 @@ const AcceptCredential: React.FC<RequestProps> = ({
         <Container padding flex={1} background={'primary'}>
           {vcs &&
             vcs.map((vc: any) => {
-              console.log('VC', vc)
               return (
                 <Credential
                   shadow={1.5}

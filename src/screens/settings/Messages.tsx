@@ -36,8 +36,6 @@ export default () => {
     })
   }
 
-  console.log(data)
-
   return (
     <Screen safeArea={true}>
       <Container flex={1}>
