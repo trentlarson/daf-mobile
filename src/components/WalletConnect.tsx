@@ -33,7 +33,6 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ navigate }) => {
     wcEventHub.addListener(
       AppConstants.events.WALLET_CONNECT.CALL_REQUEST_INT,
       async ({ peerId, peerMeta, payload }) => {
-        console.log(peerId, peerMeta, payload)
         const message = payload.params[0]
           ? await agent.handleMessage({
               raw: payload.params[0],
@@ -49,6 +48,7 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ navigate }) => {
 
         if (message && payload.method === 'request_credentials') {
           await message.save()
+          client.reFetchObservableQueries()
 
           const requestType = AppConstants.requests.DISCLOSURE
           navigate(Screens.Requests.screen, {

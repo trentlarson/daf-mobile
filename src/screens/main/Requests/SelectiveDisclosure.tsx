@@ -14,7 +14,7 @@ import {
   SEND_DIDCOMM_MUTATION,
   GET_MESSAGE_SDR,
 } from '../../../lib/graphql/queries'
-import { useMutation, useQuery } from 'react-apollo'
+import { useMutation, useQuery, useLazyQuery } from 'react-apollo'
 import { useNavigation } from 'react-navigation-hooks'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
 
@@ -46,8 +46,9 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
   const [formValid, setValid] = useState(true)
   const [message, setMessage] = useState()
   const navigation = useNavigation()
-  const { data: requestMessage } = useQuery(GET_MESSAGE_SDR, {
+  const { data: requestMessage, refetch } = useQuery(GET_MESSAGE_SDR, {
     variables: { id: messageId, selectedIdentity: selectedIdentity },
+    fetchPolicy: 'no-cache',
   })
 
   const {
@@ -93,6 +94,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
                 type: 'DIDComm',
               },
               url: message.replyUrl,
+              save: false,
             },
           })
         }
@@ -120,7 +122,6 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
             type: ['VerifiablePresentation'],
             verifiableCredential: selectedVp,
           },
-          save: true,
         },
       }
 
@@ -128,7 +129,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
     }
   }
 
-  const onSelectItem = (
+  const onSelectItem = async (
     id: string | null,
     jwt: string | null,
     claimType: string,
