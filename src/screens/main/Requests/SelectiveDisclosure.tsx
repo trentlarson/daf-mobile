@@ -17,7 +17,6 @@ import {
 import { useMutation, useQuery, useLazyQuery } from 'react-apollo'
 import { useNavigation } from 'react-navigation-hooks'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 interface RequestProps {
   peerId: string
