@@ -8,10 +8,7 @@ import {
   NavigationState,
   createSwitchNavigator,
 } from 'react-navigation'
-import {
-  createStackNavigator,
-  StackViewTransitionConfigs,
-} from 'react-navigation-stack'
+import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Icon } from '@kancha/kancha-ui'
 import TabAvatar from './components/TabAvatar'
@@ -150,7 +147,7 @@ const SettingsNavigator = createStackNavigator(
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerBackTitle: null,
+      headerBackTitle: '',
     },
   },
 )
@@ -183,7 +180,7 @@ const ActivityNavigator = createStackNavigator(
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerBackTitle: null,
+      headerTitle: '',
     },
   },
 )
@@ -198,7 +195,7 @@ const ExploreNavigator = createStackNavigator(
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerBackTitle: null,
+      headerBackTitle: '',
     },
   },
 )
@@ -282,26 +279,6 @@ const TabNavigator = createBottomTabNavigator(
   },
 )
 
-/**
- * Remove modal animation from these screens
- */
-const FADE_IN_MODALS = ['']
-
-let dynamicModalTransition = (
-  transitionProps: any,
-  prevTransitionProps: any,
-) => {
-  const notModal = FADE_IN_MODALS.some(
-    screenName =>
-      screenName === transitionProps.scene.route.routeName ||
-      (prevTransitionProps &&
-        screenName === prevTransitionProps.scene.route.routeName),
-  )
-  return notModal
-    ? fadeIn()
-    : StackViewTransitionConfigs.ModalSlideFromBottomIOS
-}
-
 export function fadeIn(duration = 400) {
   return {
     transitionSpec: {
@@ -346,7 +323,6 @@ const App = createStackNavigator(
   {
     mode: 'modal',
     headerMode: 'none',
-    transitionConfig: dynamicModalTransition,
   },
 )
 
@@ -376,7 +352,6 @@ const Onboard = createStackNavigator(
     CreatingWallet: {
       screen: CreatingWallet,
       navigationOptions: {
-        headerLeft: null,
         headerTitle: headerLogo,
         headerStyle: { borderBottomWidth: 0 },
       },
