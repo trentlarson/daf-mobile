@@ -55,13 +55,14 @@ public class MainApplication extends Application implements ReactApplication {
    * @param context
    * @param reactInstanceManager
    */
-  private static void initializeFlipper(Context context) {
+  private static void initializeFlipper(
+      Context context, ReactInstanceManager reactInstanceManager) {
     if (BuildConfig.DEBUG) {
       try {
         /*
-         * We use reflection here to pick up the class that initializes Flipper, since
-         * Flipper library is not available in release mode
-         */
+         We use reflection here to pick up the class that initializes Flipper,
+        since Flipper library is not available in release mode
+        */
         Class<?> aClass = Class.forName("com.dafmobile.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)

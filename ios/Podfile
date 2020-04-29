@@ -91,7 +91,7 @@ target 'DafMobile' do
 end
 
 target 'DafMobile-tvOS' do
-  # Pods for RnDiffApp-tvOS
+  # Pods for DafMobile-tvOS
 
   target 'DafMobile-tvOSTests' do
     inherit! :search_paths

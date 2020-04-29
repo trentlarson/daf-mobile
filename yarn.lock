@@ -5791,11 +5791,6 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-hermes-engine@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/hermes-engine/-/hermes-engine-0.2.1.tgz#25c0f1ff852512a92cb5c5cc47cf967e1e722ea2"
-  integrity sha512-eNHUQHuadDMJARpaqvlCZoK/Nitpj6oywq3vQ3wCwEsww5morX34mW5PmKWQTO7aU0ck0hgulxR+EVDlXygGxQ==
-
 hermes-engine@~0.4.0:
   version "0.4.1"
   resolved "https://registry.npmjs.org/hermes-engine/-/hermes-engine-0.4.1.tgz#2d02b295596298643c4d24b86687eb554db9e950"
@@ -9962,7 +9957,7 @@ react-native-shared-element@^0.5.3:
 
 react-native-sodium@^0.3.6:
   version "0.3.6"
-  resolved "https://registry.yarnpkg.com/react-native-sodium/-/react-native-sodium-0.3.6.tgz#c1c0058becc866ae0d60257aa53cb81a9fd4a8fc"
+  resolved "https://registry.npmjs.org/react-native-sodium/-/react-native-sodium-0.3.6.tgz#c1c0058becc866ae0d60257aa53cb81a9fd4a8fc"
   integrity sha512-1lZBpIF9mvYlgGH1tlHCNBnhMeNwFmWkok55p5Lu1Td5bYya2iUbLyfQyDcMk8RXnab2V6c/o76hmxt0tqmuWg==
 
 react-native-sqlite-storage@^3.3.10:
