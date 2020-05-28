@@ -78,7 +78,3 @@ To use a different env file set `ENVFILE` variable:
 ```
 $ ENVFILE=.env.production react-native run-android
 ```
-
-## Sentry
-
-Sentry is set up. Add the correct configs to .env
