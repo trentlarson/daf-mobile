@@ -3,7 +3,7 @@
 
 # Daf mobile
 
-Daf mobile is a reference implementation for [Daf](https://github.com/uport-project/daf) framework and also the source code for `uPort Open` mobile app. `uPort Open` mobile app along with `Daf` will replace the current `uPort` app and legacy architecture. Full documentation coming soon.
+Daf mobile is a reference implementation for [Daf](https://github.com/uport-project/daf) framework.
 
 ## Setup
 
@@ -78,7 +78,3 @@ To use a different env file set `ENVFILE` variable:
 ```
 $ ENVFILE=.env.production react-native run-android
 ```
-
-## Sentry
-
-Sentry is set up. Add the correct configs to .env

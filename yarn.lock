@@ -3713,10 +3713,10 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
-daf-core@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/daf-core/-/daf-core-4.2.0.tgz#4fafbfcca0e79bea118b098a7c5e70d8b4203eff"
-  integrity sha512-TwLtrdGuFlU5EqR0rnN/+mOvZR0ZtMh5iWJ6xXkDAX5AfdD7fEWYifgDK7Rvb4BKQ8yS+aBJa8/lk8hQLzSnBQ==
+daf-core@^5.6.5:
+  version "5.6.5"
+  resolved "https://registry.npmjs.org/daf-core/-/daf-core-5.6.5.tgz#e21fcaff8b301bcded2b08fe23217e7f04cd5435"
+  integrity sha512-C+n0qfKc7G3i0WiSkPmKon6c1r3dLUH/81yAkuDygV4GkoPJm/3R9TN2x8n0EUivmbislSGrm8OajKEnMuw/sQ==
   dependencies:
     blakejs "^1.1.0"
     debug "^4.1.1"
@@ -3724,46 +3724,46 @@ daf-core@^4.2.0:
     typeorm "^0.2.24"
     uuid "^7.0.2"
 
-daf-did-comm@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/daf-did-comm/-/daf-did-comm-4.2.0.tgz#254168d98e0465bd3a4c2438f23e80d69833faa3"
-  integrity sha512-ZWQqlfhPAH5jR3CAbNS8QarDDWfCYUd2+UGiwmsvMeilAIiRSNQkbjxUXAp7i+i1EPd/9SBw4rbWr07bNpefvA==
+daf-did-comm@^5.6.5:
+  version "5.6.5"
+  resolved "https://registry.npmjs.org/daf-did-comm/-/daf-did-comm-5.6.5.tgz#a7660ae00dd45218758b8c49ba3d191294e2f856"
+  integrity sha512-uOPiTfRbuyWG1V9v1DeKUX4l0IhIVgFprv25E/abHrOua/ezZCGvt1TT55uAiWAFqPLmzWQmRBURASS2bHiKLQ==
   dependencies:
     cross-fetch "^3.0.4"
-    daf-core "^4.2.0"
+    daf-core "^5.6.5"
     debug "^4.1.1"
     uuid "^3.3.3"
 
-daf-did-jwt@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/daf-did-jwt/-/daf-did-jwt-4.2.0.tgz#e1556bf04babbceecfc6cc1d1313706f6296a203"
-  integrity sha512-XKCW7NT/U0CtHwx8/8yAhPlapOSHzAvWNMKSEfrBtYllXWv24EhjtPOzHyZ2+g2RVICgHF1fFSAD3cmPGcCFsg==
+daf-did-jwt@^5.6.5:
+  version "5.6.5"
+  resolved "https://registry.npmjs.org/daf-did-jwt/-/daf-did-jwt-5.6.5.tgz#c6bee4cdd472b69291cc9c834ac952a113bcc28f"
+  integrity sha512-lEalZVp31l3AoyX0jEUd+PmUlirJMC87UakwyaHDiZvadRoeEQGgzdDFHMPGQwb7SGFwrUq7te4R/YmHqhwH1A==
   dependencies:
-    daf-core "^4.2.0"
+    daf-core "^5.6.5"
     debug "^4.1.1"
-    did-jwt "4.2.0"
+    did-jwt "^4.3.2"
     did-resolver "^1.1.0"
 
-daf-ethr-did@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/daf-ethr-did/-/daf-ethr-did-4.2.0.tgz#bf3bbbe6b66f99c8c47ea225ad7f3480f71f5be5"
-  integrity sha512-HNaPjSEqsjpUoVUPAZzobONtZSOmx6J5GYi1k2QTEoFs9X9v6MoA9sF+78/dihgNEvGn0f278Wr1PiQ2TchO6g==
+daf-ethr-did@^5.6.5:
+  version "5.6.5"
+  resolved "https://registry.npmjs.org/daf-ethr-did/-/daf-ethr-did-5.6.5.tgz#f409be2af15463c634824eb28fbf9f70470fc6e2"
+  integrity sha512-8AmbLelTi1+bjhkaZ8bukTHJr8CI1oMU+geZOniIYrUb3QePy6kWdSVsiMhUF+I9Dmvv7Z6CZkiAyfduldNNgw==
   dependencies:
-    daf-core "^4.2.0"
+    daf-core "^5.6.5"
     debug "^4.1.1"
     ethjs-provider-signer "^0.1.4"
     ethr-did "^1.1.0"
     js-sha3 "^0.8.0"
 
-daf-react-native-libsodium@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/daf-react-native-libsodium/-/daf-react-native-libsodium-4.2.0.tgz#14d94b3923370fba4a0a6c54ccf5d71f2911cc77"
-  integrity sha512-SF6h+Vfo5x7+wKpRizjWsLR87VI1RQCVE91Fp3y5R9N+UFyXCFpa8pexfKielXVCie0GHx8GMxjS/u3teqSYHw==
+daf-react-native-libsodium@^5.6.5:
+  version "5.6.5"
+  resolved "https://registry.npmjs.org/daf-react-native-libsodium/-/daf-react-native-libsodium-5.6.5.tgz#5d95c91dfcb36a23ce8ce9cd749ef2d52c39d5a8"
+  integrity sha512-o/DuZEtusrMZFTTECWmXWfVjF8/ckQktO64fYdoBg5OH689kEaf96K0ATfMpYHaiL40z7OIuhHWUr8SlEESNzw==
   dependencies:
     base-58 "^0.0.1"
-    daf-core "^4.2.0"
+    daf-core "^5.6.5"
     debug "^4.1.1"
-    did-jwt "4.2.0"
+    did-jwt "^4.3.2"
     elliptic "^6.5.2"
     ethjs-signer "^0.1.1"
 
@@ -3778,37 +3778,37 @@ daf-resolver@^4.1.0:
     nacl-did "^1.0.0"
     web-did-resolver "^1.2.0"
 
-daf-selective-disclosure@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.npmjs.org/daf-selective-disclosure/-/daf-selective-disclosure-4.2.1.tgz#450c0991d6339d4d771d2da3f2d9342863bd2656"
-  integrity sha512-vfrWpIpkMIrcdJ4oXVS01i6XFuiDZxWdQ7orKVgVbHh/EQ17TIP0Gc20vGOX1iAIWt2oVASPzY+BXvJkDTRTsw==
+daf-selective-disclosure@^5.6.5:
+  version "5.6.5"
+  resolved "https://registry.npmjs.org/daf-selective-disclosure/-/daf-selective-disclosure-5.6.5.tgz#35a9d2b5078296077e1c52ffe8d28adc64602113"
+  integrity sha512-zD3MZuBb8hc2tZZp1tlrD4z9flE2OMASKExJld6TDwFk8FFH5gIm3lgvpbA+7dXiwbxvF4HSjsYE9homqXIJtw==
   dependencies:
     blakejs "^1.1.0"
-    daf-core "^4.2.0"
-    daf-did-jwt "^4.2.0"
+    daf-core "^5.6.5"
+    daf-did-jwt "^5.6.5"
     debug "^4.1.1"
-    did-jwt "4.2.0"
+    did-jwt "^4.3.2"
     typeorm "^0.2.24"
 
-daf-url@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/daf-url/-/daf-url-4.2.0.tgz#1665ba7ffaeb171c6adc06196cf0434991cba522"
-  integrity sha512-O8kpeQEtWeXEFNrIdAPyRE30ddTEmdpeiR3DvM5QRPb/CNq+RuA0JfXvjfysz1ITr0/Y23m+As/m01tdDidbqQ==
+daf-url@^5.6.5:
+  version "5.6.5"
+  resolved "https://registry.npmjs.org/daf-url/-/daf-url-5.6.5.tgz#33a4f258e39eeea045e7fef5f07c4eee95e46864"
+  integrity sha512-ToKSTOKUamHwQTCUYxr6iZEt+AUZp+/zCVBqz4rxK8xTFXwuya38Ms9J+m6Lx+bC1DZOdMkhIQtPSkOmXb0S5g==
   dependencies:
-    daf-core "^4.2.0"
+    daf-core "^5.6.5"
     debug "^4.1.1"
     url-parse "^1.4.7"
 
-daf-w3c@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/daf-w3c/-/daf-w3c-4.2.0.tgz#1167890c6ed654576f67576c24b29aac9999e0f2"
-  integrity sha512-4wR88CSMnWHJ6pPz0LSg2e2bW7IUd1ZvkHJmYvcAY1suVgLpiYV1rcOwrmtY6/cAjbfn3Dp4OxqO4mPPDqEwsg==
+daf-w3c@^5.6.5:
+  version "5.6.5"
+  resolved "https://registry.npmjs.org/daf-w3c/-/daf-w3c-5.6.5.tgz#4a3bddd64cef40bef40cb60c3ec595d2cbef77cd"
+  integrity sha512-bxUR+l7wxsJzNBXWPIVzK/GNfBr9ATtBgcyz0wMZLeJYsZQ/HzjMnCt98Hqthwc0HluRDFmDYSUvppCBc0zkHQ==
   dependencies:
     blakejs "^1.1.0"
-    daf-core "^4.2.0"
-    daf-did-jwt "^4.2.0"
+    daf-core "^5.6.5"
+    daf-did-jwt "^5.6.5"
     debug "^4.1.1"
-    did-jwt-vc "^0.1.3"
+    did-jwt-vc "0.2.0"
     did-resolver "^1.1.0"
 
 dargs@^4.0.1:
@@ -4081,34 +4081,19 @@ dezalgo@^1.0.0, dezalgo@~1.0.3:
     asap "^2.0.0"
     wrappy "1"
 
+did-jwt-vc@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/did-jwt-vc/-/did-jwt-vc-0.2.0.tgz#a3592217622d4eccbe1c6b2ea68ba41fe79d7e5d"
+  integrity sha512-YlIXA3GLryD9nlHOUAzYaU6UMVvZ3103HVBILuGLvRTnE9YVmlfc6nMuYOcIzbgLW2P8pZgIgZsyEFzRdkDRFg==
+  dependencies:
+    did-jwt "^4.3.2"
+
 did-jwt-vc@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/did-jwt-vc/-/did-jwt-vc-0.1.2.tgz#bcaea103316b4fa48433100b93295c2f284e9593"
   integrity sha512-NwTt0g9t1eA/x5LT9zvFmo6EWRJvDKAQGjv+bcXKrr3ri6gq1IwUHsBEHgl9LPMFdfSr1dsK3bUdjwTraBebRw==
   dependencies:
     did-jwt "^3.0.0"
-
-did-jwt-vc@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/did-jwt-vc/-/did-jwt-vc-0.1.3.tgz#2b7631d961406f1f2c10c5b7bb4a121fd1db5d71"
-  integrity sha512-rYVlFOr93+88sdgXGcfbYb5nCKDjqznwOOArJas5Vyad46is8jqfKhdeSlQcMefzD/JMxiR+E0diPS6MitA4CQ==
-  dependencies:
-    did-jwt "^3.0.0"
-
-did-jwt@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/did-jwt/-/did-jwt-4.2.0.tgz#38798716ba646191fd512d280df39c99da1b7ec8"
-  integrity sha512-fuC/0DCmu1mM1gc1vdrtdCX5Rmj2c/OPxCVU5nnYsLN1eqRjui+7z3MjGOfSqSdh/rWQZrQfzliS+FyOI6jOsA==
-  dependencies:
-    "@babel/runtime" "^7.3.1"
-    "@stablelib/utf8" "^0.10.1"
-    buffer "^5.2.1"
-    did-resolver "^1.0.0"
-    elliptic "^6.4.0"
-    js-sha256 "^0.9.0"
-    js-sha3 "^0.8.0"
-    tweetnacl "^1.0.1"
-    uport-base64url "3.0.2-alpha.0"
 
 did-jwt@^0.1.1:
   version "0.1.3"
@@ -4129,6 +4114,21 @@ did-jwt@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/did-jwt/-/did-jwt-3.0.0.tgz#5e11f1d6e5c9e2d8bdcba0d391f1fcec7c58a07d"
   integrity sha512-/zHwoUN6eA+zTpV4HjTVMrVXOGfcfh8le4s9ibvv53ammMwdPj3RnLpw539JtnHm7dCXLq7rpjBkoX3lbbxoPQ==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    "@stablelib/utf8" "^0.10.1"
+    buffer "^5.2.1"
+    did-resolver "^1.0.0"
+    elliptic "^6.4.0"
+    js-sha256 "^0.9.0"
+    js-sha3 "^0.8.0"
+    tweetnacl "^1.0.1"
+    uport-base64url "3.0.2-alpha.0"
+
+did-jwt@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.npmjs.org/did-jwt/-/did-jwt-4.3.2.tgz#e36cddd1976711a14be5bfa4567fe77388038612"
+  integrity sha512-emkWdlt24qfhFVkPvAWIS5o5Wdyz3OyN3OQnkgW3iOow4PvtM3uO0rg1L9P9yKwl+pwg005AfM3WInjFbVjZmQ==
   dependencies:
     "@babel/runtime" "^7.3.1"
     "@stablelib/utf8" "^0.10.1"
