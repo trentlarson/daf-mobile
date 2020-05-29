@@ -7,7 +7,7 @@ Daf mobile is a reference implementation for [Daf](https://github.com/uport-proj
 
 # Demo
 
-To tryout Daf Mobile you can use [Dafhub](https://github.com/uport-project/daf) to provide you with most of the current api flows in Daf. You will need to build Daf Mobile locally and install on your device.
+Try out Daf Mobile by using [Dafhub](https://github.com/uport-project/dafhub). This demo provides you with most of the current api flows in Daf. You will need to build Daf Mobile locally and install on your device.
 
 ## Setup
 
