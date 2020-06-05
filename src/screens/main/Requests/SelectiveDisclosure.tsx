@@ -13,8 +13,9 @@ import {
   SIGN_VP,
   SEND_DIDCOMM_MUTATION,
   GET_MESSAGE_SDR,
+  SIGN_VC_MUTATION,
 } from '../../../lib/graphql/queries'
-import { useMutation, useQuery, useLazyQuery } from 'react-apollo'
+import { useMutation, useQuery } from 'react-apollo'
 import { useNavigation } from 'react-navigation-hooks'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
 
@@ -48,7 +49,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
   const navigation = useNavigation()
   const { data: requestMessage, refetch } = useQuery(GET_MESSAGE_SDR, {
     variables: { id: messageId, selectedIdentity: selectedIdentity },
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'network-only',
   })
 
   const {
@@ -65,6 +66,30 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
     })
 
     setValid(valid)
+  }
+
+  const [actionSignVc] = useMutation(SIGN_VC_MUTATION, {
+    onCompleted: async response => {
+      if (response && response.signCredentialJwt) {
+        refetch()
+      }
+    },
+  })
+
+  const signVc = (claimType: string, value: string) => {
+    actionSignVc({
+      variables: {
+        data: {
+          issuer: selectedIdentity,
+          context: ['https://www.w3.org/2018/credentials/v1'],
+          type: ['VerifiableCredential'],
+          credentialSubject: {
+            id: selectedIdentity,
+            [claimType]: value,
+          },
+        },
+      },
+    })
   }
 
   const [actionSendDidComm] = useMutation(SEND_DIDCOMM_MUTATION, {
@@ -184,6 +209,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
           }
         }
       })
+      console.log('request message changed', message)
       setMessage(message)
       updateSelected(defaultSelected)
     }
@@ -237,6 +263,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
             message.sdr.map((sdrRequestField: any, index: number) => {
               return (
                 <RequestItem
+                  selfSign={signVc}
                   closeAfterSelect={false}
                   key={sdrRequestField.claimType + index}
                   claimType={sdrRequestField.claimType}
