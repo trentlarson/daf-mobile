@@ -1,5 +1,5 @@
 PODS:
-  - Analytics (3.6.10)
+  - Analytics (3.8.0)
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
   - EthCore (1.0.9):
@@ -260,9 +260,10 @@ PODS:
     - UPTEthereumSigner (~> 1.1.5)
   - RNVectorIcons (6.6.0):
     - React
-  - Sentry (4.4.0):
-    - Sentry/Core (= 4.4.0)
-  - Sentry/Core (4.4.0)
+  - Sentry (4.4.3):
+    - Sentry/Core (= 4.4.3)
+  - Sentry/Core (4.4.3)
+  - SocketRocket (0.5.1)
   - UPTEthereumSigner (1.1.5):
     - EthCore (~> 1.0.9)
     - Valet (~> 2.4.2)
@@ -312,10 +313,11 @@ DEPENDENCIES:
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNUportSigner (from `../node_modules/react-native-uport-signer`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - SocketRocket (from `../node_modules/detox/ios_src/SocketRocket`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Analytics
     - boost-for-react-native
     - EthCore
@@ -403,11 +405,13 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-uport-signer"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  SocketRocket:
+    :path: "../node_modules/detox/ios_src/SocketRocket"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  Analytics: 63744ad4afa65c3bcdcdb7a94b62515bde5b3900
+  Analytics: fcf79ebc393a7d77befb8d43ce296353ba9ede3d
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   EthCore: f30384fa193fbb5f1ce1cff1fa4a7f5f93408d01
@@ -450,11 +454,12 @@ SPEC CHECKSUMS:
   RNSVG: 75670614bca635d3dd64bc267bc199e539cb4fa9
   RNUportSigner: 6f4968dd61b4e856bc6e93fa216b2a7268561923
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  Sentry: 26650184fe71eb7476dfd2737acb5ea6cc64b4b1
+  Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
+  SocketRocket: dbb1554b8fc288ef8ef370d6285aeca7361be31e
   UPTEthereumSigner: a14eb8bc74a2094499682f8c374bfd6066ce7440
   Valet: 14463ef24fab8fd5809044ecedb61484b799fdd6
   Yoga: d8c572ddec8d05b7dba08e4e5f1924004a177078
 
 PODFILE CHECKSUM: ee43cfa7c5b944272ffb9e325f33e25851574dd6
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
