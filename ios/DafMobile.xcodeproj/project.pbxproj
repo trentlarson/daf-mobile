@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* DafMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DafMobileTests.m */; };
+		0509A09DB66C201B2D7E7D77 /* libPods-DafMobile-DafMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC94739A719A9908B616A2C3 /* libPods-DafMobile-DafMobileTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -17,14 +18,14 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* DafMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DafMobileTests.m */; };
-		6D27C00F2E8A9BE0DF3C79AA /* libPods-DafMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DECCCE326F43132A904E12 /* libPods-DafMobileTests.a */; };
 		7010C9ED227B270200642EEA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010C9EC227B270200642EEA /* libz.tbd */; };
 		96889E46234B4373006EAA84 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96889E43234B4343006EAA84 /* libReactNativeConfig.a */; };
+		96D1BE56248E9C770003FB49 /* libPods-DafMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D1BE55248E9C770003FB49 /* libPods-DafMobile.a */; };
+		96D1BE65248F8E660003FB49 /* DafMobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D1BE64248F8E660003FB49 /* DafMobile.swift */; };
+		96D1BE66248F8E6B0003FB49 /* DafMobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D1BE64248F8E660003FB49 /* DafMobile.swift */; };
 		D25D594E501F2E00E6916F25 /* libPods-DafMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBEE661503113C7BD8FF6F19 /* libPods-DafMobile-tvOS.a */; };
-		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		F03C021136739D7F6ADF9C52 /* libPods-DafMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0700AF344D50C550AA10E55 /* libPods-DafMobile-tvOSTests.a */; };
-		F1103CFE547C55B1157EE497 /* libPods-DafMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC85E9052E5AD40FA86DE27 /* libPods-DafMobile.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		2D02E4901E0B4A5D006451C7 /* DafMobile-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DafMobile-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA5CF1259309BFABCCE7173 /* Pods-DafMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-DafMobileTests/Pods-DafMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4B4CFFE1816C307F851FD7D6 /* Pods-DafMobile-DafMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobile-DafMobileTests.release.xcconfig"; path = "Target Support Files/Pods-DafMobile-DafMobileTests/Pods-DafMobile-DafMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		7010C9EC227B270200642EEA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7077030522B8FF8E002885B6 /* DafMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = DafMobile.entitlements; path = DafMobile/DafMobile.entitlements; sourceTree = "<group>"; };
 		70AFD2B522C3C10B00C7808E /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
@@ -111,9 +113,13 @@
 		9685349022BD26A300EED8BB /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		96889E3D234B4343006EAA84 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		968D41182346149C00720469 /* libRNUportSigner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNUportSigner.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		96D1BE55248E9C770003FB49 /* libPods-DafMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-DafMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96D1BE63248F8E650003FB49 /* DafMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DafMobile-Bridging-Header.h"; sourceTree = "<group>"; };
+		96D1BE64248F8E660003FB49 /* DafMobile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DafMobile.swift; path = DafMobile/DafMobile.swift; sourceTree = "<group>"; };
 		A790B15AB706002380B90922 /* Pods-DafMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobile.release.xcconfig"; path = "Target Support Files/Pods-DafMobile/Pods-DafMobile.release.xcconfig"; sourceTree = "<group>"; };
+		AC94739A719A9908B616A2C3 /* libPods-DafMobile-DafMobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DafMobile-DafMobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACCF7930FB9C2F4F68C907E9 /* Pods-DafMobile-DafMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobile-DafMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-DafMobile-DafMobileTests/Pods-DafMobile-DafMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BFC85E9052E5AD40FA86DE27 /* libPods-DafMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DafMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4DECCCE326F43132A904E12 /* libPods-DafMobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DafMobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9E0906A2D6B9E7D0BCA9C39 /* Pods-DafMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobileTests.release.xcconfig"; path = "Target Support Files/Pods-DafMobileTests/Pods-DafMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		CDAA8A0F5C7A54F975DD6112 /* Pods-DafMobile-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobile-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-DafMobile-tvOS/Pods-DafMobile-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		DC6ACD3D32F2E1B1EB33F892 /* Pods-DafMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DafMobile.debug.xcconfig"; path = "Target Support Files/Pods-DafMobile/Pods-DafMobile.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,7 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D27C00F2E8A9BE0DF3C79AA /* libPods-DafMobileTests.a in Frameworks */,
+				0509A09DB66C201B2D7E7D77 /* libPods-DafMobile-DafMobileTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,10 +142,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96D1BE56248E9C770003FB49 /* libPods-DafMobile.a in Frameworks */,
 				96889E46234B4373006EAA84 /* libReactNativeConfig.a in Frameworks */,
 				7010C9ED227B270200642EEA /* libz.tbd in Frameworks */,
-				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
-				F1103CFE547C55B1157EE497 /* libPods-DafMobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +189,7 @@
 		13B07FAE1A68108700A75B9A /* DafMobile */ = {
 			isa = PBXGroup;
 			children = (
+				96D1BE64248F8E660003FB49 /* DafMobile.swift */,
 				7077030522B8FF8E002885B6 /* DafMobile.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -199,6 +205,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				96D1BE55248E9C770003FB49 /* libPods-DafMobile.a */,
 				968D41182346149C00720469 /* libRNUportSigner.a */,
 				7010C9EC227B270200642EEA /* libz.tbd */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
@@ -207,7 +214,7 @@
 				BFC85E9052E5AD40FA86DE27 /* libPods-DafMobile.a */,
 				FBEE661503113C7BD8FF6F19 /* libPods-DafMobile-tvOS.a */,
 				F0700AF344D50C550AA10E55 /* libPods-DafMobile-tvOSTests.a */,
-				C4DECCCE326F43132A904E12 /* libPods-DafMobileTests.a */,
+				AC94739A719A9908B616A2C3 /* libPods-DafMobile-DafMobileTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -247,6 +254,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				701980502278611000372518 /* Recovered References */,
 				D46C82B1ABA8F7023B562381 /* Pods */,
+				96D1BE63248F8E650003FB49 /* DafMobile-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -306,6 +314,8 @@
 				7FBD2D21B3B1C2EDD4BBAB3A /* Pods-DafMobile-tvOSTests.release.xcconfig */,
 				2DA5CF1259309BFABCCE7173 /* Pods-DafMobileTests.debug.xcconfig */,
 				C9E0906A2D6B9E7D0BCA9C39 /* Pods-DafMobileTests.release.xcconfig */,
+				ACCF7930FB9C2F4F68C907E9 /* Pods-DafMobile-DafMobileTests.debug.xcconfig */,
+				4B4CFFE1816C307F851FD7D6 /* Pods-DafMobile-DafMobileTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -321,6 +331,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				B97835ED9F7E0A5B968A6782 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -408,6 +419,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 82SAVLYZ3K;
+						LastSwiftMigration = 1150;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -658,11 +670,59 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DafMobileTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DafMobile-DafMobileTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B97835ED9F7E0A5B968A6782 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DafMobile-DafMobileTests/Pods-DafMobile-DafMobileTests-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DafMobile-DafMobileTests/Pods-DafMobile-DafMobileTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CC652D70D5835BF874D3BB31 /* [CP] Check Pods Manifest.lock */ = {
@@ -726,6 +786,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				96D1BE65248F8E660003FB49 /* DafMobile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,6 +796,7 @@
 			files = (
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
+				96D1BE66248F8E6B0003FB49 /* DafMobile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,8 +838,9 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2DA5CF1259309BFABCCE7173 /* Pods-DafMobileTests.debug.xcconfig */;
+			baseConfigurationReference = ACCF7930FB9C2F4F68C907E9 /* Pods-DafMobile-DafMobileTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -808,8 +871,9 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9E0906A2D6B9E7D0BCA9C39 /* Pods-DafMobileTests.release.xcconfig */;
+			baseConfigurationReference = 4B4CFFE1816C307F851FD7D6 /* Pods-DafMobile-DafMobileTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
@@ -839,18 +903,24 @@
 			baseConfigurationReference = DC6ACD3D32F2E1B1EB33F892 /* Pods-DafMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DafMobile/DafMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 82SAVLYZ3K;
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"FB_SONARKIT_ENABLED=1",
+				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DafMobile/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "";
 				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_VERIFY_BITCODE = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -859,6 +929,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.serto.wallet;
 				PRODUCT_NAME = DafMobile;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development co.serto.wallet";
+				SWIFT_OBJC_BRIDGING_HEADER = "DafMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = "${PODS_ROOT}/EthCore ${PODS_ROOT}/EthCore/openssl/include";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -869,6 +942,7 @@
 			baseConfigurationReference = A790B15AB706002380B90922 /* Pods-DafMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DafMobile/DafMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -876,10 +950,11 @@
 				DEVELOPMENT_TEAM = 82SAVLYZ3K;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DafMobile/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "";
 				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_VERIFY_BITCODE = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -888,6 +963,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.serto.wallet;
 				PRODUCT_NAME = DafMobile;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore co.serto.wallet";
+				SWIFT_OBJC_BRIDGING_HEADER = "DafMobile-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = "${PODS_ROOT}/EthCore ${PODS_ROOT}/EthCore/openssl/include";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -963,6 +1040,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 924ABD49744AF22892B40E78 /* Pods-DafMobile-tvOSTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -994,6 +1072,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7FBD2D21B3B1C2EDD4BBAB3A /* Pods-DafMobile-tvOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;

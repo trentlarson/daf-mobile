@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0940"
+   LastUpgradeVersion = "1130"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "NO"
+      parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
@@ -17,20 +17,6 @@
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "DafMobile.app"
                BlueprintName = "DafMobile"
-               ReferencedContainer = "container:DafMobile.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "DafMobileTests.xctest"
-               BlueprintName = "DafMobileTests"
                ReferencedContainer = "container:DafMobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
