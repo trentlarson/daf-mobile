@@ -3,7 +3,6 @@ import React from 'react'
 import Credential from '../Credential'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 
 import {
   render,
@@ -41,7 +40,7 @@ const sertoVerifiableCredential = {
 
 export const renderWithNavigation = (component: any, options: any) => {
   const Navigator = createAppContainer(
-    createSharedElementStackNavigator(createStackNavigator, {
+    createStackNavigator({
       CredentialDetail: createStackNavigator({
         Root: () => component,
       }),

@@ -161,7 +161,6 @@ exports[`Onboarding renders the intermediate screen if dids are present 1`] = `
       <View
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
