@@ -148,7 +148,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^4.0.0",
-    "typescript": "^3.7.2",
+    "typescript": "^3.9.5",
     "ws": "^7.1.2"
   },
   "husky": {

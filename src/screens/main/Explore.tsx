@@ -96,6 +96,7 @@ Explore.navigationOptions = ({ navigation }: any) => {
   const params = navigation.state.params || {}
 
   return {
+    headerTitleAlign: 'left',
     headerTitle: () => {
       return (
         Device.isIOS && (

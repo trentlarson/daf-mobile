@@ -1,14 +1,16 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Screen, Container, Button, Constants, Text } from '@kancha/kancha-ui'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
+import { NavigationStackProp } from 'react-navigation-stack'
 
-interface OnboardingProps extends NavigationStackScreenProps {}
+type Props = {
+  navigation: NavigationStackProp
+}
 
-const Onboarding: React.FC<OnboardingProps> = ({ navigation }) => {
+const Onboarding: React.FC<Props> = ({ navigation }) => {
   const { t } = useTranslation()
   return (
-    <Screen>
+    <Screen background={'primary'}>
       <Container alignItems={'center'} flex={1} padding>
         <Container marginTop={30}>
           <Text type={Constants.TextTypes.H2} bold>
