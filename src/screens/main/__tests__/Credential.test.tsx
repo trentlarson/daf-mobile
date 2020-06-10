@@ -3,7 +3,6 @@ import React from 'react'
 import Credential from '../Credential'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 
 import {
   render,
@@ -41,7 +40,7 @@ const sertoVerifiableCredential = {
 
 export const renderWithNavigation = (component: any, options: any) => {
   const Navigator = createAppContainer(
-    createSharedElementStackNavigator(createStackNavigator, {
+    createStackNavigator({
       CredentialDetail: createStackNavigator({
         Root: () => component,
       }),
@@ -99,12 +98,17 @@ describe('Credential', () => {
         },
       },
     }
-    const header = Credential.navigationOptions({ navigation: navigation })
+    //@ts-ignore
+    const tree = render(<Credential navigation={navigation} />)
+    const Header = Credential.navigationOptions({ navigation: navigation })
+    const headerTree = render(<Header.headerRight />)
+
     act(() => {
-      header.headerRight.props.children.props.onPress()
+      fireEvent.press(headerTree.getByText('Share'))
     })
 
-    expect(header).toMatchSnapshot()
+    expect(tree.toJSON()).toMatchSnapshot()
+    expect(headerTree.toJSON()).toMatchSnapshot()
     expect(navigation.state.params.toggleSharingMode).toHaveBeenCalled()
   })
 
@@ -123,13 +127,17 @@ describe('Credential', () => {
         },
       },
     }
+    //@ts-ignore
+    const tree = render(<Credential navigation={navigation} />)
+    const Header = Credential.navigationOptions({ navigation: navigation })
+    const headerTree = render(<Header.headerRight />)
 
-    const header = Credential.navigationOptions({ navigation: navigation })
     act(() => {
-      header.headerRight.props.children.props.onPress()
+      fireEvent.press(headerTree.getByText('Cancel'))
     })
 
-    expect(header).toMatchSnapshot()
+    expect(tree).toMatchSnapshot()
+    expect(headerTree.toJSON()).toMatchSnapshot()
     expect(navigation.state.params.toggleSharingMode).toHaveBeenCalled()
   })
 
@@ -148,12 +156,16 @@ describe('Credential', () => {
         },
       },
     }
-    const header = Credential.navigationOptions({ navigation: navigation })
+    //@ts-ignore
+    const tree = render(<Credential navigation={navigation} />)
+    const Header = Credential.navigationOptions({ navigation: navigation })
+    const headerTree = render(<Header.headerLeft />)
     act(() => {
-      header.headerLeft.props.children.props.onPress()
+      fireEvent.press(headerTree.getByText('Done'))
     })
 
-    expect(header).toMatchSnapshot()
+    expect(tree).toMatchSnapshot()
+    expect(headerTree.toJSON()).toMatchSnapshot()
     expect(navigation.dismiss).toHaveBeenCalled()
   })
 })

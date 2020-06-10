@@ -41,9 +41,13 @@ export default ({ onFocus, cancel, searchActive }: SearchBarProps) => {
     <Transitioning.View
       transition={transition}
       ref={transitionRef}
-      style={{ flexDirection: 'row', alignItems: 'center' }}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      }}
     >
-      <Container flex={1} marginLeft marginRight>
+      <Container flex={1}>
         <TextInput
           autoCapitalize={'none'}
           autoCorrect={false}
@@ -60,7 +64,9 @@ export default ({ onFocus, cancel, searchActive }: SearchBarProps) => {
           }}
         />
       </Container>
-      <Container viewStyle={{ marginRight: active ? 0 : -80 }}>
+      <Container
+        viewStyle={{ marginRight: active ? 0 : -80, opacity: active ? 1 : 0 }}
+      >
         <HeaderButtons>
           <Item title={'Cancel'} onPress={cancelAndBlur} />
         </HeaderButtons>

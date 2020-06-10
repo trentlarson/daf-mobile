@@ -126,7 +126,7 @@ CredentialDetail.navigationOptions = ({ navigation }: any) => {
     headerStyle: {
       backgroundColor: '#f4511e',
     },
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons>
         <Item
           testID={'DONE_BTN'}
@@ -136,7 +136,7 @@ CredentialDetail.navigationOptions = ({ navigation }: any) => {
         />
       </HeaderButtons>
     ),
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons>
         {sharingMode && sharingModeEnabled ? (
           <Item

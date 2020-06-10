@@ -8,10 +8,7 @@ import {
   NavigationState,
   createSwitchNavigator,
 } from 'react-navigation'
-import {
-  createStackNavigator,
-  StackViewTransitionConfigs,
-} from 'react-navigation-stack'
+import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Icon } from '@kancha/kancha-ui'
 import TabAvatar from './components/TabAvatar'
@@ -62,6 +59,16 @@ const headerLogo = () => (
     resizeMode={'contain'}
   />
 )
+
+const defaultNavigationOptions = {
+  defaultNavigationOptions: {
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    headerBackTitleVisible: false,
+    headerTintColor: Colors.BLACK,
+  },
+}
 
 const SettingsNavigator = createStackNavigator(
   {
@@ -145,13 +152,7 @@ const SettingsNavigator = createStackNavigator(
     },
   },
   {
-    defaultNavigationOptions: {
-      headerTintColor: Colors.BLACK,
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      headerBackTitle: null,
-    },
+    ...defaultNavigationOptions,
   },
 )
 
@@ -178,13 +179,7 @@ const ActivityNavigator = createStackNavigator(
   },
   {
     initialRouteName: 'Activity',
-    defaultNavigationOptions: {
-      headerTintColor: Colors.BLACK,
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      headerBackTitle: null,
-    },
+    ...defaultNavigationOptions,
   },
 )
 
@@ -193,13 +188,7 @@ const ExploreNavigator = createStackNavigator(
     [Screens.Explore.screen]: Explore,
   },
   {
-    defaultNavigationOptions: {
-      headerTintColor: Colors.BLACK,
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      headerBackTitle: null,
-    },
+    ...defaultNavigationOptions,
   },
 )
 
@@ -282,47 +271,6 @@ const TabNavigator = createBottomTabNavigator(
   },
 )
 
-/**
- * Remove modal animation from these screens
- */
-const FADE_IN_MODALS = ['']
-
-let dynamicModalTransition = (
-  transitionProps: any,
-  prevTransitionProps: any,
-) => {
-  const notModal = FADE_IN_MODALS.some(
-    screenName =>
-      screenName === transitionProps.scene.route.routeName ||
-      (prevTransitionProps &&
-        screenName === prevTransitionProps.scene.route.routeName),
-  )
-  return notModal
-    ? fadeIn()
-    : StackViewTransitionConfigs.ModalSlideFromBottomIOS
-}
-
-export function fadeIn(duration = 400) {
-  return {
-    transitionSpec: {
-      duration,
-      easing: Easing.out(Easing.poly(4)),
-      timing: Animated.timing,
-      useNativeDriver: true,
-    },
-    screenInterpolator: ({ position, scene }: any) => {
-      const { index } = scene
-
-      const opacity = position.interpolate({
-        inputRange: [index - 1, index],
-        outputRange: [0, 1],
-      })
-
-      return { opacity }
-    },
-  }
-}
-
 const CredentialDetail = createStackNavigator({
   Credential: {
     screen: Credential,
@@ -346,7 +294,6 @@ const App = createStackNavigator(
   {
     mode: 'modal',
     headerMode: 'none',
-    transitionConfig: dynamicModalTransition,
   },
 )
 
@@ -354,35 +301,26 @@ const Onboard = createStackNavigator(
   {
     Intro: {
       screen: Intro,
-      navigationOptions: {
-        headerTitle: headerLogo,
-        headerStyle: { borderBottomWidth: 0 },
-      },
     },
     Onboarding: {
       screen: Onboarding,
-      navigationOptions: {
-        headerTitle: headerLogo,
-        headerStyle: { borderBottomWidth: 0 },
-      },
     },
     Restore: {
       screen: Restore,
-      navigationOptions: {
-        headerTitle: headerLogo,
-        headerStyle: { borderBottomWidth: 0 },
-      },
     },
     CreatingWallet: {
       screen: CreatingWallet,
-      navigationOptions: {
-        headerLeft: null,
-        headerTitle: headerLogo,
-        headerStyle: { borderBottomWidth: 0 },
-      },
     },
   },
   {
+    defaultNavigationOptions: {
+      headerTitle: headerLogo,
+      headerBackTitleVisible: false,
+      headerTintColor: Colors.BLACK,
+      headerStyle: {
+        borderBottomWidth: 0,
+      },
+    },
     initialRouteName: 'Intro',
   },
 )

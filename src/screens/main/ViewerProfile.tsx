@@ -162,7 +162,7 @@ ViewerProfile.navigationOptions = ({ navigation }: any) => {
   const { viewer } = navigation.state.params || {}
 
   return {
-    headerLeft: (
+    headerLeft: () => (
       <Container paddingLeft>
         <Button
           iconButton
@@ -179,7 +179,7 @@ ViewerProfile.navigationOptions = ({ navigation }: any) => {
         />
       </Container>
     ),
-    headerRight: (
+    headerRight: () => (
       <Button
         onPress={() => BottomSnap.to(1, SWITCH_IDENTITY)}
         iconButton
