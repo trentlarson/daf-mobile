@@ -6,7 +6,7 @@ exports[`Onboarding renders the intermediate screen if dids are present 1`] = `
   style={
     Object {
       "alignItems": undefined,
-      "backgroundColor": undefined,
+      "backgroundColor": "#FFFFFF",
       "borderRadius": undefined,
       "flex": 1,
       "flexDirection": undefined,
