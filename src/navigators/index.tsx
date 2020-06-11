@@ -10,7 +10,7 @@ import {
 } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import { Icon } from '@kancha/kancha-ui'
+import { Icon, Container, Text } from '@kancha/kancha-ui'
 import TabAvatar from './components/TabAvatar'
 import { Colors, Icons } from '../theme'
 import { Screens } from './screens'
@@ -281,13 +281,29 @@ const CredentialDetail = createStackNavigator({
   SettingsDetail: Settings,
 })
 
+const DeepLinkModal = createStackNavigator({
+  DeepLinkModal: {
+    screen: () => (
+      <Container>
+        <Text>Hello Modal</Text>
+      </Container>
+    ),
+    navigationOptions: {
+      headerStyle: { borderBottomWidth: 0, backgroundColor: '#000000' },
+    },
+  },
+})
+
 const App = createStackNavigator(
   {
     Tabs: TabNavigator,
     Request: Request,
     Requests: Requests,
     Scanner: ScannerNavigator,
-    IssueFirstCredential,
+    IssueFirstCredential: {
+      screen: IssueFirstCredential,
+      path: 'issue',
+    },
     IssueCredential,
     CredentialDetail,
   },
@@ -327,7 +343,10 @@ const Onboard = createStackNavigator(
 
 const RootNavigator = createSwitchNavigator(
   {
-    App,
+    App: {
+      screen: App,
+      path: '',
+    },
     Onboard,
   },
   { initialRouteName: 'Onboard' },
