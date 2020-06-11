@@ -38,7 +38,7 @@ lane :deploy_android do
   # Can be changed to another track (e.g. 'beta')
   upload_to_play_store(
       track: "internal", 
-      aab: "./app/build/outputs/bundle/release/app.aab", 
+      aab: "./app/build/outputs/bundle/release/app-release.aab", 
       skip_upload_metadata: true,
       skip_upload_images: true,
       skip_upload_screenshots: true  
