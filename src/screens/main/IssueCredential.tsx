@@ -361,7 +361,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
 IssueCredential.navigationOptions = ({ navigation }: any) => {
   return {
     title: 'Issue credential',
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons>
         <Item title={'Cancel'} onPress={navigation.dismiss} />
       </HeaderButtons>

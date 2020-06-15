@@ -151,7 +151,51 @@ export const NEW_MESSAGE = gql`
     $save: Boolean
   ) {
     handleMessage(raw: $raw, meta: $meta, save: $save) {
-      raw
+      type
+      credentials {
+        id
+        raw
+        credentialSubject
+        expirationDate
+        issuer {
+          did
+          shortId: shortDid
+        }
+        subject {
+          did
+          shortId: shortDid
+        }
+        claims {
+          isObj
+          type
+          value
+        }
+      }
+    }
+  }
+`
+
+export const NEW_CREDENTIAL = gql`
+  mutation handleMessage(
+    $raw: String!
+    $meta: [MetaDataInput]
+    $save: Boolean
+  ) {
+    handleMessage(raw: $raw, meta: $meta, save: $save) {
+      type
+      credentials {
+        id
+        raw
+        issuer {
+          did
+        }
+        subject {
+          did
+        }
+        claims {
+          did
+        }
+      }
     }
   }
 `

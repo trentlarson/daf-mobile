@@ -20,6 +20,7 @@ const MainScreens = {
     title: 'Create First Credential',
   },
   Credential: { screen: 'Credential', title: 'Credential' },
+  CredentialView: { screen: 'CredentialView', title: 'Credential' },
 }
 
 const UserSettingScreens = {
