@@ -4,8 +4,6 @@ PODS:
   - CocoaAsyncSocket (7.6.4)
   - CocoaLibEvent (1.0.0)
   - DoubleConversion (1.1.6)
-  - EthCore (1.0.9):
-    - ISO8601DateFormatter
   - FBLazyVector (0.62.2)
   - FBReactNativeSpec (0.62.2):
     - Folly (= 2018.10.22.00)
@@ -70,7 +68,6 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - ISO8601DateFormatter (0.8)
   - OpenSSL-Universal (1.0.2.19):
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
@@ -334,18 +331,11 @@ PODS:
     - Sentry (~> 4.4.0)
   - RNSVG (9.12.0):
     - React
-  - RNUportSigner (1.6.1):
-    - React
-    - UPTEthereumSigner (~> 1.1.5)
   - RNVectorIcons (6.6.0):
     - React
   - Sentry (4.4.3):
     - Sentry/Core (= 4.4.3)
   - Sentry/Core (4.4.3)
-  - UPTEthereumSigner (1.1.5):
-    - EthCore (~> 1.0.9)
-    - Valet (~> 2.4.2)
-  - Valet (2.4.2)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -412,7 +402,6 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNSVG (from `../node_modules/react-native-svg`)
-  - RNUportSigner (from `../node_modules/react-native-uport-signer`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -422,7 +411,6 @@ SPEC REPOS:
     - boost-for-react-native
     - CocoaAsyncSocket
     - CocoaLibEvent
-    - EthCore
     - Flipper
     - Flipper-DoubleConversion
     - Flipper-Folly
@@ -430,11 +418,8 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - Flipper-RSocket
     - FlipperKit
-    - ISO8601DateFormatter
     - OpenSSL-Universal
     - Sentry
-    - UPTEthereumSigner
-    - Valet
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -516,8 +501,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@sentry/react-native"
   RNSVG:
     :path: "../node_modules/react-native-svg"
-  RNUportSigner:
-    :path: "../node_modules/react-native-uport-signer"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -529,7 +512,6 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
-  EthCore: f30384fa193fbb5f1ce1cff1fa4a7f5f93408d01
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
   Flipper: 6c1f484f9a88d30ab3e272800d53688439e50f69
@@ -541,7 +523,6 @@ SPEC CHECKSUMS:
   FlipperKit: 6dc9b8f4ef60d9e5ded7f0264db299c91f18832e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
@@ -577,11 +558,8 @@ SPEC CHECKSUMS:
   RNScreens: bfa9143ca291bcf3804c932f77b9617ff324704f
   RNSentry: f1c8e34f9109a94b77e946d0ca50803375c1c19e
   RNSVG: 75670614bca635d3dd64bc267bc199e539cb4fa9
-  RNUportSigner: 6f4968dd61b4e856bc6e93fa216b2a7268561923
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
-  UPTEthereumSigner: a14eb8bc74a2094499682f8c374bfd6066ce7440
-  Valet: 14463ef24fab8fd5809044ecedb61484b799fdd6
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

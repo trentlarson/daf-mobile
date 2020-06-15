@@ -10046,14 +10046,6 @@ react-native-typescript-transformer@^1.2.12:
     semver "^5.4.1"
     source-map "^0.5.6"
 
-react-native-uport-signer@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/react-native-uport-signer/-/react-native-uport-signer-1.6.1.tgz#452997433355efcb0de0d933cd19c15b08a3f3a8"
-  integrity sha512-OaArtXmUKVix9DeKHb5QJpvbK4p2UvyI9l9aG7U0096CXp46xYz+rpgLv+dC3j9E0Q0s8l+dOMOwagDtC8QLdg==
-  dependencies:
-    buffer "^5.2.1"
-    set-value "^2.0.1"
-
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"

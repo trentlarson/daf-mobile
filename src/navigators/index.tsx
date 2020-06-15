@@ -29,6 +29,7 @@ import MessageProcess from '../screens/main/MessageProcess'
 import Request from '../screens/main/Request'
 import Requests from '../screens/main/Requests/Requests'
 import Credential from '../screens/main/Credential'
+import CredentialView from '../screens/main/CredentialView'
 import CreatingWallet from '../screens/main/CreateIdentity'
 import CreateFirstCredential from '../screens/main/CreateFirstCredential'
 import IssueCredentialScreen from '../screens/main/IssueCredential'
@@ -300,12 +301,10 @@ const App = createStackNavigator(
     Request: Request,
     Requests: Requests,
     Scanner: ScannerNavigator,
-    IssueFirstCredential: {
-      screen: IssueFirstCredential,
-      path: 'issue',
-    },
+    IssueFirstCredential,
     IssueCredential,
     CredentialDetail,
+    CredentialView,
   },
   {
     mode: 'modal',
