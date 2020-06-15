@@ -66,7 +66,6 @@ export default (props: any) => {
         walletConnectOnSessionRequest(e.data)
         props.navigation.dismiss()
       } else {
-        console.log(e.data)
         processDafMessage(e.data)
       }
     }

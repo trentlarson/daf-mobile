@@ -9,11 +9,6 @@ import {
 } from '@kancha/kancha-ui'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
 
-type Identity = {
-  did: string
-  shortId: string
-}
-
 interface CredentialViewProps {}
 
 const CredentialView: React.FC<CredentialViewProps> = () => {
@@ -22,8 +17,6 @@ const CredentialView: React.FC<CredentialViewProps> = () => {
   const message = useNavigationParam('message')
   const credentials = useNavigationParam('credentials')
   const handleMessage = useNavigationParam('handleMessage')
-
-  console.log(message)
 
   const saveMessage = () => {
     handleMessage({

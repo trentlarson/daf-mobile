@@ -134,7 +134,10 @@ describe('Request Component', () => {
     const { getByText, getAllByText, unmount } = render(
       // @ts-ignore
       <MockedProvider mocks={mocks} addTypename={false}>
-        <Request navigation={navigation} />
+        {
+          // @ts-ignore
+          <Request navigation={navigation} />
+        }
       </MockedProvider>,
     )
 
@@ -162,13 +165,14 @@ describe('Request Component', () => {
           return 'did:ethr:0x456'
         }
       }),
-      //getParam: jest.fn().mockReturnValue(mockMessage),
     }
 
     const tree = render(
-      // @ts-ignore
       <MockedProvider mocks={[]} addTypename={false}>
-        <Request navigation={navigation} />
+        {
+          // @ts-ignore
+          <Request navigation={navigation} />
+        }
       </MockedProvider>,
     )
     expect(tree.toJSON()).toMatchSnapshot()
@@ -187,13 +191,15 @@ describe('Request Component', () => {
           return 'did:ethr:0x456'
         }
       }),
-      //getParam: jest.fn().mockReturnValue(mockMessage),
     }
 
     const tree = render(
       // @ts-ignore
       <MockedProvider mocks={[]} addTypename={false}>
-        <Request navigation={navigation} />
+        {
+          // @ts-ignore
+          <Request navigation={navigation} />
+        }
       </MockedProvider>,
     )
     expect(tree.toJSON()).toMatchSnapshot()
