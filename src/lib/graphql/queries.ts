@@ -153,17 +153,15 @@ export const NEW_MESSAGE = gql`
     handleMessage(raw: $raw, meta: $meta, save: $save) {
       type
       credentials {
-        id
+        hash
         raw
         credentialSubject
         expirationDate
         issuer {
           did
-          shortId: shortDid
         }
         subject {
           did
-          shortId: shortDid
         }
         claims {
           isObj

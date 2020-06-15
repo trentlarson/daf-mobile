@@ -19,9 +19,11 @@ interface CredentialViewProps {}
 const CredentialView: React.FC<CredentialViewProps> = () => {
   const navigation = useNavigation()
 
-  const message = useNavigationParam('handleMessage')
+  const message = useNavigationParam('message')
   const credentials = useNavigationParam('credentials')
   const handleMessage = useNavigationParam('handleMessage')
+
+  console.log(message)
 
   const saveMessage = () => {
     handleMessage({
@@ -33,6 +35,18 @@ const CredentialView: React.FC<CredentialViewProps> = () => {
     })
 
     navigation.goBack()
+  }
+
+  const useShortId = (identity: any) => {
+    if (identity.shortId) {
+      return identity
+    }
+    const shortDid = `${identity.did.slice(0, 15)}...${identity.did.slice(-4)}`
+
+    return {
+      ...identity,
+      shortId: shortDid,
+    }
   }
 
   return (
@@ -71,12 +85,12 @@ const CredentialView: React.FC<CredentialViewProps> = () => {
         {credentials.map((vc: any) => {
           return (
             <Credential
-              background={'primary'}
               key={vc.hash}
+              background={'primary'}
               detailMode
               jwt={vc.raw}
-              issuer={vc.issuer}
-              subject={vc.subject}
+              issuer={useShortId(vc.issuer)}
+              subject={useShortId(vc.subject)}
               fields={vc.claims}
               exp={vc.expirationDate}
             />
