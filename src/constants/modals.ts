@@ -9,7 +9,7 @@ export default {
     delay: 2000,
   },
   SWITCHED_IDENTITY: {
-    title: 'Switched identity',
+    title: 'Identity Switched',
     message: '',
     icon: {
       name: 'ios-checkmark',
