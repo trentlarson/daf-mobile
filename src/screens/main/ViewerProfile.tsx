@@ -181,7 +181,7 @@ ViewerProfile.navigationOptions = ({ navigation }: any) => {
     ),
     headerRight: () => (
       <Button
-        onPress={() => BottomSnap.to(1, SWITCH_IDENTITY)}
+        onPress={() => BottomSnap.open(SWITCH_IDENTITY)}
         iconButton
         icon={<TabAvatar />}
       />

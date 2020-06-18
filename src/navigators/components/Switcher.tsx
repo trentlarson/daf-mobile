@@ -20,7 +20,7 @@ import {
 import AppConstants from '../../constants'
 import { AppContext } from '../../providers/AppContext'
 
-const { SWITCHING_IDENTITY } = AppConstants.modals
+const { SWITCHED_IDENTITY } = AppConstants.modals
 
 interface Identity {
   did: string
@@ -48,35 +48,23 @@ const Switcher: React.FC<SwitcherProps> = ({ id }) => {
     data && data.managedIdentities && data.managedIdentities
 
   const switchIdentity = async (identity: Identity) => {
-    BottomSnap.to(0, id)
-
     setSelectedIdentity(identity.did)
+    await client.reFetchObservableQueries()
+
+    BottomSnap.close(id)
 
     Overlay.show(
-      SWITCHING_IDENTITY.title,
-      SWITCHING_IDENTITY.message,
-      SWITCHING_IDENTITY.icon,
-      SWITCHING_IDENTITY.delay,
+      SWITCHED_IDENTITY.title,
+      SWITCHED_IDENTITY.message,
+      SWITCHED_IDENTITY.icon,
+      SWITCHED_IDENTITY.delay,
     )
-
-    client.reFetchObservableQueries()
   }
 
   return (
-    <BottomSheet
-      snapPoints={[-15, 350]}
-      initialSnap={0}
-      id={id}
-      enabledInnerScrolling
-    >
+    <BottomSheet id={id} scrollEnabled>
       {() => (
-        <ScrollView
-          contentContainerStyle={{ paddingBottom: 80 }}
-          style={{
-            backgroundColor: Theme.colors.primary.background,
-            height: 350,
-          }}
-        >
+        <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
           {managedIdentities &&
             managedIdentities
               .sort(
@@ -106,20 +94,6 @@ const Switcher: React.FC<SwitcherProps> = ({ id }) => {
                     >
                       {identity.shortId}
                     </ListItem>
-                    {/* {identity.isSelected && (
-                      <Container flexDirection={'row'} paddingLeft={75}>
-                        <Container
-                          borderWidth={1}
-                          borderColor={Colors.LIGHT_GREY}
-                          padding={6}
-                          br={5}
-                        >
-                          <Text textStyle={{ fontSize: 12 }}>
-                            34 Credentials received
-                          </Text>
-                        </Container>
-                      </Container>
-                    )} */}
                   </Container>
                 )
               })}
