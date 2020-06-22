@@ -31,16 +31,12 @@ const Intro: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
   return (
     <Screen
       safeAreaBottom={true}
-      safeAreaBottomBackground={Colors.WHITE}
+      // safeAreaBottomBackground={Colors.WHITE}
       background={'primary'}
       footerComponent={
         !selectedIdentity &&
         !loading && (
-          <Container
-            paddingHorizontal={true}
-            paddingBottom={true}
-            backgroundColor={Colors.WHITE}
-          >
+          <Container paddingHorizontal={true} paddingBottom={true}>
             <Container alignItems={'center'}>
               <Container w={300}>
                 <Button

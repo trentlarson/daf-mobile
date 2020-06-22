@@ -1,7 +1,6 @@
 import React from 'react'
 import { ScrollView } from 'react-native'
-import { Container, Typings, Connection } from '@kancha/kancha-ui'
-import { Colors } from '../../theme'
+import { Container, Typings, Connection, withTheme } from '@kancha/kancha-ui'
 
 interface Identity extends Typings.Identity {
   isSelected: boolean
@@ -12,17 +11,22 @@ interface Identity extends Typings.Identity {
 interface ContactsHeaderProps {
   identities: Identity[]
   viewProfile: (did: string) => void
+  theme: any
 }
 
 const ContactsHeader: React.FC<ContactsHeaderProps> = ({
   identities,
   viewProfile,
+  theme,
 }) => {
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      style={{ backgroundColor: Colors.WHITE, marginBottom: 1 }}
+      style={{
+        backgroundColor: theme.colors.primary.background,
+        marginBottom: 1,
+      }}
     >
       <Container flexDirection={'row'}>
         {identities &&
@@ -48,4 +52,4 @@ const ContactsHeader: React.FC<ContactsHeaderProps> = ({
   )
 }
 
-export default ContactsHeader
+export default withTheme(ContactsHeader)

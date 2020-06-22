@@ -8,6 +8,8 @@ import IDSwitcher from './navigators/components/Switcher'
 import useDeepLinking from './hooks/useDeepLinking'
 import './lib/I18n'
 
+type ThemeType = 'light' | 'dark' | 'no-preference'
+
 const App = () => {
   const {
     getInitialUrl,
@@ -26,16 +28,21 @@ const App = () => {
 
   return (
     <Providers>
-      <WalletConnect navigate={NavigationService.navigate} />
-      <Toast />
-      <OverlaySign />
-      <Navigation
-        enableURLHandling={false}
-        ref={navigatorRef =>
-          NavigationService.setTopLevelNavigator(navigatorRef)
-        }
-      />
-      <IDSwitcher id={'SWITCH_IDENTITY'} />
+      {(theme: ThemeType) => (
+        <>
+          <WalletConnect navigate={NavigationService.navigate} />
+          <Toast />
+          <OverlaySign />
+          <Navigation
+            theme={theme}
+            enableURLHandling={false}
+            ref={navigatorRef =>
+              NavigationService.setTopLevelNavigator(navigatorRef)
+            }
+          />
+          <IDSwitcher id={'SWITCH_IDENTITY'} />
+        </>
+      )}
     </Providers>
   )
 }

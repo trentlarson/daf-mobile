@@ -1373,10 +1373,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@kancha/kancha-ui@^1.0.0-beta.49":
-  version "1.0.0-beta.49"
-  resolved "https://registry.npmjs.org/@kancha/kancha-ui/-/kancha-ui-1.0.0-beta.49.tgz#bae35a8f662d2d0149a347bc236dfb748c74a6db"
-  integrity sha512-9nPk7EDS+3PuUDx7rrNb8XnzYae1F08xGMkFTIYfTrsvCiN9pUyfsLvPTCE553JG9VPq5vD3DTbAQ9Lh1pCPMQ==
+"@kancha/kancha-ui@^1.0.0-beta.50":
+  version "1.0.0-beta.50"
+  resolved "https://registry.npmjs.org/@kancha/kancha-ui/-/kancha-ui-1.0.0-beta.50.tgz#abb840ad2c7055165f390a58e9abb89914736377"
+  integrity sha512-0kP3iDCv0X53RbfqkFRPJOKT/quSvhLFSRxafSVU7+ZIWBmlvPYUOnwS1C6z/wZB4Q1SS0udmnibic3hfFCsvw==
   dependencies:
     "@callstack/react-theme-provider" "^3.0.0"
     date-fns "^2.5.0"

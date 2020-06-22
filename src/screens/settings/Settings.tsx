@@ -9,8 +9,11 @@ import { Switch } from 'react-native'
 import { Container, Text, Screen, ListItem, Section } from '@kancha/kancha-ui'
 import { Colors } from '../../theme'
 import Config from 'react-native-config'
+import { useSwitch } from '../../theme/switcher'
+
 const Settings: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
   const { t, i18n } = useTranslation()
+  const [themeType, switchTheme] = useSwitch()
   return (
     <Screen scrollEnabled={true}>
       <Container backgroundColor={Colors.BRAND} padding alignItems={'center'}>
@@ -73,6 +76,22 @@ const Settings: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
             }
           >
             {i18n.language === 'en' ? t('English') : t('Spanish')}
+          </ListItem>
+        </Section>
+        <Section title={'Theme'}>
+          <ListItem
+            last
+            iconLeft={
+              <Switch
+                testID={'THEME_SWITCH_BTN'}
+                value={themeType === 'dark'}
+                onValueChange={() =>
+                  switchTheme(themeType === 'light' ? 'dark' : 'light')
+                }
+              />
+            }
+          >
+            {themeType === 'dark' ? 'Dark Mode - experimental' : 'Light Mode'}
           </ListItem>
         </Section>
       </Container>

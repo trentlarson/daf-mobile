@@ -3,7 +3,7 @@
  *
  */
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   Container,
   Screen,
@@ -11,17 +11,17 @@ import {
   MessageItem,
   DAFMessage,
   Constants,
+  useTheme,
 } from '@kancha/kancha-ui'
 import { FlatList } from 'react-native'
 import { useQuery } from 'react-apollo'
-import { Colors } from '../../theme'
 import { useNavigation } from 'react-navigation-hooks'
 import { Screens } from '../../navigators/screens'
 import { ALL_MESSAGES } from '../../lib/graphql/queries'
 
 export default () => {
   const navigation = useNavigation()
-
+  const theme = useTheme()
   const { loading, data, error, refetch } = useQuery(ALL_MESSAGES)
 
   const viewProfile = (did: string) => {
@@ -43,7 +43,7 @@ export default () => {
           <Text>Error</Text>
         ) : (
           <FlatList
-            style={{ backgroundColor: Colors.LIGHTEST_GREY, flex: 1 }}
+            style={{ flex: 1 }}
             data={data && data.messages && data.messages && data.messages}
             renderItem={({ item }: { item: any }) => {
               /**
@@ -75,7 +75,7 @@ export default () => {
                 <Text
                   type={Constants.TextTypes.H3}
                   bold
-                  textColor={Colors.DARK_GREY}
+                  textColor={theme.colors.primary.text}
                 >
                   No messages
                 </Text>
