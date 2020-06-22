@@ -15,7 +15,7 @@ exports[`renders correctly 1`] = `
       Object {
         "alignItems": undefined,
         "alignSelf": "stretch",
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "#EFEEF3",
         "borderRadius": undefined,
         "borderTopLeftRadius": 10,
         "borderTopRightRadius": 10,

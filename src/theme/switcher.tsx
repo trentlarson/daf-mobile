@@ -20,10 +20,6 @@ export const SwitchProvider = ({ children }: any) => {
     setTheme(createTheme(type))
   }
 
-  useEffect(() => {
-    console.log(themeType, theme)
-  }, [theme])
-
   return (
     <SwitchContext.Provider value={[themeType, switchTheme]}>
       <ThemeProvider theme={theme}>{children(themeType)}</ThemeProvider>

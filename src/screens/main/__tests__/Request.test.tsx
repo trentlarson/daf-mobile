@@ -2,7 +2,6 @@ import 'react-native'
 import React from 'react'
 import Request from '../Request'
 import { render, fireEvent, act } from 'react-native-testing-library'
-import { Toaster } from '@kancha/kancha-ui'
 import { MockedProvider, wait } from '@apollo/react-testing'
 import { SIGN_VP, SEND_JWT_MUTATION } from '../../../lib/graphql/queries'
 
