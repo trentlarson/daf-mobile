@@ -4,7 +4,6 @@
  */
 
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { FlatList, Image } from 'react-native'
 import { Query, QueryResult } from 'react-apollo'
 import {
@@ -14,8 +13,8 @@ import {
   Text,
   Avatar,
   Constants,
+  useTheme,
 } from '@kancha/kancha-ui'
-import { Colors } from '../../theme'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { GET_ALL_IDENTITIES } from '../../lib/graphql/queries'
 
@@ -26,6 +25,8 @@ interface Result extends QueryResult {
 interface Props extends NavigationStackScreenProps {}
 
 const Connections: React.FC<Props> = props => {
+  const theme = useTheme()
+
   return (
     <Screen safeArea={true}>
       <Container flex={1}>
@@ -35,7 +36,7 @@ const Connections: React.FC<Props> = props => {
               <Text>{error.message}</Text>
             ) : (
               <FlatList
-                style={{ backgroundColor: Colors.LIGHTEST_GREY, flex: 1 }}
+                style={{ flex: 1 }}
                 data={data && data.identities}
                 renderItem={({ item, index }) => {
                   const imgSrc = item.profileImage
@@ -70,7 +71,7 @@ const Connections: React.FC<Props> = props => {
                     <Text
                       type={Constants.TextTypes.H3}
                       bold
-                      textColor={Colors.DARK_GREY}
+                      textColor={theme.colors.primary.text}
                     >
                       No Connections
                     </Text>

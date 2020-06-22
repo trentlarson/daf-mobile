@@ -699,7 +699,7 @@ Array [
         <Text
           style={
             Object {
-              "color": "#3DCF8A",
+              "color": "#ff6666",
               "flexWrap": "wrap",
             }
           }
@@ -833,7 +833,7 @@ Array [
                 <Text
                   style={
                     Object {
-                      "color": "#3DCF8A",
+                      "color": "#ff6666",
                       "flexWrap": "wrap",
                       "fontSize": 18,
                     }
@@ -1527,7 +1527,7 @@ Array [
                         <Text
                           style={
                             Object {
-                              "color": "#3DCF8A",
+                              "color": "#ff6666",
                               "flexWrap": "wrap",
                               "fontSize": 16,
                               "lineHeight": 22,
@@ -1677,7 +1677,7 @@ Array [
         <Text
           style={
             Object {
-              "color": "#3DCF8A",
+              "color": "#ff6666",
               "flexWrap": "wrap",
             }
           }
@@ -1811,7 +1811,7 @@ Array [
                 <Text
                   style={
                     Object {
-                      "color": "#3DCF8A",
+                      "color": "#ff6666",
                       "flexWrap": "wrap",
                       "fontSize": 18,
                     }

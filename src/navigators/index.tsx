@@ -67,7 +67,6 @@ const defaultNavigationOptions = {
       fontWeight: 'bold',
     },
     headerBackTitleVisible: false,
-    headerTintColor: Colors.BLACK,
   },
 }
 
@@ -331,7 +330,6 @@ const Onboard = createStackNavigator(
     defaultNavigationOptions: {
       headerTitle: headerLogo,
       headerBackTitleVisible: false,
-      headerTintColor: Colors.BLACK,
       headerStyle: {
         borderBottomWidth: 0,
       },

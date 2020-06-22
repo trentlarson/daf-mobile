@@ -239,7 +239,7 @@ Array [
     emulateUnlessSupported={true}
     style={
       Object {
-        "backgroundColor": undefined,
+        "backgroundColor": "#FFFFFF",
       }
     }
   />,

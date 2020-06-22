@@ -86,7 +86,7 @@ const Activity: React.FC<Props> = ({ navigation }) => {
                 identities={allIdentities && allIdentities.identities}
               />
             }
-            style={{ backgroundColor: Colors.LIGHTEST_GREY, flex: 1 }}
+            style={{ flex: 1 }}
             data={allMessages && allMessages.messages && allMessages.messages}
             onRefresh={() => refetchAllMessages()}
             refreshing={allMessagesLoading || allIdentitiesLoading}
