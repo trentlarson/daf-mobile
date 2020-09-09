@@ -15,7 +15,7 @@ import {
   GET_MESSAGE_SDR,
   SIGN_VC_MUTATION,
 } from '../../../lib/graphql/queries'
-import { useMutation, useQuery } from 'react-apollo'
+import { useMutation, useQuery } from '@apollo/client'
 import { useNavigation } from 'react-navigation-hooks'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
 

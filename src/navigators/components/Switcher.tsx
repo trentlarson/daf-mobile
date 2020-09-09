@@ -10,7 +10,7 @@ import {
   Icon,
   Overlay,
 } from '@kancha/kancha-ui'
-import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks'
+import { useQuery, useMutation, useApolloClient } from '@apollo/client'
 import { Theme, Colors } from '../../theme'
 import {
   GET_MANAGED_IDENTITIES,

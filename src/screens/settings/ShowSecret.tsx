@@ -7,7 +7,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Container, Text, Screen, Constants, Button } from '@kancha/kancha-ui'
 import { Colors } from '../../theme'
 import hexToRgba from 'hex-to-rgba'
-import { useQuery, useLazyQuery } from 'react-apollo'
+import { useQuery, useLazyQuery } from '@apollo/client'
 import { GET_VIEWER, GET_SECRET_KEY } from '../../lib/graphql/queries'
 
 const ShowSecret: React.FC<NavigationStackScreenProps> = ({ navigation }) => {

@@ -18,7 +18,7 @@ import {
 } from '@kancha/kancha-ui'
 import { TextInput, ScrollView } from 'react-native'
 import { useNavigation } from 'react-navigation-hooks'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { GET_VIEWER, GET_ALL_IDENTITIES } from '../../lib/graphql/queries'
 
 import { Colors } from '../../theme'

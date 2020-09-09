@@ -5,7 +5,7 @@
 
 import React from 'react'
 import { FlatList, Image } from 'react-native'
-import { Query, QueryResult } from 'react-apollo'
+import { Query, QueryResult } from '@apollo/client'
 import {
   Container,
   Screen,

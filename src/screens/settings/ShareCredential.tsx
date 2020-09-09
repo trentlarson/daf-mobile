@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Screen, Text, Constants, Device } from '@kancha/kancha-ui'
 import { useNavigationParam } from 'react-navigation-hooks'
-import { useMutation } from 'react-apollo'
+import { useMutation } from '@apollo/client'
 import QRCode from 'react-native-qrcode-svg'
 import { ActivityIndicator } from 'react-native'
 import {

@@ -13,7 +13,7 @@ import {
 } from '@kancha/kancha-ui'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { SIGN_VC_MUTATION, NEW_MESSAGE } from '../../lib/graphql/queries'
 
 const CreateFirstCredential: React.FC<NavigationStackScreenProps> & {

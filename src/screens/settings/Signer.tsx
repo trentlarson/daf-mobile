@@ -6,7 +6,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, TextInput } from 'react-native'
-import { Query, Mutation } from 'react-apollo'
+import { Query, Mutation } from '@apollo/client'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 
 import {

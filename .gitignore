@@ -22,6 +22,7 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 output
+local_modules
 
 # Android/IntelliJ
 #

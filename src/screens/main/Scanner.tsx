@@ -9,7 +9,7 @@ import { RNCamera } from 'react-native-camera'
 import { Colors, Icons } from '../../theme'
 import { TextInput } from 'react-native-gesture-handler'
 import { NEW_MESSAGE } from '../../lib/graphql/queries'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 
 export default (props: any) => {
   const [scannerActive, toggleScanner] = useState(true)

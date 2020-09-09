@@ -9,7 +9,7 @@ import {
 } from '@kancha/kancha-ui'
 import { ActivityIndicator } from 'react-native'
 import { useNavigationParam } from 'react-navigation-hooks'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { GET_MESSAGE } from '../../lib/graphql/queries'
 import QRCode from 'react-native-qrcode-svg'
 

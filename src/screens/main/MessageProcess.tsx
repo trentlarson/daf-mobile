@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Screen, Container, Text, Constants, Button } from '@kancha/kancha-ui'
 import { ActivityIndicator } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { NEW_MESSAGE } from '../../lib/graphql/queries'
 
 interface MessageProcess {}

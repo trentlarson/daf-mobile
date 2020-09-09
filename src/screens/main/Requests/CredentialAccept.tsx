@@ -9,7 +9,7 @@ import {
 } from '@kancha/kancha-ui'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
 import { useNavigation } from 'react-navigation-hooks'
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 
 interface RequestProps {
   peerId: string

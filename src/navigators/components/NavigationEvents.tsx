@@ -3,7 +3,7 @@ import { core } from '../../lib/setup'
 import NavigationService from '../navigationService'
 import * as Daf from 'daf-core'
 
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { GET_VIEWER } from '../../lib/graphql/queries'
 
 const App = () => {

@@ -27,7 +27,10 @@ export const AppProvider = (props: any) => {
       debug('Stored Identity', storedSelectedIdentity)
 
       if (!storedSelectedIdentity) {
-        const identities = await agent.identityManager.getIdentities()
+        const identities = await agent.identityManagerGetIdentities()
+        // const identitiy = await agent.identityManagerCreateIdentity()
+
+        console.log(identities)
 
         if (identities.length > 0) {
           await AsyncStorage.setItem('selectedIdentity', identities[0].did)

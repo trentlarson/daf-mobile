@@ -131,8 +131,8 @@ export const IMPORT_IDENTITY = gql`
 `
 
 export const CREATE_IDENTITY = gql`
-  mutation createIdentity($type: String!) {
-    createIdentity(type: $type) {
+  mutation createIdentity($provider: String!, $kms: String!) {
+    identityManagerCreateIdentity(provider: $provider, kms: $kms) {
       did
     }
   }

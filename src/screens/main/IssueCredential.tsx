@@ -14,7 +14,7 @@ import {
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Colors } from '../../theme'
-import { useMutation, useLazyQuery } from 'react-apollo'
+import { useMutation, useLazyQuery } from '@apollo/client'
 import {
   SEND_JWT_MUTATION,
   SIGN_VC_MUTATION,

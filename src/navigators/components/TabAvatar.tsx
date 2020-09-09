@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Avatar } from '@kancha/kancha-ui'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { GET_VIEWER } from '../../lib/graphql/queries'
 import { ActivityIndicator } from 'react-native'
 

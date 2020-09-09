@@ -40,7 +40,7 @@ const App = () => {
               NavigationService.setTopLevelNavigator(navigatorRef)
             }
           />
-          <IDSwitcher id={'SWITCH_IDENTITY'} />
+          {/* <IDSwitcher id={'SWITCH_IDENTITY'} /> */}
         </>
       )}
     </Providers>

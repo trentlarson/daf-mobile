@@ -15,7 +15,7 @@ import {
 } from '@kancha/kancha-ui'
 import ContactsHeader from '../../navigators/components/ContactsHeader'
 import { Colors } from '../../theme'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { AppContext } from '../../providers/AppContext'
 import AppConstants from '../../constants'
 

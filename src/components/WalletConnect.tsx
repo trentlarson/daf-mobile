@@ -3,7 +3,7 @@ import { agent, Message } from '../lib/setup'
 import { wcEventHub } from '../providers/WalletConnect'
 import { Screens } from '../navigators/screens'
 import AppConstants from '../constants/index'
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 
 interface WalletConnectProps {
   navigate: (routeName: any, params: any) => void

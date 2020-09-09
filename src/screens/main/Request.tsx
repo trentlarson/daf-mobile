@@ -13,7 +13,7 @@ import {
 } from '@kancha/kancha-ui'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Colors } from '../../theme'
-import { useMutation } from 'react-apollo'
+import { useMutation } from '@apollo/client'
 import { SIGN_VP, SEND_JWT_MUTATION } from '../../lib/graphql/queries'
 import { ActivityIndicator, ActivityIndicatorBase } from 'react-native'
 import navigationService from 'Serto/src/navigators/navigationService'

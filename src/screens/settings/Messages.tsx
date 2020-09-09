@@ -14,7 +14,7 @@ import {
   useTheme,
 } from '@kancha/kancha-ui'
 import { FlatList } from 'react-native'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { useNavigation } from 'react-navigation-hooks'
 import { Screens } from '../../navigators/screens'
 import { ALL_MESSAGES } from '../../lib/graphql/queries'
