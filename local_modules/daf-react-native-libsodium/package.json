@@ -1,0 +1,59 @@
+{
+  "name": "daf-react-native-libsodium",
+  "description": "DAF react native libsodium modules",
+  "version": "6.2.0",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "base-58": "^0.0.1",
+    "daf-core": "^7.0.0-beta.16",
+    "daf-key-manager": "^7.0.0-beta.16",
+    "debug": "^4.1.1",
+    "did-jwt": "^4.3.2",
+    "elliptic": "^6.5.2",
+    "ethjs-signer": "^0.1.1"
+  },
+  "peerDependencies": {
+    "react-native-sodium": "*"
+  },
+  "devDependencies": {
+    "@types/debug": "4.1.5",
+    "@types/ethjs-signer": "0.1.0",
+    "react-native-sodium": "0.3.6",
+    "typescript": "4.0.2"
+  },
+  "files": [
+    "build/**/*",
+    "src/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": "git@github.com:uport-project/daf.git",
+  "author": "Simonas Karuzas <simonas.karuzas@consensys.net>",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "gitHead": "3bfdbda866978a87c8ae1622e48fd9a4d871867d",
+  "react-native": {
+    "crypto": "react-native-crypto",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify",
+    "vm": "vm-browserify"
+  },
+  "browser": {
+    "crypto": "react-native-crypto",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify",
+    "vm": "vm-browserify"
+  }
+}
