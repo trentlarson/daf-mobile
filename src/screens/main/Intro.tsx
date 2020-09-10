@@ -16,7 +16,7 @@ import { Image, ActivityIndicator } from 'react-native'
 import { AppContext } from '../../providers/AppContext'
 
 const Intro: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
-  const [selectedIdentity] = useContext(AppContext)
+  const { selectedIdentity } = useContext(AppContext)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

@@ -253,7 +253,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: ProfileNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => {
-          return <TabAvatar tintColor={tintColor} />
+          return <Icon icon={Icons.SETTINGS} color={tintColor} />
         },
       },
     },

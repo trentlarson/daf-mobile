@@ -30,9 +30,9 @@ const App = () => {
     <Providers>
       {(theme: ThemeType) => (
         <>
-          <WalletConnect navigate={NavigationService.navigate} />
-          <Toast />
-          <OverlaySign />
+          {/* <WalletConnect navigate={NavigationService.navigate} /> */}
+          {/* <Toast /> */}
+          {/* <OverlaySign /> */}
           <Navigation
             theme={theme}
             enableURLHandling={false}

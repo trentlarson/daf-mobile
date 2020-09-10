@@ -20,7 +20,6 @@ import {
 import { DIDComm, DIDCommMessageHandler, IDIDComm } from 'daf-did-comm'
 import { EthrIdentityProvider } from 'daf-ethr-did'
 import { KeyManagementSystem } from 'daf-react-native-libsodium'
-import { AgentGraphQLClient } from 'daf-graphql'
 import {
   Entities,
   KeyStore,
@@ -36,7 +35,7 @@ const dbConnection = createConnection({
   database: 'daf.sqlite',
   location: 'default',
   synchronize: true,
-  logging: ['error'],
+  logging: ['error', 'info', 'warn'],
   entities: Entities,
 })
 
