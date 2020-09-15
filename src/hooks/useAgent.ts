@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
-import { resolve } from 'url'
+import { useState, useEffect } from 'react'
 
 const useAgent = (method: any, options?: any, prefetch = true) => {
   const [state, setState] = useState<{
@@ -23,8 +22,8 @@ const useAgent = (method: any, options?: any, prefetch = true) => {
     }
   }
 
-  const request = () => {
-    doRequest(options)
+  const request = (opts?: any) => {
+    doRequest(opts || options)
   }
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const useAgent = (method: any, options?: any, prefetch = true) => {
     }
   }, [])
 
-  return { state, request }
+  return { state, loading: state.status === 'loading', request }
 }
 
 export default useAgent

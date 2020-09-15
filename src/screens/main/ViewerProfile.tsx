@@ -12,14 +12,19 @@ import {
   Typings,
 } from '@kancha/kancha-ui'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-import TabAvatar from '../../navigators/components/TabAvatar'
+// import TabAvatar from '../../navigators/components/TabAvatar'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { useQuery } from '@apollo/client'
-import { GET_VIEWER_CREDENTIALS } from '../../lib/graphql/queries'
 import { ActivityIndicator } from 'react-native'
 import { Colors } from '../../theme'
 import hexToRgba from 'hex-to-rgba'
 import { AppContext } from '../../providers/AppContext'
+import useAgent from '../../hooks/useAgent'
+import useProfile from '../../hooks/useProfile'
+import {
+  agent,
+  getProfile,
+  getGetCredentialsWithProfiles,
+} from '../../services/daf'
 
 const SWITCH_IDENTITY = 'SWITCH_IDENTITY'
 
@@ -28,29 +33,35 @@ interface Props extends NavigationStackScreenProps {}
 const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
   navigation,
 }) => {
-  const [selectedIdentity] = useContext(AppContext)
-  const { data, loading } = useQuery(GET_VIEWER_CREDENTIALS, {
-    variables: {
-      selectedIdentity,
-    },
+  const { selectedIdentity } = useContext(AppContext)
+
+  const { state: profile, loading: profileLoading } = useAgent(getProfile, {
+    subject: selectedIdentity,
+    // Overide the fields by adding them
+    // fields: ['name', 'job', 'profileImage'], overid
   })
 
-  const viewer = data && data.viewer
-  const credentials = data && data.credentials
+  const { state: credentials, loading: credentialsLoading } = useAgent(
+    getGetCredentialsWithProfiles,
+    {
+      where: [{ column: 'subject', value: [selectedIdentity] }],
+    },
+  )
+
   const source =
-    viewer && data.viewer.profileImage
-      ? { source: { uri: viewer.profileImage } }
+    profile.data && profile.data.profileImage
+      ? { source: { uri: profile.data.profileImage } }
       : {}
 
   useEffect(() => {
-    if (viewer) {
-      navigation.setParams({ viewer })
+    if (profile) {
+      navigation.setParams({ viewer: profile })
     }
-  }, [data])
+  }, [])
 
   return (
     <Screen scrollEnabled background={'primary'}>
-      {loading && (
+      {profileLoading && (
         <Container padding flex={1}>
           <Container
             w={100}
@@ -76,19 +87,19 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
         </Container>
       )}
 
-      {!loading && (
+      {!profileLoading && (
         <Container padding flex={1}>
           <Avatar
             {...source}
             type={'rounded'}
             size={100}
-            address={viewer && viewer.did}
+            address={selectedIdentity}
             gravatarType={'retro'}
             backgroundColor={'white'}
           />
           <Container marginTop>
             <Text type={Constants.TextTypes.H2} bold>
-              {viewer && viewer.shortId}
+              {profile.data && profile.data.shortDid}
             </Text>
             <Container marginTop>
               <Container
@@ -97,7 +108,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
                 br={5}
               >
                 <Text textStyle={{ fontFamily: 'menlo' }} selectable>
-                  {viewer && viewer.did}
+                  {selectedIdentity}
                 </Text>
               </Container>
             </Container>
@@ -105,7 +116,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
         </Container>
       )}
       <Container padding>
-        {!loading && viewer && (
+        {!profileLoading && (
           <Container flexDirection={'row'}>
             <Text type={Constants.TextTypes.H3} bold>
               Credentials
@@ -113,46 +124,53 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
           </Container>
         )}
 
-        {!loading && credentials && credentials.length === 0 && (
-          <Container marginTop>
-            <Text type={Constants.TextTypes.Body}>
-              Start issuing credentials to yourself and others. Try starting
-              with a <Text bold>name</Text> credential to personalise this
-              profile.
-            </Text>
-          </Container>
-        )}
-        {!loading && credentials && credentials.length > 0 && (
-          <Container>
-            <Container marginBottom>
-              <Container marginTop>
-                <Text type={Constants.TextTypes.Body}>
-                  <Text bold>Received</Text> credentials are presented here as a
-                  plain list for now. Some will be moved to the data explorer
-                  tab where we can explore all of our data and connections.
-                </Text>
-              </Container>
+        {!credentialsLoading &&
+          credentials.data &&
+          credentials.data.length === 0 && (
+            <Container marginTop>
+              <Text type={Constants.TextTypes.Body}>
+                Start issuing credentials to yourself and others. Try starting
+                with a <Text bold>name</Text> credential to personalise this
+                profile.
+              </Text>
             </Container>
-            {credentials &&
-              credentials.map((vc: any) => {
-                return (
-                  <Credential
-                    key={vc.hash}
-                    onPress={() =>
-                      navigation.navigate('Credential', {
-                        credentials: [vc],
-                      })
-                    }
-                    background={'secondary'}
-                    exp={vc.expirationDate}
-                    issuer={vc.issuer}
-                    subject={vc.subject}
-                    fields={vc.claims}
-                  />
-                )
-              })}
-          </Container>
-        )}
+          )}
+        {!credentialsLoading &&
+          credentials.data &&
+          credentials.data.length > 0 && (
+            <Container>
+              <Container marginBottom>
+                <Container marginTop>
+                  <Text type={Constants.TextTypes.Body}>
+                    <Text bold>Received</Text> credentials are presented here as
+                    a plain list for now. Some will be moved to the data
+                    explorer tab where we can explore all of our data and
+                    connections.
+                  </Text>
+                </Container>
+              </Container>
+              {credentials &&
+                credentials.data.map((vc: any, i: number) => {
+                  console.log('!____!', credentials)
+
+                  return (
+                    <Credential
+                      key={i}
+                      onPress={() =>
+                        navigation.navigate('Credential', {
+                          credentials: [vc],
+                        })
+                      }
+                      background={'secondary'}
+                      exp={3456789}
+                      issuer={vc.issuer}
+                      subject={vc.subject}
+                      fields={vc.claims}
+                    />
+                  )
+                })}
+            </Container>
+          )}
       </Container>
     </Screen>
   )
@@ -183,7 +201,7 @@ ViewerProfile.navigationOptions = ({ navigation }: any) => {
       <Button
         onPress={() => BottomSnap.open(SWITCH_IDENTITY)}
         iconButton
-        icon={<TabAvatar />}
+        // icon={<TabAvatar />}
       />
     ),
   }

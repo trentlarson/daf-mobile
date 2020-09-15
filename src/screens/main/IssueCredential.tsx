@@ -14,29 +14,23 @@ import {
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Colors } from '../../theme'
-import { useMutation, useLazyQuery } from '@apollo/client'
-import {
-  SEND_JWT_MUTATION,
-  SIGN_VC_MUTATION,
-  GET_VIEWER_CREDENTIALS,
-  GET_ALL_IDENTITIES,
-  NEW_MESSAGE,
-} from '../../lib/graphql/queries'
+// import { useMutation, useLazyQuery } from '@apollo/client'
+// import {
+//   SEND_JWT_MUTATION,
+//   SIGN_VC_MUTATION,
+//   GET_VIEWER_CREDENTIALS,
+//   GET_ALL_IDENTITIES,
+//   NEW_MESSAGE,
+// } from '../../lib/graphql/queries'
 import { useTranslation } from 'react-i18next'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import { Identity } from '@kancha/kancha-ui/dist/types'
 import hexToRgba from 'hex-to-rgba'
+import { issueCredential } from '../../services/daf'
 
 interface Field {
   type: string
   value: any
-}
-
-const claimToObject = (arr: any[]) => {
-  return arr.reduce(
-    (obj, item) => Object.assign(obj, { [item.type]: item.value }),
-    {},
-  )
 }
 
 const IssueCredential: React.FC<NavigationStackScreenProps> & {
@@ -44,34 +38,39 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
 } = ({ navigation }) => {
   const { t } = useTranslation()
   const viewer = navigation.getParam('viewer')
-  const [claimType, setClaimType] = useState()
-  const [claimValue, setClaimValue] = useState()
-  const [errorMessage, setErrorMessage] = useState()
+  const [claimType, setClaimType] = useState('')
+  const [claimValue, setClaimValue] = useState('')
+  const [errorMessage, setErrorMessage] = useState<any>()
   const [sending, setSending] = useState(false)
   const [subject, setSubject] = useState(viewer)
   const [fields, updateFields] = useState<Field[]>([])
-  const [getKnownIdentities, { data, loading }] = useLazyQuery(
-    GET_ALL_IDENTITIES,
-  )
-  const [handleMessage] = useMutation(NEW_MESSAGE)
+
   const [identitySelectOpen, setIdentitySelect] = useState(false)
+  const loading = false
 
   const inputSubject = (did: string) => {
     /**
      * If the user pastes in a did that is already in our known
      * identities then we use that entry as it may have additional data associated
      */
-    const matchedIdentity =
-      data && data.identities.find((identity: Identity) => identity.did === did)
-    if (matchedIdentity) {
-      setSubject(matchedIdentity)
-    } else {
-      const sub = {
-        did,
-        shortId: 'an unknown did',
-      }
-      setSubject(sub)
+    // const matchedIdentity =
+    //   data && data.identities.find((identity: Identity) => identity.did === did)
+    // if (matchedIdentity) {
+    //   setSubject(matchedIdentity)
+    // } else {
+    //   const sub = {
+    //     did,
+    //     shortId: 'an unknown did',
+    //   }
+    //   setSubject(sub)
+    // }
+
+    const sub = {
+      did,
+      shortId: 'an unknown did',
     }
+
+    setSubject(sub)
   }
 
   const updateClaimFields = (field: Field) => {
@@ -95,13 +94,13 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
     }
 
     updateFields(newfields)
-    setClaimValue(null)
-    setClaimType(null)
+    setClaimValue('')
+    setClaimType('')
   }
 
   const openIdentitySelection = () => {
     setIdentitySelect(true)
-    getKnownIdentities()
+    // getKnownIdentities()
   }
 
   const removeClaimField = (index: number) => {
@@ -109,40 +108,9 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
     updateFields(updatedClaims)
   }
 
-  const [signCredentialJwt] = useMutation(SIGN_VC_MUTATION, {
-    onCompleted: async response => {
-      if (
-        response &&
-        response.signCredentialJwt &&
-        response.signCredentialJwt.raw
-      ) {
-        handleMessage({
-          variables: {
-            raw: response.signCredentialJwt.raw,
-            meta: [{ type: 'selfSigned' }],
-          },
-        })
-
-        navigation.dismiss()
-      }
-    },
-  })
-
-  const signVc = (claimFields: Field[]) => {
-    signCredentialJwt({
-      variables: {
-        data: {
-          issuer: viewer.did,
-          context: ['https://www.w3.org/2018/credentials/v1'],
-          type: ['VerifiableCredential'],
-          credentialSubject: {
-            id: viewer.did,
-            ...claimToObject(claimFields),
-          },
-        },
-        save: true,
-      },
-    })
+  const signVc = async () => {
+    const credential = await issueCredential(viewer.did, viewer.did, fields)
+    console.log(credential)
   }
 
   return (
@@ -195,7 +163,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
               </TextInput>
             </Container>
           </Container>
-          {identitySelectOpen && (
+          {/* {identitySelectOpen && (
             <Container marginTop>
               {loading && (
                 <Container
@@ -247,7 +215,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
                     })}
               </Container>
             </Container>
-          )}
+          )} */}
         </Container>
 
         <Container background={'secondary'} padding marginBottom br={5}>
@@ -349,7 +317,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
               block={Constants.ButtonBlocks.Filled}
               type={Constants.BrandOptions.Primary}
               buttonText={'Issue'}
-              onPress={() => signVc(fields)}
+              onPress={() => signVc()}
             />
           </Container>
         </Container>
