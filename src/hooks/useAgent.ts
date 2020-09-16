@@ -13,10 +13,11 @@ const useAgent = (method: any, options?: any, prefetch = true) => {
 
   const doRequest = async (options: any) => {
     setState({ status: 'loading', error: null, data: null })
-    let data
     try {
-      data = await method(options)
-      setState({ status: 'complete', error: null, data })
+      const data = await method(options)
+      if (data) {
+        setState({ status: 'complete', error: null, data })
+      }
     } catch (error) {
       setState({ status: 'error', error, data: null })
     }

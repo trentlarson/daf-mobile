@@ -73,11 +73,13 @@ const Activity: React.FC<Props> = ({ navigation }) => {
           onRefresh={() => getMessages()}
           refreshing={messages.status === 'loading'}
           renderItem={({ item }: { item: any }) => {
+            console.log('Activity', item)
             return (
+              // <Container />
               <ActivityItem
                 id={item.id}
                 type={item.type}
-                date={item.saveDate}
+                date={item.data.nbf * 1000}
                 sender={item.from}
                 receiver={item.to}
                 viewer={item.viewer}

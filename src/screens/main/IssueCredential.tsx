@@ -27,6 +27,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler'
 import { Identity } from '@kancha/kancha-ui/dist/types'
 import hexToRgba from 'hex-to-rgba'
 import { issueCredential } from '../../services/daf'
+import { agent } from '../../services/daf'
 
 interface Field {
   type: string
@@ -44,9 +45,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
   const [sending, setSending] = useState(false)
   const [subject, setSubject] = useState(viewer)
   const [fields, updateFields] = useState<Field[]>([])
-
   const [identitySelectOpen, setIdentitySelect] = useState(false)
-  const loading = false
 
   const inputSubject = (did: string) => {
     /**
@@ -110,7 +109,9 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
 
   const signVc = async () => {
     const credential = await issueCredential(viewer.did, viewer.did, fields)
-    console.log(credential)
+    await agent.handleMessage({ raw: credential.proof.jwt, save: true })
+
+    navigation.dismiss()
   }
 
   return (

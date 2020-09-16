@@ -37,8 +37,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
 
   const { state: profile, loading: profileLoading } = useAgent(getProfile, {
     subject: selectedIdentity,
-    // Overide the fields by adding them
-    // fields: ['name', 'job', 'profileImage'], overid
+    fields: ['name', 'profileImage'],
   })
 
   const { state: credentials, loading: credentialsLoading } = useAgent(
@@ -54,10 +53,10 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
       : {}
 
   useEffect(() => {
-    if (profile) {
-      navigation.setParams({ viewer: profile })
+    if (profile.data) {
+      navigation.setParams({ viewer: profile.data })
     }
-  }, [])
+  }, [profile.data])
 
   return (
     <Screen scrollEnabled background={'primary'}>
@@ -151,8 +150,6 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
               </Container>
               {credentials &&
                 credentials.data.map((vc: any, i: number) => {
-                  console.log('!____!', credentials)
-
                   return (
                     <Credential
                       key={i}

@@ -6,6 +6,26 @@ const claimToObject = (arr: any[]) => {
     {},
   )
 }
+const shortId = (did: string) => `${did.slice(0, 15)}...${did.slice(-4)}`
+
+const getActivityWithProfiles = async (args?: any) => {
+  const messages = await agent.dataStoreORMGetMessages({ ...args })
+  return await Promise.all(
+    messages.map(async (message: any) => {
+      return {
+        ...message,
+        viewer: await getProfile({ subject: message.to }),
+        from: await getProfile({ subject: message.from }),
+        to: await getProfile({ subject: message.to }),
+        credentials: await Promise.all(
+          message.credentials.map(async (vc: any) => {
+            return await credentialProfile(vc)
+          }),
+        ),
+      }
+    }),
+  )
+}
 
 const getGetCredentialsWithProfiles = async (args?: any) => {
   const credentials = await agent.dataStoreORMGetVerifiableCredentials({
@@ -44,15 +64,14 @@ const getProfile = async ({
   subject: string
   fields?: string[]
 }) => {
-  const shortId = (did: string) => `${did.slice(0, 15)}...${did.slice(-4)}`
   const _fields = fields || ['name', 'firstname', 'lastname', 'profileImage']
-
   const all = await agent.dataStoreORMGetVerifiableCredentialsByClaims({
     where: [
       { column: 'subject', value: [subject] },
       { column: 'type', value: _fields },
     ],
   })
+
   const selectedFields = Object.assign(
     {},
     ..._fields.map((f) => {
@@ -78,7 +97,7 @@ const issueCredential = async (iss: string, sub: string, claims: any[]) => {
   return await agent.createVerifiableCredential({
     credential: {
       issuer: { id: iss },
-      issuanceDate: Date.now().toString(),
+      issuanceDate: new Date().toISOString(),
       '@context': ['https://www.w3.org/2018/credentials/v1'],
       type: ['VerifiableCredential'],
       credentialSubject: { id: sub, ...claimToObject(claims) },
@@ -88,4 +107,10 @@ const issueCredential = async (iss: string, sub: string, claims: any[]) => {
   })
 }
 
-export { agent, issueCredential, getProfile, getGetCredentialsWithProfiles }
+export {
+  agent,
+  issueCredential,
+  getProfile,
+  getGetCredentialsWithProfiles,
+  getActivityWithProfiles,
+}
