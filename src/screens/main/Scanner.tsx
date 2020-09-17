@@ -8,57 +8,58 @@ import { Container, FabButton, Screen } from '@kancha/kancha-ui'
 import { RNCamera } from 'react-native-camera'
 import { Colors, Icons } from '../../theme'
 import { TextInput } from 'react-native-gesture-handler'
-import { NEW_MESSAGE } from '../../lib/graphql/queries'
-import { useMutation } from '@apollo/client'
+import { agent } from '../../services/daf'
+// import { NEW_MESSAGE } from '../../lib/graphql/queries'
+// import { useMutation } from '@apollo/client'
 
 export default (props: any) => {
   const [scannerActive, toggleScanner] = useState(true)
   const [inputMode, toggleInputMode] = useState(false)
   const { walletConnectOnSessionRequest } = useContext(WalletConnectContext)
 
-  const [handleMessage] = useMutation(NEW_MESSAGE, {
-    onCompleted(resp) {
-      console.log('Success', resp)
-    },
-    onError(err) {
-      if (err) {
-        console.log('Error', err)
-      }
-    },
-  })
+  // const [handleMessage] = useMutation(NEW_MESSAGE, {
+  //   onCompleted(resp) {
+  //     console.log('Success', resp)
+  //   },
+  //   onError(err) {
+  //     if (err) {
+  //       console.log('Error', err)
+  //     }
+  //   },
+  // })
 
   const onPasteJWT = (text: string) => {
     onBarCodeRead({ data: text })
   }
 
-  const processDafMessage = async (message: string) => {
-    const decodedMessage = await handleMessage({
-      variables: {
-        raw: message,
-        metaData: [{ type: 'qrCode' }],
-        save: false,
-      },
-    })
-    const { type, credentials } = decodedMessage.data.handleMessage
-    switch (type) {
-      case 'w3c.vc':
-        props.navigation.dismiss()
+  // const processDafMessage = async (message: string) => {
+  //   const decodedMessage = await handleMessage({
+  //     variables: {
+  //       raw: message,
+  //       metaData: [{ type: 'qrCode' }],
+  //       save: false,
+  //     },
+  //   })
+  //   const { type, credentials } = decodedMessage.data.handleMessage
+  //   switch (type) {
+  //     case 'w3c.vc':
+  //       props.navigation.dismiss()
 
-        setTimeout(() => {
-          props.navigation.navigate('CredentialView', {
-            message,
-            credentials,
-            handleMessage,
-          })
-        }, 300)
+  //       setTimeout(() => {
+  //         props.navigation.navigate('CredentialView', {
+  //           message,
+  //           credentials,
+  //           handleMessage,
+  //         })
+  //       }, 300)
 
-        return
-      default:
-        props.navigation.navigate('MessageProcess', {
-          message,
-        })
-    }
-  }
+  //       return
+  //     default:
+  //       props.navigation.navigate('MessageProcess', {
+  //         message,
+  //       })
+  //   }
+  // }
 
   const onBarCodeRead = (e: any) => {
     if (scannerActive) {
@@ -66,7 +67,7 @@ export default (props: any) => {
         walletConnectOnSessionRequest(e.data)
         props.navigation.dismiss()
       } else {
-        processDafMessage(e.data)
+        // processDafMessage(e.data)
       }
     }
 
