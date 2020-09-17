@@ -12,26 +12,29 @@ import { ActivityIndicator } from 'react-native'
 import { Colors } from '../../theme'
 import hexToRgba from 'hex-to-rgba'
 import useAgent from '../../hooks/useAgent'
-import { agent } from '../../services/daf'
+import { getProfile } from '../../services/daf'
 
 interface Props extends NavigationStackScreenProps {}
 
 const Profile: React.FC<Props> = ({ navigation }) => {
   const did = navigation.getParam('did')
   const isViewer = navigation.getParam('isViewer')
-  const { state: identity } = useAgent(agent.identityManagerGetIdentity, {
-    did,
+  const { state: profile, loading: identityLoading } = useAgent(getProfile, {
+    subject: did,
+    fields: ['name', 'profileImage'],
   })
 
-  // const identity = _identity.data && _identity.data
-  // const source =
-  //   identity && identity.profileImage
-  //     ? { source: { uri: identity.profileImage } }
-  //     : {}
+  const identity = profile.data && profile.data
+  const source =
+    identity && identity.profileImage
+      ? { source: { uri: identity.profileImage } }
+      : {}
+
+  console.log(identity)
 
   return (
     <Screen scrollEnabled background={'primary'}>
-      {identity.status === 'loading' && (
+      {identityLoading && (
         <Container padding flex={1}>
           <Container
             w={100}
@@ -57,21 +60,21 @@ const Profile: React.FC<Props> = ({ navigation }) => {
         </Container>
       )}
 
-      {identity.status === 'complete' && (
+      {!identityLoading && identity && (
         <Container padding flex={1}>
           <Avatar
-            // {...source}
+            {...source}
             type={'rounded'}
             size={100}
-            address={identity.data && identity.data.did}
+            address={identity && identity.did}
             gravatarType={'retro'}
             backgroundColor={'white'}
           />
           <Container marginTop>
             <Text type={Constants.TextTypes.H2} bold>
-              {/* {identity && identity.shortId} */}
+              {identity.data && identity.data.shortDid}
             </Text>
-            {/* {identity && identity.isManaged && (
+            {identity && identity.isManaged && (
               <Container paddingTop flexDirection={'row'} alignItems={'center'}>
                 <Container
                   alignItems={'center'}
@@ -95,7 +98,7 @@ const Profile: React.FC<Props> = ({ navigation }) => {
                   This <Text bold>did</Text> is managed on this device
                 </Text>
               </Container>
-            )} */}
+            )}
 
             <Container marginTop>
               <Container
@@ -104,7 +107,7 @@ const Profile: React.FC<Props> = ({ navigation }) => {
                 br={5}
               >
                 <Text textStyle={{ fontFamily: 'menlo' }} selectable>
-                  {identity.data && identity.data.did}
+                  {identity && identity.did}
                 </Text>
               </Container>
             </Container>

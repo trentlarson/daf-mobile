@@ -1,6 +1,10 @@
 import React, { useState, createContext, useEffect } from 'react'
 import Debug from 'debug'
-import { agent, getActivityWithProfiles } from '../services/daf'
+import {
+  agent,
+  getActivityWithProfiles,
+  getIdentitiesWithProfiles,
+} from '../services/daf'
 import AsyncStorage from '@react-native-community/async-storage'
 import useAgent from '../hooks/useAgent'
 
@@ -19,7 +23,7 @@ export const AppProvider = (props: any) => {
   // --------------
   // State from hooks
   const { state: identities, request: getIdentities } = useAgent(
-    agent.identityManagerGetIdentities,
+    getIdentitiesWithProfiles,
   )
 
   const { state: messages, request: getMessages } = useAgent(

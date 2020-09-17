@@ -27,6 +27,8 @@ const Activity: React.FC<Props> = ({ navigation }) => {
     getMessages,
   } = useContext(AppContext)
 
+  console.log(identities)
+
   const showFirstLoadModal = () => {
     navigation.navigate('CreateFirstCredential', {
       did: selectedIdentity,
@@ -66,7 +68,10 @@ const Activity: React.FC<Props> = ({ navigation }) => {
         {!messages && <Loader width={180} text={'Loading activity...'} />}
         <FlatList
           ListHeaderComponent={
-            <ContactsHeader viewProfile={viewProfile} identities={[]} />
+            <ContactsHeader
+              viewProfile={viewProfile}
+              identities={identities.data || []}
+            />
           }
           style={{ flex: 1 }}
           data={messages.data && messages.data}
