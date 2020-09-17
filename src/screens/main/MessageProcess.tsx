@@ -2,36 +2,30 @@ import React, { useState, useEffect } from 'react'
 import { Screen, Container, Text, Constants, Button } from '@kancha/kancha-ui'
 import { ActivityIndicator } from 'react-native'
 import { useNavigation, useNavigationParam } from 'react-navigation-hooks'
-import { useMutation } from '@apollo/client'
-import { NEW_MESSAGE } from '../../lib/graphql/queries'
+import { agent } from '../../services/daf'
 
 interface MessageProcess {}
 
 const MessageProcess: React.FC<MessageProcess> = () => {
-  const [parsingMessage, setParsing] = useState(true)
-  const raw = useNavigationParam('message')
   const navigation = useNavigation()
-  const [handleMessage] = useMutation(NEW_MESSAGE, {
-    onCompleted(resp) {
+  const raw = useNavigationParam('message')
+
+  const [parsingMessage, setParsing] = useState(true)
+
+  const handleMessage = async (msg: string) => {
+    const newMessage = await agent.handleMessage({
+      raw: msg,
+      metaData: [{ type: 'qrCode' }],
+      save: false,
+    })
+    if (newMessage) {
       setParsing(false)
-      console.log('Success', resp)
-    },
-    onError(err) {
-      if (err) {
-        setParsing(false)
-        console.log('Error', err)
-      }
-    },
-  })
+    }
+  }
 
   useEffect(() => {
     if (raw) {
-      handleMessage({
-        variables: {
-          raw,
-          sourceType: 'qrCode',
-        },
-      })
+      handleMessage(raw)
     }
   }, [])
 
