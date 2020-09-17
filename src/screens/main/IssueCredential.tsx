@@ -14,14 +14,6 @@ import {
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Colors } from '../../theme'
-// import { useMutation, useLazyQuery } from '@apollo/client'
-// import {
-//   SEND_JWT_MUTATION,
-//   SIGN_VC_MUTATION,
-//   GET_VIEWER_CREDENTIALS,
-//   GET_ALL_IDENTITIES,
-//   NEW_MESSAGE,
-// } from '../../lib/graphql/queries'
 import { useTranslation } from 'react-i18next'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import { Identity } from '@kancha/kancha-ui/dist/types'

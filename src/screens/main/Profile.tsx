@@ -72,7 +72,7 @@ const Profile: React.FC<Props> = ({ navigation }) => {
           />
           <Container marginTop>
             <Text type={Constants.TextTypes.H2} bold>
-              {identity.data && identity.data.shortDid}
+              {identity && identity.shortDid}
             </Text>
             {identity && identity.isManaged && (
               <Container paddingTop flexDirection={'row'} alignItems={'center'}>

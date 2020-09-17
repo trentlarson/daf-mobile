@@ -29,27 +29,7 @@ const UserSettingScreens = {
 }
 
 const DeveloperSettingsScreens = {
-  Signer: { screen: 'Signer', title: 'Signer' },
-  Config: { screen: 'Config', title: 'Config' },
-  Crash: { screen: 'Crash', title: 'Crash Reporting' },
   MessageProcess: { screen: 'MessageProcess', title: 'Message Process' },
-  Messages: { screen: 'Messages', title: 'Messages' },
-  MessageDetail: { screen: 'MessageDetail', title: 'Message Detail' },
-  CreateCredential: { screen: 'CreateCredential', title: 'Create Credential' },
-  CreateRequest: { screen: 'CreateRequest', title: 'Create Request' },
-  ShareCredential: { screen: 'ShareCredential', title: 'Share Credential' },
-  SendRequest: { screen: 'SendRequest', title: 'Send Request' },
-  Connections: { screen: 'Connections', title: 'Connections' },
-  CredentialField: { screen: 'CredentialField', title: 'Credential Field' },
-  DidViewer: { screen: 'DidViewer', title: 'DidViewer' },
-  ModalDemo: { screen: 'ModalDemo', title: 'Modal Demo' },
-  IdentitySelectModal: { screen: 'IdentitySelectModal', title: 'Identities' },
-  Claim: { screen: 'Claim', title: 'Claim Demo' },
-  DisclosureRequest: {
-    screen: 'DisclosureRequest',
-    title: 'Disclosure Request',
-  },
-  Credentials: { screen: 'Credentials', title: 'Credentials' },
 }
 
 export const Screens = {

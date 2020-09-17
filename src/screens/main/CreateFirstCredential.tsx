@@ -13,50 +13,29 @@ import {
 } from '@kancha/kancha-ui'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { useMutation } from '@apollo/client'
-import { SIGN_VC_MUTATION, NEW_MESSAGE } from '../../lib/graphql/queries'
+import { agent, issueCredential } from '../../services/daf'
 
 const CreateFirstCredential: React.FC<NavigationStackScreenProps> & {
   navigationOptions: any
 } = ({ navigation }) => {
   const did = navigation.getParam('did')
   const fetchMessages = navigation.getParam('fetchMessages')
-  const [name, setName] = useState()
 
-  const [handleMessage] = useMutation(NEW_MESSAGE, {
-    onCompleted: () => {
-      fetchMessages()
-      navigation.dismiss()
-    },
-  })
+  const [name, setName] = useState('')
 
-  const [actionSignVc] = useMutation(SIGN_VC_MUTATION, {
-    onCompleted: async response => {
-      if (response && response.signCredentialJwt) {
-        handleMessage({
-          variables: {
-            raw: response.signCredentialJwt.raw,
-            meta: [{ type: 'selfSigned' }],
-          },
-        })
-      }
-    },
-  })
+  const signVc = async () => {
+    const credential = await issueCredential(did, did, [
+      { type: 'name', value: name },
+    ])
 
-  const signVc = () => {
-    actionSignVc({
-      variables: {
-        data: {
-          issuer: did,
-          context: ['https://www.w3.org/2018/credentials/v1'],
-          type: ['VerifiableCredential'],
-          credentialSubject: {
-            id: did,
-            name,
-          },
-        },
-      },
+    await agent.handleMessage({
+      raw: credential.proof.jwt,
+      save: true,
     })
+    await agent.handleMessage({ raw: credential.proof.jwt, save: true })
+
+    fetchMessages()
+    navigation.dismiss()
   }
 
   return (
@@ -76,11 +55,8 @@ const CreateFirstCredential: React.FC<NavigationStackScreenProps> & {
         </Container>
         <Container marginTop marginBottom>
           <Text type={Constants.TextTypes.Body}>
-            Let's create your first credential by issuing a{' '}
-            <Text textStyle={{ fontStyle: 'italic' }} bold>
-              name
-            </Text>
-            credential to yourself...
+            Let's create your first credential by issuing a name credential to
+            yourself...
           </Text>
         </Container>
         <Container marginTop marginBottom>

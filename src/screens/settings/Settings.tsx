@@ -27,7 +27,7 @@ const Settings: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
             {t('Show Seed Phrase')}
           </ListItem>
         </Section> */}
-        {__DEV__ && (
+        {/* {__DEV__ && (
           <Section title={'Developer tooling'}>
             <ListItem
               testID={'MESSAGES_BTN'}
@@ -61,7 +61,7 @@ const Settings: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
               {t('Identities')}
             </ListItem>
           </Section>
-        )}
+        )} */}
         <Section title={'Language'}>
           <ListItem
             last

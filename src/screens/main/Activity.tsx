@@ -19,13 +19,9 @@ import AppConstants from '../../constants'
 interface Props extends NavigationStackScreenProps {}
 
 const Activity: React.FC<Props> = ({ navigation }) => {
-  const {
-    selectedIdentity,
-    messages,
-    identities,
-    getIdenties,
-    getMessages,
-  } = useContext(AppContext)
+  const { selectedIdentity, messages, identities, getMessages } = useContext(
+    AppContext,
+  )
 
   console.log(identities)
 

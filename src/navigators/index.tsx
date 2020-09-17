@@ -38,21 +38,6 @@ import IssueCredentialScreen from '../screens/main/IssueCredential'
 import Settings from '../screens/settings/Settings'
 import ShowSecret from '../screens/settings/ShowSecret'
 
-// Developer tooling.  * == Deprecated. Will be removed soon.
-import Signer from '../screens/settings/Signer'
-import DidViewer from '../screens/settings/DidViewer'
-import Config from '../screens/settings/Config' // *
-import Messages from '../screens/settings/Messages'
-import MessageDetail from '../screens/settings/MessageDetail'
-import CreateCredential from '../screens/settings/CreateCredential' // *
-import CreateRequest from '../screens/settings/CreateRequest'
-import SendRequest from '../screens/settings/SendRequest'
-import ShareCredential from '../screens/settings/ShareCredential'
-import Connections from '../screens/settings/Connections' // *
-import Credentials from '../screens/settings/Credentials' // *
-
-import { Animated, Easing } from 'react-native'
-
 const headerLogo = () => (
   <Image
     source={require('../assets/images/daf-black-icon.png')}
@@ -82,72 +67,6 @@ const SettingsNavigator = createStackNavigator(
       screen: ShowSecret,
       navigationOptions: {
         title: i18n.t('Reveal Secret'),
-      },
-    },
-    [Screens.Messages.screen]: {
-      screen: Messages,
-      navigationOptions: {
-        title: i18n.t('Messages'),
-      },
-    },
-    [Screens.MessageDetail.screen]: {
-      screen: MessageDetail,
-      navigationOptions: {
-        title: i18n.t('Messages Detail'),
-      },
-    },
-    [Screens.CreateCredential.screen]: {
-      screen: CreateCredential,
-      navigationOptions: {
-        title: i18n.t('Create Credential'),
-      },
-    },
-    [Screens.ShareCredential.screen]: {
-      screen: ShareCredential,
-      navigationOptions: {
-        title: i18n.t('Share Credential'),
-      },
-    },
-    [Screens.CreateRequest.screen]: {
-      screen: CreateRequest,
-      navigationOptions: {
-        title: i18n.t('Create Request'),
-      },
-    },
-    [Screens.SendRequest.screen]: {
-      screen: SendRequest,
-      navigationOptions: {
-        title: i18n.t('Send Request'),
-      },
-    },
-    [Screens.Connections.screen]: {
-      screen: Connections,
-      navigationOptions: {
-        title: i18n.t('Connections'),
-      },
-    },
-    [Screens.Credentials.screen]: {
-      screen: Credentials,
-      navigationOptions: {
-        title: i18n.t('Credentials'),
-      },
-    },
-    [Screens.DidViewer.screen]: {
-      screen: DidViewer,
-      navigationOptions: {
-        title: i18n.t('Connections'),
-      },
-    },
-    [Screens.Signer.screen]: {
-      screen: Signer,
-      navigationOptions: {
-        title: i18n.t('Signer'),
-      },
-    },
-    [Screens.Config.screen]: {
-      screen: Config,
-      navigationOptions: {
-        title: i18n.t('Configuration'),
       },
     },
   },
