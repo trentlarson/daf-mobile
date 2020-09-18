@@ -8,21 +8,59 @@ const claimToObject = (arr: any[]) => {
 }
 const shortId = (did: string) => `${did.slice(0, 15)}...${did.slice(-4)}`
 
-const getActivityWithProfiles = async ({ did }: { did: string }) => {
-  const messages = await agent.dataStoreORMGetMessages()
-  return await Promise.all(
-    messages.map(async (message: any) => {
+const getMessageWithSdr = async ({
+  messageId,
+  did,
+}: {
+  messageId: string
+  did: string
+}) => {
+  const message = await agent.dataStoreORMGetMessages({
+    where: [{ column: 'id', value: [messageId] }],
+  })
+  const sdr = await agent.getVerifiableCredentialsForSdr({
+    sdr: message[0].data,
+    did,
+  })
+
+  const sdrWithProfiles = await Promise.all(
+    sdr.map(async (sd: any) => {
       return {
-        ...message,
-        viewer: await getProfile({ subject: did }),
-        from: await getProfile({ subject: message.from }),
-        to: await getProfile({ subject: message.to }),
+        ...sd,
         credentials: await Promise.all(
-          message.credentials.map(async (vc: any, i: number) => {
+          sd.credentials.map(async (vc: any, i: number) => {
             return await credentialProfile(vc, i)
           }),
         ),
       }
+    }),
+  )
+
+  return await transformMessage(message[0], did, sdrWithProfiles)
+}
+
+const transformMessage = async (message: any, did: string, sdr?: any) => {
+  return {
+    ...message,
+    viewer: await getProfile({ subject: did }),
+    from: await getProfile({ subject: message.from }),
+    ...(message.to ? { to: await getProfile({ subject: message.to }) } : {}),
+    credentials: await Promise.all(
+      message.credentials.map(async (vc: any, i: number) => {
+        return await credentialProfile(vc, i)
+      }),
+    ),
+    sdr,
+  }
+}
+
+const getActivityWithProfiles = async ({ did }: { did: string }) => {
+  const messages = await agent.dataStoreORMGetMessages({
+    order: [{ column: 'createdAt', direction: 'DESC' }],
+  })
+  return await Promise.all(
+    messages.map(async (message: any) => {
+      return await transformMessage(message, did)
     }),
   )
 }
@@ -68,12 +106,11 @@ const getCredentialsFromRequestMessage = async ({ msg }: any) => {
 }
 
 const credentialProfile = async (vc: any, index: number) => {
-  console.log(vc)
   return {
     hash: `00${index + 1}`,
-    issuer: await getProfile({ subject: vc.issuer.id }),
-    subject: await getProfile({ subject: vc.credentialSubject.id }),
-    claims: Object.keys(vc.credentialSubject)
+    iss: await getProfile({ subject: vc.issuer.id }),
+    sub: await getProfile({ subject: vc.credentialSubject.id }),
+    fields: Object.keys(vc.credentialSubject)
       .map((key, i) => {
         return (
           key !== 'id' && {
@@ -150,6 +187,7 @@ export {
   issueCredential,
   getProfile,
   credentialProfile,
+  getMessageWithSdr,
   getGetCredentialsWithProfiles,
   getActivityWithProfiles,
   getIdentitiesWithProfiles,

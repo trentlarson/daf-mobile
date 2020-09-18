@@ -101,9 +101,9 @@ const Activity: React.FC<Props> = ({ navigation }) => {
                         viewAttachments(item.credentials, credentialIndex)
                       }
                       exp={credential.expirationDate}
-                      fields={credential.claims}
-                      subject={credential.subject}
-                      issuer={credential.issuer}
+                      fields={credential.fields}
+                      subject={credential.sub}
+                      issuer={credential.iss}
                       shadow={1.5}
                       background={'primary'}
                     />

@@ -40,13 +40,15 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ navigate }) => {
           : null
 
         if (message && payload.method === 'issue_credential') {
-          // await message.save()
-          // client.reFetchObservableQueries()
+          if (message.raw) {
+            await agent.handleMessage({ raw: message.raw, save: true })
+          }
         }
 
         if (message && payload.method === 'request_credentials') {
-          // await message.save()
-          // client.reFetchObservableQueries()
+          if (message.raw) {
+            await agent.handleMessage({ raw: message.raw, save: true })
+          }
 
           const requestType = AppConstants.requests.DISCLOSURE
           navigate(Screens.Requests.screen, {

@@ -21,7 +21,7 @@ interface CredentialStyle {
 
 interface Props extends NavigationStackScreenProps {}
 
-const CredentialDetail: React.FC<Props> & { sharedElements: any } & {
+const CredentialDetail: React.FC<Props> & {
   navigationOptions: any
 } = ({ navigation }) => {
   const credentials = navigation.getParam('credentials')
@@ -74,9 +74,9 @@ const CredentialDetail: React.FC<Props> & { sharedElements: any } & {
           onPress={() => sharingMode && selectCredential(index)}
           detailMode
           jwt={item.raw}
-          issuer={item.issuer}
-          subject={item.subject}
-          fields={item.claims}
+          issuer={item.iss}
+          subject={item.sub}
+          fields={item.fields}
           exp={item.expirationDate}
           {...selectedStyle(index)}
         />
@@ -156,16 +156,6 @@ CredentialDetail.navigationOptions = ({ navigation }: any) => {
       </HeaderButtons>
     ),
   }
-}
-
-CredentialDetail.sharedElements = (navigation: any) => {
-  return navigation
-    .getParam('credentials')
-    .map((vc: Typings.VerifiableCredential) => ({
-      id: vc.hash,
-      animation: 'fade',
-      resize: 'clip',
-    }))
 }
 
 export default CredentialDetail

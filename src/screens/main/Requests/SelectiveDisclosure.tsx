@@ -3,21 +3,14 @@ import {
   Container,
   Banner,
   Indicator,
-  Credential,
-  Toaster,
   RequestItem,
   Screen,
   Button,
 } from '@kancha/kancha-ui'
-import {
-  SIGN_VP,
-  SEND_DIDCOMM_MUTATION,
-  GET_MESSAGE_SDR,
-  SIGN_VC_MUTATION,
-} from '../../../lib/graphql/queries'
-import { useMutation, useQuery } from '@apollo/client'
 import { useNavigation } from 'react-navigation-hooks'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
+import useAgent from '../../../hooks/useAgent'
+import { agent, getMessageWithSdr } from '../../../services/daf'
 
 interface RequestProps {
   peerId: string
@@ -45,12 +38,17 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
   const [sending, updateSending] = useState<boolean>(false)
   const [selected, updateSelected] = useState<ValidationState>({})
   const [formValid, setValid] = useState(true)
-  const [message, setMessage] = useState()
   const navigation = useNavigation()
-  const { data: requestMessage, refetch } = useQuery(GET_MESSAGE_SDR, {
-    variables: { id: messageId, selectedIdentity: selectedIdentity },
-    fetchPolicy: 'network-only',
+
+  const { state: sdrMessage } = useAgent(getMessageWithSdr, {
+    messageId,
+    did: selectedIdentity,
   })
+
+  // const { data: requestMessage, refetch } = useQuery(GET_MESSAGE_SDR, {
+  //   variables: { id: messageId, selectedIdentity: selectedIdentity },
+  //   fetchPolicy: 'network-only',
+  // })
 
   const {
     walletConnectApproveCallRequest,
@@ -59,7 +57,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
 
   const checkValidity = () => {
     let valid = true
-    Object.keys(selected).map(key => {
+    Object.keys(selected).map((key) => {
       if (selected[key].required && !selected[key].jwt) {
         valid = false
       }
@@ -68,91 +66,91 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
     setValid(valid)
   }
 
-  const [actionSignVc] = useMutation(SIGN_VC_MUTATION, {
-    onCompleted: async response => {
-      if (response && response.signCredentialJwt) {
-        refetch()
-      }
-    },
-  })
+  // const [actionSignVc] = useMutation(SIGN_VC_MUTATION, {
+  //   onCompleted: async (response) => {
+  //     if (response && response.signCredentialJwt) {
+  //       refetch()
+  //     }
+  //   },
+  // })
 
-  const signVc = (claimType: string, value: string) => {
-    actionSignVc({
-      variables: {
-        data: {
-          issuer: selectedIdentity,
-          context: ['https://www.w3.org/2018/credentials/v1'],
-          type: ['VerifiableCredential'],
-          credentialSubject: {
-            id: selectedIdentity,
-            [claimType]: value,
-          },
-        },
-      },
-    })
-  }
+  // const signVc = (claimType: string, value: string) => {
+  //   actionSignVc({
+  //     variables: {
+  //       data: {
+  //         issuer: selectedIdentity,
+  //         context: ['https://www.w3.org/2018/credentials/v1'],
+  //         type: ['VerifiableCredential'],
+  //         credentialSubject: {
+  //           id: selectedIdentity,
+  //           [claimType]: value,
+  //         },
+  //       },
+  //     },
+  //   })
+  // }
 
-  const [actionSendDidComm] = useMutation(SEND_DIDCOMM_MUTATION, {
-    onCompleted: response => {
-      if (response) {
-        updateSending(false)
-      }
-    },
-    onError: error => {
-      console.log(error)
-    },
-  })
-  const [actionSignVp] = useMutation(SIGN_VP, {
-    onCompleted: async response => {
-      if (response.signPresentationJwt) {
-        updateSending(true)
+  // const [actionSendDidComm] = useMutation(SEND_DIDCOMM_MUTATION, {
+  //   onCompleted: (response) => {
+  //     if (response) {
+  //       updateSending(false)
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     console.log(error)
+  //   },
+  // })
+  // const [actionSignVp] = useMutation(SIGN_VP, {
+  //   onCompleted: async (response) => {
+  //     if (response.signPresentationJwt) {
+  //       updateSending(true)
 
-        if (isWalletConnect) {
-          await approveCallRequest(response.signPresentationJwt.raw)
-        } else {
-          await actionSendDidComm({
-            variables: {
-              data: {
-                to: message.from.did,
-                from: selectedIdentity,
-                body: response.signPresentationJwt.raw,
-                type: 'DIDComm',
-              },
-              url: message.replyUrl,
-              save: false,
-            },
-          })
-        }
-        navigation.goBack()
-      }
-    },
-    onError: error => {
-      console.log(error)
-    },
-  })
+  //       if (isWalletConnect) {
+  //         await approveCallRequest(response.signPresentationJwt.raw)
+  //       } else {
+  //         await actionSendDidComm({
+  //           variables: {
+  //             data: {
+  //               to: message.from.did,
+  //               from: selectedIdentity,
+  //               body: response.signPresentationJwt.raw,
+  //               type: 'DIDComm',
+  //             },
+  //             url: message.replyUrl,
+  //             save: false,
+  //           },
+  //         })
+  //       }
+  //       navigation.goBack()
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     console.log(error)
+  //   },
+  // })
 
-  const accept = () => {
-    if (formValid) {
-      const selectedVp = Object.keys(selected)
-        .map(key => selected[key].jwt)
-        .filter(item => item)
+  // const accept = () => {
+  //   if (formValid) {
+  //     const selectedVp = Object.keys(selected)
+  //       .map((key) => selected[key].jwt)
+  //       .filter((item) => item)
 
-      const payload = {
-        variables: {
-          data: {
-            issuer: selectedIdentity,
-            audience: message && message.from.did,
-            tag: message && message.threadId,
-            context: ['https://www.w3.org/2018/credentials/v1'],
-            type: ['VerifiablePresentation'],
-            verifiableCredential: selectedVp,
-          },
-        },
-      }
+  //     const payload = {
+  //       variables: {
+  //         data: {
+  //           issuer: selectedIdentity,
+  //           audience: message && message.from.did,
+  //           tag: message && message.threadId,
+  //           context: ['https://www.w3.org/2018/credentials/v1'],
+  //           type: ['VerifiablePresentation'],
+  //           verifiableCredential: selectedVp,
+  //         },
+  //       },
+  //     }
 
-      actionSignVp(payload)
-    }
-  }
+  //     actionSignVp(payload)
+  //   }
+  // }
 
   const onSelectItem = async (
     id: string | null,
@@ -190,8 +188,8 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
   }, [selected])
 
   useEffect(() => {
-    if (requestMessage) {
-      const { message } = requestMessage
+    if (sdrMessage.data) {
+      const message = sdrMessage.data
       let defaultSelected: ValidationState = {}
       message.sdr.map((sdr: any) => {
         if (sdr && sdr.essential) {
@@ -210,10 +208,9 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
         }
       })
       console.log('request message changed', message)
-      setMessage(message)
       updateSelected(defaultSelected)
     }
-  }, [requestMessage])
+  }, [sdrMessage.data])
 
   return (
     <Screen
@@ -235,7 +232,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
               disabled={!formValid}
               fullWidth
               buttonText={'Share'}
-              onPress={accept}
+              onPress={() => {}}
               block={'filled'}
             />
           </Container>
@@ -253,17 +250,19 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
           }}
         />
         <Indicator
-          text={`${(peerMeta && peerMeta.name) ||
-            'Unknown'} has requested credentials`}
+          text={`${
+            (peerMeta && peerMeta.name) || 'Unknown'
+          } has requested credentials`}
         />
 
         <Container>
-          {message &&
-            message.sdr &&
-            message.sdr.map((sdrRequestField: any, index: number) => {
+          {sdrMessage.data &&
+            sdrMessage.data.sdr &&
+            sdrMessage.data.sdr.map((sdrRequestField: any, index: number) => {
+              console.log(sdrRequestField)
               return (
                 <RequestItem
-                  selfSign={signVc}
+                  selfSign={() => {}}
                   closeAfterSelect={false}
                   key={sdrRequestField.claimType + index}
                   claimType={sdrRequestField.claimType}
@@ -271,7 +270,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
                   issuers={sdrRequestField.issuers}
                   credentials={sdrRequestField.credentials}
                   required={sdrRequestField.essential}
-                  onSelectItem={onSelectItem}
+                  onSelectItem={() => {}}
                 />
               )
             })}

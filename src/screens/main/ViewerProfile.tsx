@@ -158,9 +158,9 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
                       }
                       background={'secondary'}
                       exp={3456789}
-                      issuer={vc.issuer}
-                      subject={vc.subject}
-                      fields={vc.claims}
+                      issuer={vc.iss}
+                      subject={vc.sub}
+                      fields={vc.fields}
                     />
                   )
                 })}

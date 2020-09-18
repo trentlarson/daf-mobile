@@ -56,8 +56,6 @@ const AcceptCredential: React.FC<RequestProps> = ({
     navigation.goBack()
   }
 
-  useEffect(() => {}, [])
-
   return (
     <Screen
       scrollEnabled
@@ -99,11 +97,10 @@ const AcceptCredential: React.FC<RequestProps> = ({
           text={`${peerMeta && peerMeta.name} has issue you a credential`}
         />
         <Container padding flex={1} background={'primary'}>
-          {credentials.data ? (
+          {loading && <ActivityIndicator />}
+          {credentials.data &&
             credentials.data.map((vc: any) => {
-              console.log(vc)
               return (
-                // <Container />
                 <Credential
                   shadow={1.5}
                   background={'primary'}
@@ -115,10 +112,7 @@ const AcceptCredential: React.FC<RequestProps> = ({
                   jwt={vc.raw}
                 />
               )
-            })
-          ) : (
-            <ActivityIndicator />
-          )}
+            })}
         </Container>
       </Container>
     </Screen>
