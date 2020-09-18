@@ -20,6 +20,8 @@ const Requests: React.FC<RequestsProps> = (props) => {
   const payload = useNavigationParam('payload')
   const isWalletConnect = useNavigationParam('isWalletConnect')
 
+  console.log(message)
+
   const RequestScreen = () => {
     switch (requestType) {
       case AppConstants.requests.SESSION:

@@ -59,7 +59,16 @@ const getGetCredentialsWithProfiles = async (args?: any) => {
   )
 }
 
+const getCredentialsFromRequestMessage = async ({ msg }: any) => {
+  return await Promise.all(
+    msg.credentials.map(async (vc: any, i: number) => {
+      return await credentialProfile(vc, i)
+    }),
+  )
+}
+
 const credentialProfile = async (vc: any, index: number) => {
+  console.log(vc)
   return {
     hash: `00${index + 1}`,
     issuer: await getProfile({ subject: vc.issuer.id }),
@@ -75,6 +84,7 @@ const credentialProfile = async (vc: any, index: number) => {
         )
       })
       .filter((i) => i),
+    raw: vc.proof.jwt,
   }
 }
 
@@ -139,8 +149,10 @@ export {
   agent,
   issueCredential,
   getProfile,
+  credentialProfile,
   getGetCredentialsWithProfiles,
   getActivityWithProfiles,
   getIdentitiesWithProfiles,
   getManagedIdentitiesWithProfiles,
+  getCredentialsFromRequestMessage,
 }

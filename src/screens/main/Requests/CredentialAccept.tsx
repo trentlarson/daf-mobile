@@ -9,7 +9,9 @@ import {
 } from '@kancha/kancha-ui'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
 import { useNavigation } from 'react-navigation-hooks'
-import { useApolloClient } from '@apollo/client'
+import { agent, getCredentialsFromRequestMessage } from '../../../services/daf'
+import useAgent from '../../../hooks/useAgent'
+import { ActivityIndicator } from 'react-native'
 
 interface RequestProps {
   peerId: string
@@ -28,17 +30,21 @@ const AcceptCredential: React.FC<RequestProps> = ({
     walletConnectRejectCallRequest,
     walletConnectApproveCallRequest,
   } = useContext(WalletConnectContext)
-  const [vcs, updateVcs] = useState()
   const navigation = useNavigation()
-  const client = useApolloClient()
+
+  const { state: credentials, loading } = useAgent(
+    getCredentialsFromRequestMessage,
+    {
+      msg: message,
+    },
+  )
 
   const approveCallRequest = async () => {
-    await message.save()
+    await agent.handleMessage({ raw: message.raw, save: true })
     await walletConnectApproveCallRequest(peerId, {
       id: payloadId,
       result: 'CREDENTIAL_ACCEPTED',
     })
-    client.reFetchObservableQueries()
     navigation.goBack()
   }
 
@@ -50,29 +56,7 @@ const AcceptCredential: React.FC<RequestProps> = ({
     navigation.goBack()
   }
 
-  const shortId = (did: string) => {
-    return `${did.slice(0, 15)}...${did.slice(-4)}`
-  }
-
-  useEffect(() => {
-    const credentials = message.credentials.map((vc: any) => {
-      return {
-        ...vc,
-        issuer: {
-          did: vc.issuer.did,
-          shortId: shortId(vc.issuer.did),
-          profileImage: '',
-        },
-        subject: {
-          did: vc.subject.did,
-          shortId: shortId(vc.subject.did),
-          profileImage: '',
-        },
-      }
-    })
-
-    updateVcs(credentials)
-  }, [])
+  useEffect(() => {}, [])
 
   return (
     <Screen
@@ -115,9 +99,11 @@ const AcceptCredential: React.FC<RequestProps> = ({
           text={`${peerMeta && peerMeta.name} has issue you a credential`}
         />
         <Container padding flex={1} background={'primary'}>
-          {vcs &&
-            vcs.map((vc: any) => {
+          {credentials.data ? (
+            credentials.data.map((vc: any) => {
+              console.log(vc)
               return (
+                // <Container />
                 <Credential
                   shadow={1.5}
                   background={'primary'}
@@ -129,7 +115,10 @@ const AcceptCredential: React.FC<RequestProps> = ({
                   jwt={vc.raw}
                 />
               )
-            })}
+            })
+          ) : (
+            <ActivityIndicator />
+          )}
         </Container>
       </Container>
     </Screen>

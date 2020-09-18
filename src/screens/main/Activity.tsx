@@ -23,6 +23,8 @@ const Activity: React.FC<Props> = ({ navigation }) => {
     AppContext,
   )
 
+  console.log(messages)
+
   const showFirstLoadModal = () => {
     navigation.navigate('CreateFirstCredential', {
       did: selectedIdentity,
@@ -76,7 +78,7 @@ const Activity: React.FC<Props> = ({ navigation }) => {
               <ActivityItem
                 id={item.id}
                 type={item.type}
-                date={item.data.nbf * 1000}
+                date={item.data.nbf * 1000 || item.data.iat * 1000}
                 sender={item.from}
                 receiver={item.to}
                 viewer={item.viewer}
