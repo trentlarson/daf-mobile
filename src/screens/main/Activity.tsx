@@ -23,8 +23,6 @@ const Activity: React.FC<Props> = ({ navigation }) => {
     AppContext,
   )
 
-  console.log(identities)
-
   const showFirstLoadModal = () => {
     navigation.navigate('CreateFirstCredential', {
       did: selectedIdentity,
@@ -74,9 +72,7 @@ const Activity: React.FC<Props> = ({ navigation }) => {
           onRefresh={() => getMessages()}
           refreshing={messages.status === 'loading'}
           renderItem={({ item }: { item: any }) => {
-            console.log('Activity', item)
             return (
-              // <Container />
               <ActivityItem
                 id={item.id}
                 type={item.type}

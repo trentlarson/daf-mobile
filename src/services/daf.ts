@@ -8,13 +8,13 @@ const claimToObject = (arr: any[]) => {
 }
 const shortId = (did: string) => `${did.slice(0, 15)}...${did.slice(-4)}`
 
-const getActivityWithProfiles = async (args?: any) => {
-  const messages = await agent.dataStoreORMGetMessages({ ...args })
+const getActivityWithProfiles = async ({ did }: { did: string }) => {
+  const messages = await agent.dataStoreORMGetMessages()
   return await Promise.all(
     messages.map(async (message: any) => {
       return {
         ...message,
-        viewer: await getProfile({ subject: message.to }),
+        viewer: await getProfile({ subject: did }),
         from: await getProfile({ subject: message.from }),
         to: await getProfile({ subject: message.to }),
         credentials: await Promise.all(
@@ -23,6 +23,16 @@ const getActivityWithProfiles = async (args?: any) => {
           }),
         ),
       }
+    }),
+  )
+}
+
+const getManagedIdentitiesWithProfiles = async () => {
+  const identities = await agent.identityManagerGetIdentities()
+
+  return await Promise.all(
+    identities.map(async (ids: any) => {
+      return await getProfile({ subject: ids.did })
     }),
   )
 }
@@ -132,4 +142,5 @@ export {
   getGetCredentialsWithProfiles,
   getActivityWithProfiles,
   getIdentitiesWithProfiles,
+  getManagedIdentitiesWithProfiles,
 }

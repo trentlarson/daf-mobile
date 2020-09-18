@@ -9,22 +9,15 @@ import {
   BottomSnap,
   Credential,
   Icon,
-  Typings,
 } from '@kancha/kancha-ui'
-import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-// import TabAvatar from '../../navigators/components/TabAvatar'
+import TabAvatar from '../../navigators/components/TabAvatar'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { ActivityIndicator } from 'react-native'
 import { Colors } from '../../theme'
 import hexToRgba from 'hex-to-rgba'
 import { AppContext } from '../../providers/AppContext'
 import useAgent from '../../hooks/useAgent'
-import useProfile from '../../hooks/useProfile'
-import {
-  agent,
-  getProfile,
-  getGetCredentialsWithProfiles,
-} from '../../services/daf'
+import { getProfile, getGetCredentialsWithProfiles } from '../../services/daf'
 
 const SWITCH_IDENTITY = 'SWITCH_IDENTITY'
 
@@ -40,12 +33,13 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
     fields: ['name', 'profileImage'],
   })
 
-  const { state: credentials, loading: credentialsLoading } = useAgent(
-    getGetCredentialsWithProfiles,
-    {
-      where: [{ column: 'subject', value: [selectedIdentity] }],
-    },
-  )
+  const {
+    state: credentials,
+    loading: credentialsLoading,
+    request: getCredentials,
+  } = useAgent(getGetCredentialsWithProfiles, {
+    where: [{ column: 'subject', value: [selectedIdentity] }],
+  })
 
   const source =
     profile.data && profile.data.profileImage
@@ -57,6 +51,10 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
       navigation.setParams({ viewer: profile.data })
     }
   }, [profile.data])
+
+  useEffect(() => {
+    getCredentials()
+  }, [selectedIdentity])
 
   return (
     <Screen scrollEnabled background={'primary'}>
@@ -198,7 +196,7 @@ ViewerProfile.navigationOptions = ({ navigation }: any) => {
       <Button
         onPress={() => BottomSnap.open(SWITCH_IDENTITY)}
         iconButton
-        // icon={<TabAvatar />}
+        icon={<TabAvatar />}
       />
     ),
   }

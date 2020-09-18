@@ -26,9 +26,23 @@ export const AppProvider = (props: any) => {
     getIdentitiesWithProfiles,
   )
 
-  const { state: messages, request: getMessages } = useAgent(
-    getActivityWithProfiles,
+  const { state: managedIdentities, request: getManagedIdentities } = useAgent(
+    getIdentitiesWithProfiles,
   )
+
+  const {
+    state: messages,
+    request: getMessages,
+  } = useAgent(getActivityWithProfiles, { did: selectedIdentity })
+
+  const createIdentity = async () => {
+    await agent.identityManagerCreateIdentity({
+      kms: 'local',
+      provider: 'did:ethr:rinkeby',
+    })
+
+    getManagedIdentities()
+  }
 
   // --------------
 
@@ -58,15 +72,22 @@ export const AppProvider = (props: any) => {
     setDefaultIdentity()
   }, [])
 
+  useEffect(() => {
+    getMessages()
+  }, [selectedIdentity])
+
   return (
     <AppContext.Provider
       value={{
         // Data
         selectedIdentity,
         identities,
+        managedIdentities,
         messages,
         // Methods
         getIdentities,
+        createIdentity,
+        getManagedIdentities,
         getMessages,
         setSelectedIdentity,
       }}

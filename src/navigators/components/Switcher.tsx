@@ -10,22 +10,14 @@ import {
   Icon,
   Overlay,
 } from '@kancha/kancha-ui'
-import { useQuery, useMutation, useApolloClient } from '@apollo/client'
-import { Theme, Colors } from '../../theme'
-import {
-  GET_MANAGED_IDENTITIES,
-  SET_VIEWER,
-  CREATE_IDENTITY,
-} from '../../lib/graphql/queries'
+import { Colors } from '../../theme'
 import AppConstants from '../../constants'
 import { AppContext } from '../../providers/AppContext'
-
 const { SWITCHED_IDENTITY } = AppConstants.modals
 
 interface Identity {
   did: string
-  shortId: string
-  isSelected: boolean
+  shortDid: string
   profileImage?: string
 }
 
@@ -34,22 +26,15 @@ interface SwitcherProps {
 }
 
 const Switcher: React.FC<SwitcherProps> = ({ id }) => {
-  const client = useApolloClient()
-  const [selectedIdentity, setSelectedIdentity] = useContext(AppContext)
-  const { data } = useQuery(GET_MANAGED_IDENTITIES)
-  const [createIdentity] = useMutation(CREATE_IDENTITY, {
-    refetchQueries: [{ query: GET_MANAGED_IDENTITIES }],
-    variables: {
-      type: 'rinkeby-ethr-did',
-    },
-  })
-
-  const managedIdentities =
-    data && data.managedIdentities && data.managedIdentities
+  const {
+    managedIdentities,
+    selectedIdentity,
+    setSelectedIdentity,
+    createIdentity,
+  } = useContext(AppContext)
 
   const switchIdentity = async (identity: Identity) => {
     setSelectedIdentity(identity.did)
-    await client.reFetchObservableQueries()
 
     BottomSnap.close(id)
 
@@ -61,15 +46,17 @@ const Switcher: React.FC<SwitcherProps> = ({ id }) => {
     )
   }
 
+  const isSelected = (did: string) => did === selectedIdentity
+
   return (
     <BottomSheet id={id} scrollEnabled>
       {() => (
         <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
-          {managedIdentities &&
-            managedIdentities
+          {managedIdentities.data &&
+            managedIdentities.data
               .sort(
                 (id1: Identity, id2: Identity) =>
-                  (id2.isSelected ? 1 : 0) - (id1.isSelected ? 1 : 0),
+                  (isSelected(id2.did) ? 1 : 0) - (isSelected(id1.did) ? 1 : 0),
               )
               .map((identity: Identity) => {
                 const source = identity.profileImage
@@ -80,7 +67,7 @@ const Switcher: React.FC<SwitcherProps> = ({ id }) => {
                     <ListItem
                       hideForwardArrow
                       onPress={() => switchIdentity(identity)}
-                      selected={identity.isSelected}
+                      selected={isSelected(identity.did)}
                       last
                       iconLeft={
                         <Avatar
@@ -92,7 +79,7 @@ const Switcher: React.FC<SwitcherProps> = ({ id }) => {
                         />
                       }
                     >
-                      {identity.shortId}
+                      {identity.shortDid}
                     </ListItem>
                   </Container>
                 )

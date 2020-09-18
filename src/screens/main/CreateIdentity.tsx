@@ -14,7 +14,7 @@ const Intro: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
   const importingSeed = navigation.getParam('import', false)
 
   // State hooks
-  const { selectedIdentity, setSelectedIdentity } = useContext(AppContext)
+  const { setSelectedIdentity } = useContext(AppContext)
   const { state: identity, request: createIdentity } = useAgent(
     agent.identityManagerCreateIdentity,
     { kms: 'local', provider: 'did:ethr:rinkeby' },

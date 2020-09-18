@@ -30,17 +30,17 @@ const App = () => {
     <Providers>
       {(theme: ThemeType) => (
         <>
-          {/* <WalletConnect navigate={NavigationService.navigate} /> */}
-          {/* <Toast /> */}
-          {/* <OverlaySign /> */}
+          <WalletConnect navigate={NavigationService.navigate} />
+          <Toast />
+          <OverlaySign />
           <Navigation
             theme={theme}
             enableURLHandling={false}
-            ref={navigatorRef =>
+            ref={(navigatorRef) =>
               NavigationService.setTopLevelNavigator(navigatorRef)
             }
           />
-          {/* <IDSwitcher id={'SWITCH_IDENTITY'} /> */}
+          <IDSwitcher id={'SWITCH_IDENTITY'} />
         </>
       )}
     </Providers>

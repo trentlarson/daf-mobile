@@ -10,8 +10,8 @@ import { AppContext } from '../../../providers/AppContext'
 
 interface RequestsProps {}
 
-const Requests: React.FC<RequestsProps> = props => {
-  const [selectedIdentity] = useContext(AppContext)
+const Requests: React.FC<RequestsProps> = (props) => {
+  const { selectedIdentity } = useContext(AppContext)
   const requestType = useNavigationParam('requestType')
   const peerMeta = useNavigationParam('peerMeta')
   const peerId = useNavigationParam('peerId')
