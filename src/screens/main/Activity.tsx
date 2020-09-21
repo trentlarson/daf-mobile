@@ -23,8 +23,6 @@ const Activity: React.FC<Props> = ({ navigation }) => {
     AppContext,
   )
 
-  console.log(messages)
-
   const showFirstLoadModal = () => {
     navigation.navigate('CreateFirstCredential', {
       did: selectedIdentity,
@@ -61,7 +59,9 @@ const Activity: React.FC<Props> = ({ navigation }) => {
   return (
     <Screen background={'secondary'} safeArea={true}>
       <Container flex={1}>
-        {!messages && <Loader width={180} text={'Loading activity...'} />}
+        {!messages.data && messages.status === 'loading' && (
+          <Loader width={180} text={'Loading activity...'} />
+        )}
         <FlatList
           ListHeaderComponent={
             <ContactsHeader
@@ -70,7 +70,7 @@ const Activity: React.FC<Props> = ({ navigation }) => {
             />
           }
           style={{ flex: 1 }}
-          data={messages.data && messages.data}
+          data={messages.data || []}
           onRefresh={() => getMessages()}
           refreshing={messages.status === 'loading'}
           renderItem={({ item }: { item: any }) => {
@@ -115,25 +115,29 @@ const Activity: React.FC<Props> = ({ navigation }) => {
           keyExtractor={(item, index) => item.id + index}
           ListEmptyComponent={
             <Container>
-              <Container padding background={'secondary'}>
-                <Text bold type={Constants.TextTypes.H3}>
-                  Hey there,
-                </Text>
-                <Container marginBottom marginTop={5}>
-                  <Text type={Constants.TextTypes.Body}>
-                    It looks like you are new here? You can start by issuing
-                    yourself a<Text bold> name </Text>
-                    credential!
-                  </Text>
-                </Container>
-                <Button
-                  fullWidth
-                  buttonText={'Get started'}
-                  onPress={() => showFirstLoadModal()}
-                  type={Constants.BrandOptions.Primary}
-                  block={Constants.ButtonBlocks.Outlined}
-                />
-              </Container>
+              {messages.data &&
+                messages.data.length === 0 &&
+                messages.status === 'complete' && (
+                  <Container padding background={'secondary'}>
+                    <Text bold type={Constants.TextTypes.H3}>
+                      Hey there,
+                    </Text>
+                    <Container marginBottom marginTop={5}>
+                      <Text type={Constants.TextTypes.Body}>
+                        It looks like you are new here? You can start by issuing
+                        yourself a<Text bold> name </Text>
+                        credential!
+                      </Text>
+                    </Container>
+                    <Button
+                      fullWidth
+                      buttonText={'Get started'}
+                      onPress={() => showFirstLoadModal()}
+                      type={Constants.BrandOptions.Primary}
+                      block={Constants.ButtonBlocks.Outlined}
+                    />
+                  </Container>
+                )}
               {[1, 2, 3, 4].map((fakeItem: number) => (
                 <Container
                   background={'primary'}

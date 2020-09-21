@@ -41,6 +41,15 @@ const dbConnection = createConnection({
 
 const infuraProjectId = '5ffc47f65c4042ce847ef66a3fa70d4c'
 
+export const msgHandler = new MessageHandler({
+  messageHandlers: [
+    new DIDCommMessageHandler(),
+    new JwtMessageHandler(),
+    new W3cMessageHandler(),
+    new SdrMessageHandler(),
+  ],
+})
+
 export const agent = createAgent<
   IIdentityManager &
     IKeyManager &
@@ -78,18 +87,9 @@ export const agent = createAgent<
     new DafResolver({ infuraProjectId }),
     new DataStore(dbConnection),
     new DataStoreORM(dbConnection),
-    new MessageHandler({
-      messageHandlers: [
-        new DIDCommMessageHandler(),
-        new JwtMessageHandler(),
-        new W3cMessageHandler(),
-        new SdrMessageHandler(),
-      ],
-    }),
+    msgHandler,
     new DIDComm(),
     new CredentialIssuer(),
     new SelectiveDisclosure(),
   ],
 })
-
-export { Message } from 'daf-message-handler'

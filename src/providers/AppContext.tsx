@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect } from 'react'
 import Debug from 'debug'
 import {
   agent,
+  msgHandler,
   getActivityWithProfiles,
   getIdentitiesWithProfiles,
   getManagedIdentitiesWithProfiles,
@@ -76,6 +77,12 @@ export const AppProvider = (props: any) => {
   useEffect(() => {
     getMessages()
   }, [selectedIdentity])
+
+  useEffect(() => {
+    msgHandler.on('validatedMessage', (msg: any) => {
+      getMessages()
+    })
+  }, [])
 
   return (
     <AppContext.Provider

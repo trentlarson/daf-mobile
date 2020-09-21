@@ -1,4 +1,4 @@
-import { agent } from '../lib/setup'
+import { agent, msgHandler } from '../lib/setup'
 
 const claimToObject = (arr: any[]) => {
   return arr.reduce(
@@ -208,6 +208,7 @@ const signVerifiablePresentation = async (
 
 export {
   agent,
+  msgHandler,
   issueCredential,
   signVerifiablePresentation,
   getProfile,
