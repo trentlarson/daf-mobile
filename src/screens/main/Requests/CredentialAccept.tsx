@@ -106,9 +106,9 @@ const AcceptCredential: React.FC<RequestProps> = ({
                   background={'primary'}
                   key={vc.hash}
                   exp={vc.expirationDate}
-                  issuer={vc.issuer}
-                  subject={vc.subject}
-                  fields={vc.claims}
+                  issuer={vc.iss}
+                  subject={vc.sub}
+                  fields={vc.fields}
                   jwt={vc.raw}
                 />
               )

@@ -183,9 +183,33 @@ const issueCredential = async (iss: string, sub: string, claims: any[]) => {
   })
 }
 
+const signVerifiablePresentation = async (
+  did: string,
+  verifier: string[],
+  selected: any,
+) => {
+  const selectedCredentials = Object.keys(selected)
+    .map((key) => selected[key].jwt)
+    .filter((item) => item)
+
+  return await agent.createVerifiablePresentation({
+    presentation: {
+      '@context': ['https://www.w3.org/2018/credentials/v1'],
+      type: ['VerifiablePresentation'],
+      verifiableCredential: selectedCredentials,
+      issuanceDate: new Date().toISOString(),
+      holder: did,
+      verifier,
+    },
+    proofFormat: 'jwt',
+    save: true,
+  })
+}
+
 export {
   agent,
   issueCredential,
+  signVerifiablePresentation,
   getProfile,
   credentialProfile,
   getMessageWithSdr,

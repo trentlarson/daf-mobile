@@ -10,7 +10,12 @@ import {
 import { useNavigation } from 'react-navigation-hooks'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
 import useAgent from '../../../hooks/useAgent'
-import { agent, getMessageWithSdr } from '../../../services/daf'
+import {
+  agent,
+  getMessageWithSdr,
+  issueCredential,
+  signVerifiablePresentation,
+} from '../../../services/daf'
 import useSelectedCredentials from '../../../hooks/useSelectedCredentials'
 
 interface RequestProps {
@@ -37,8 +42,6 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
   payloadId,
 }) => {
   const [sending, updateSending] = useState<boolean>(false)
-  // const [selected, updateSelected] = useState<ValidationState>({})
-  // const [formValid, setValid] = useState(true)
   const navigation = useNavigation()
 
   const { state: sdrMessage } = useAgent(getMessageWithSdr, {
@@ -57,91 +60,26 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
     walletConnectRejectCallRequest,
   } = useContext(WalletConnectContext)
 
-  // const [actionSignVc] = useMutation(SIGN_VC_MUTATION, {
-  //   onCompleted: async (response) => {
-  //     if (response && response.signCredentialJwt) {
-  //       refetch()
-  //     }
-  //   },
-  // })
+  const shareCredentials = async () => {
+    if (formValid) {
+      updateSending(true)
 
-  // const signVc = (claimType: string, value: string) => {
-  //   actionSignVc({
-  //     variables: {
-  //       data: {
-  //         issuer: selectedIdentity,
-  //         context: ['https://www.w3.org/2018/credentials/v1'],
-  //         type: ['VerifiableCredential'],
-  //         credentialSubject: {
-  //           id: selectedIdentity,
-  //           [claimType]: value,
-  //         },
-  //       },
-  //     },
-  //   })
-  // }
+      const vp = await signVerifiablePresentation(
+        selectedIdentity,
+        sdrMessage.data.from.did,
+        selected,
+      )
 
-  // const [actionSendDidComm] = useMutation(SEND_DIDCOMM_MUTATION, {
-  //   onCompleted: (response) => {
-  //     if (response) {
-  //       updateSending(false)
-  //     }
-  //   },
-  //   onError: (error) => {
-  //     console.log(error)
-  //   },
-  // })
-  // const [actionSignVp] = useMutation(SIGN_VP, {
-  //   onCompleted: async (response) => {
-  //     if (response.signPresentationJwt) {
-  //       updateSending(true)
+      console.log(vp)
 
-  //       if (isWalletConnect) {
-  //         await approveCallRequest(response.signPresentationJwt.raw)
-  //       } else {
-  //         await actionSendDidComm({
-  //           variables: {
-  //             data: {
-  //               to: message.from.did,
-  //               from: selectedIdentity,
-  //               body: response.signPresentationJwt.raw,
-  //               type: 'DIDComm',
-  //             },
-  //             url: message.replyUrl,
-  //             save: false,
-  //           },
-  //         })
-  //       }
-  //       navigation.goBack()
-  //     }
-  //   },
-  //   onError: (error) => {
-  //     console.log(error)
-  //   },
-  // })
+      if (isWalletConnect) {
+        await approveCallRequest(vp.proof.jwt)
+        updateSending(false)
+      }
 
-  // const accept = () => {
-  //   if (formValid) {
-  //     const selectedVp = Object.keys(selected)
-  //       .map((key) => selected[key].jwt)
-  //       .filter((item) => item)
-
-  //     const payload = {
-  //       variables: {
-  //         data: {
-  //           issuer: selectedIdentity,
-  //           audience: message && message.from.did,
-  //           tag: message && message.threadId,
-  //           context: ['https://www.w3.org/2018/credentials/v1'],
-  //           type: ['VerifiablePresentation'],
-  //           verifiableCredential: selectedVp,
-  //         },
-  //       },
-  //     }
-
-  //     actionSignVp(payload)
-  //   }
-  // }
+      navigation.goBack()
+    }
+  }
 
   const approveCallRequest = async (jwt: string) => {
     await walletConnectApproveCallRequest(peerId, {
@@ -181,7 +119,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
               disabled={!formValid}
               fullWidth
               buttonText={'Share'}
-              onPress={() => {}}
+              onPress={() => shareCredentials()}
               block={'filled'}
             />
           </Container>
@@ -211,7 +149,11 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
               console.log(sdrRequestField)
               return (
                 <RequestItem
-                  selfSign={() => {}}
+                  selfSign={(claimType: string, value: string) =>
+                    issueCredential(selectedIdentity, selectedIdentity, [
+                      { [claimType]: value },
+                    ])
+                  }
                   closeAfterSelect={false}
                   key={sdrRequestField.claimType + index}
                   claimType={sdrRequestField.claimType}
