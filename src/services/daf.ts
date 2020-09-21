@@ -122,6 +122,7 @@ const credentialProfile = async (vc: any, index: number) => {
       })
       .filter((i) => i),
     raw: vc.proof.jwt,
+    jwt: vc.proof.jwt,
   }
 }
 

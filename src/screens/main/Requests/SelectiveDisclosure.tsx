@@ -11,6 +11,7 @@ import { useNavigation } from 'react-navigation-hooks'
 import { WalletConnectContext } from '../../../providers/WalletConnect'
 import useAgent from '../../../hooks/useAgent'
 import { agent, getMessageWithSdr } from '../../../services/daf'
+import useSelectedCredentials from '../../../hooks/useSelectedCredentials'
 
 interface RequestProps {
   peerId: string
@@ -36,8 +37,8 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
   payloadId,
 }) => {
   const [sending, updateSending] = useState<boolean>(false)
-  const [selected, updateSelected] = useState<ValidationState>({})
-  const [formValid, setValid] = useState(true)
+  // const [selected, updateSelected] = useState<ValidationState>({})
+  // const [formValid, setValid] = useState(true)
   const navigation = useNavigation()
 
   const { state: sdrMessage } = useAgent(getMessageWithSdr, {
@@ -45,26 +46,16 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
     did: selectedIdentity,
   })
 
-  // const { data: requestMessage, refetch } = useQuery(GET_MESSAGE_SDR, {
-  //   variables: { id: messageId, selectedIdentity: selectedIdentity },
-  //   fetchPolicy: 'network-only',
-  // })
+  const {
+    selected,
+    onSelect: onSelectItem,
+    valid: formValid,
+  } = useSelectedCredentials(sdrMessage.data)
 
   const {
     walletConnectApproveCallRequest,
     walletConnectRejectCallRequest,
   } = useContext(WalletConnectContext)
-
-  const checkValidity = () => {
-    let valid = true
-    Object.keys(selected).map((key) => {
-      if (selected[key].required && !selected[key].jwt) {
-        valid = false
-      }
-    })
-
-    setValid(valid)
-  }
 
   // const [actionSignVc] = useMutation(SIGN_VC_MUTATION, {
   //   onCompleted: async (response) => {
@@ -152,19 +143,6 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
   //   }
   // }
 
-  const onSelectItem = async (
-    id: string | null,
-    jwt: string | null,
-    claimType: string,
-  ) => {
-    const updatedSelection = {
-      ...selected,
-      [claimType]: { ...selected[claimType], jwt },
-    }
-
-    updateSelected(updatedSelection)
-  }
-
   const approveCallRequest = async (jwt: string) => {
     await walletConnectApproveCallRequest(peerId, {
       id: payloadId,
@@ -182,35 +160,6 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
     }
     navigation.goBack()
   }
-
-  useEffect(() => {
-    checkValidity()
-  }, [selected])
-
-  useEffect(() => {
-    if (sdrMessage.data) {
-      const message = sdrMessage.data
-      let defaultSelected: ValidationState = {}
-      message.sdr.map((sdr: any) => {
-        if (sdr && sdr.essential) {
-          if (sdr.credentials.length) {
-            defaultSelected[sdr.claimType] = {
-              required: true,
-              jwt: sdr.credentials[0].raw,
-            }
-          } else {
-            defaultSelected[sdr.claimType] = {
-              required: true,
-              jwt: null,
-            }
-            setValid(false)
-          }
-        }
-      })
-      console.log('request message changed', message)
-      updateSelected(defaultSelected)
-    }
-  }, [sdrMessage.data])
 
   return (
     <Screen
@@ -270,7 +219,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
                   issuers={sdrRequestField.issuers}
                   credentials={sdrRequestField.credentials}
                   required={sdrRequestField.essential}
-                  onSelectItem={() => {}}
+                  onSelectItem={onSelectItem}
                 />
               )
             })}
