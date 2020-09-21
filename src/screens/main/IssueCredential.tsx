@@ -18,8 +18,9 @@ import { useTranslation } from 'react-i18next'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import { Identity } from '@kancha/kancha-ui/dist/types'
 import hexToRgba from 'hex-to-rgba'
-import { issueCredential } from '../../services/daf'
+import { issueCredential, getIdentitiesWithProfiles } from '../../services/daf'
 import { agent } from '../../services/daf'
+import useAgent from '../../hooks/useAgent'
 
 interface Field {
   type: string
@@ -31,6 +32,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
 } = ({ navigation }) => {
   const { t } = useTranslation()
   const viewer = navigation.getParam('viewer')
+  const getCredentials = navigation.getParam('getCredentials')
   const [claimType, setClaimType] = useState('')
   const [claimValue, setClaimValue] = useState('')
   const [errorMessage, setErrorMessage] = useState<any>()
@@ -39,29 +41,25 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
   const [fields, updateFields] = useState<Field[]>([])
   const [identitySelectOpen, setIdentitySelect] = useState(false)
 
+  const { state: allIdentities, loading } = useAgent(getIdentitiesWithProfiles)
+
   const inputSubject = (did: string) => {
     /**
      * If the user pastes in a did that is already in our known
      * identities then we use that entry as it may have additional data associated
      */
-    // const matchedIdentity =
-    //   data && data.identities.find((identity: Identity) => identity.did === did)
-    // if (matchedIdentity) {
-    //   setSubject(matchedIdentity)
-    // } else {
-    //   const sub = {
-    //     did,
-    //     shortId: 'an unknown did',
-    //   }
-    //   setSubject(sub)
-    // }
-
-    const sub = {
-      did,
-      shortId: 'an unknown did',
+    const matchedIdentity =
+      allIdentities.data &&
+      allIdentities.data.find((identity: Identity) => identity.did === did)
+    if (matchedIdentity) {
+      setSubject(matchedIdentity)
+    } else {
+      const sub = {
+        did,
+        shortId: 'an unknown did',
+      }
+      setSubject(sub)
     }
-
-    setSubject(sub)
   }
 
   const updateClaimFields = (field: Field) => {
@@ -102,7 +100,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
   const signVc = async () => {
     const credential = await issueCredential(viewer.did, viewer.did, fields)
     await agent.handleMessage({ raw: credential.proof.jwt, save: true })
-
+    await getCredentials()
     navigation.dismiss()
   }
 
@@ -149,14 +147,14 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
                 onFocus={() => openIdentitySelection()}
                 onBlur={() => setIdentitySelect(false)}
                 clearButtonMode={'always'}
-                style={{ fontFamily: 'menlo' }}
+                style={{ fontFamily: 'menlo', color: Colors.CHARCOAL }}
                 onChangeText={inputSubject}
               >
                 {subject.did}
               </TextInput>
             </Container>
           </Container>
-          {/* {identitySelectOpen && (
+          {identitySelectOpen && (
             <Container marginTop>
               {loading && (
                 <Container
@@ -186,9 +184,8 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
                     </Text>
                   </Container>
                 </TouchableHighlight>
-                {data &&
-                  data.identities &&
-                  data.identities
+                {allIdentities.data &&
+                  allIdentities.data
                     .filter((i: Identity) => i.did !== viewer.did)
                     .map((identity: any) => {
                       return (
@@ -208,7 +205,7 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
                     })}
               </Container>
             </Container>
-          )} */}
+          )}
         </Container>
 
         <Container background={'secondary'} padding marginBottom br={5}>
@@ -264,6 +261,8 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
             autoCorrect={false}
             autoCapitalize={'none'}
             autoCompleteType={'off'}
+            style={{ color: Colors.CHARCOAL }}
+            placeholderTextColor={Colors.LIGHT_GREY}
           />
         </Container>
         <Container background={'primary'} padding br={5} dividerBottom>
@@ -274,6 +273,8 @@ const IssueCredential: React.FC<NavigationStackScreenProps> & {
             autoCorrect={false}
             autoCapitalize={'none'}
             autoCompleteType={'off'}
+            style={{ color: Colors.CHARCOAL }}
+            placeholderTextColor={Colors.LIGHT_GREY}
           />
         </Container>
         <Container padding alignItems={'flex-start'}>

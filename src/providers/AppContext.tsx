@@ -4,6 +4,7 @@ import {
   agent,
   getActivityWithProfiles,
   getIdentitiesWithProfiles,
+  getManagedIdentitiesWithProfiles,
 } from '../services/daf'
 import AsyncStorage from '@react-native-community/async-storage'
 import useAgent from '../hooks/useAgent'
@@ -27,7 +28,7 @@ export const AppProvider = (props: any) => {
   )
 
   const { state: managedIdentities, request: getManagedIdentities } = useAgent(
-    getIdentitiesWithProfiles,
+    getManagedIdentitiesWithProfiles,
   )
 
   const {

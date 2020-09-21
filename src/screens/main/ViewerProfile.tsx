@@ -28,7 +28,11 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
 }) => {
   const { selectedIdentity } = useContext(AppContext)
 
-  const { state: profile, loading: profileLoading } = useAgent(getProfile, {
+  const {
+    state: profile,
+    loading: profileLoading,
+    request: refetcProfile,
+  } = useAgent(getProfile, {
     subject: selectedIdentity,
     fields: ['name', 'profileImage'],
   })
@@ -38,6 +42,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
     loading: credentialsLoading,
     request: getCredentials,
   } = useAgent(getGetCredentialsWithProfiles, {
+    order: [{ column: 'issuanceDate', direction: 'DESC' }],
     where: [{ column: 'subject', value: [selectedIdentity] }],
   })
 
@@ -48,11 +53,13 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
 
   useEffect(() => {
     if (profile.data) {
-      navigation.setParams({ viewer: profile.data })
+      navigation.setParams({ viewer: profile.data, getCredentials })
     }
   }, [profile.data])
 
   useEffect(() => {
+    console.log(selectedIdentity)
+    refetcProfile()
     getCredentials()
   }, [selectedIdentity])
 
@@ -136,16 +143,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
           credentials.data &&
           credentials.data.length > 0 && (
             <Container>
-              <Container marginBottom>
-                <Container marginTop>
-                  <Text type={Constants.TextTypes.Body}>
-                    <Text bold>Received</Text> credentials are presented here as
-                    a plain list for now. Some will be moved to the data
-                    explorer tab where we can explore all of our data and
-                    connections.
-                  </Text>
-                </Container>
-              </Container>
+              <Container marginBottom></Container>
               {credentials &&
                 credentials.data.map((vc: any, i: number) => {
                   return (
@@ -157,7 +155,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
                         })
                       }
                       background={'secondary'}
-                      exp={3456789}
+                      exp={vc.expiryDate}
                       issuer={vc.iss}
                       subject={vc.sub}
                       fields={vc.fields}
@@ -172,7 +170,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
 }
 
 ViewerProfile.navigationOptions = ({ navigation }: any) => {
-  const { viewer } = navigation.state.params || {}
+  const { viewer, getCredentials } = navigation.state.params || {}
 
   return {
     headerLeft: () => (
@@ -180,7 +178,8 @@ ViewerProfile.navigationOptions = ({ navigation }: any) => {
         <Button
           iconButton
           onPress={() =>
-            viewer && navigation.navigate('IssueCredential', { viewer })
+            viewer &&
+            navigation.navigate('IssueCredential', { viewer, getCredentials })
           }
           icon={
             <Icon
