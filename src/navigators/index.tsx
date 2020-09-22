@@ -21,7 +21,6 @@ import Explore from '../screens/main/Explore'
 import ViewerProfile from '../screens/main/ViewerProfile'
 import Profile from '../screens/main/Profile'
 import Onboarding from '../screens/main/Onboarding'
-import Restore from '../screens/main/Restore'
 import Intro from '../screens/main/Intro'
 
 import Scanner from '../screens/main/Scanner'
@@ -228,9 +227,6 @@ const Onboard = createStackNavigator(
     },
     Onboarding: {
       screen: Onboarding,
-    },
-    Restore: {
-      screen: Restore,
     },
     CreatingWallet: {
       screen: CreatingWallet,
