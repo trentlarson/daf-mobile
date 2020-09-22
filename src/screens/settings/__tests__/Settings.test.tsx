@@ -20,25 +20,3 @@ it('renders correctly', () => {
   ).toJSON()
   expect(tree).toMatchSnapshot()
 })
-
-it('test buttons', () => {
-  const { t, i18n } = useTranslation()
-  // @ts-ignore
-  const tree = render(
-    <SwitchProvider>
-      {() => (
-        // @ts-ignore
-        <Settings navigation={navigation} />
-      )}
-    </SwitchProvider>,
-  )
-
-  act(() => {
-    fireEvent.press(tree.getByTestId('MESSAGES_BTN'))
-    fireEvent.press(tree.getByTestId('CREATE_CREDENTIAL_BTN'))
-    fireEvent.press(tree.getByTestId('CREATE_REQUEST_BTN'))
-    fireEvent.press(tree.getByTestId('CONNECTIONS_BTN'))
-    fireEvent.press(tree.getByTestId('SIGNER_BTN'))
-  })
-  expect(navigation.navigate).toHaveBeenCalledTimes(5)
-})

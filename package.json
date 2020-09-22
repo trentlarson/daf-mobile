@@ -21,7 +21,6 @@
     "postinstall": "rn-nodeify --install assert,buffer,process,crypto,stream,vm --hack --yarn"
   },
   "dependencies": {
-    "@apollo/client": "^3.1.4",
     "@kancha/kancha-ui": "^1.0.0-beta.50",
     "@react-native-community/async-storage": "^1.8.0",
     "@react-native-community/masked-view": "^0.1.10",
@@ -31,7 +30,6 @@
     "@types/lodash.merge": "^4.6.6",
     "@walletconnect/react-native": "^1.0.0-beta.47",
     "add": "^2.0.6",
-    "apollo-link-schema": "^1.2.5",
     "assert": "^1.1.1",
     "blakejs": "^1.1.0",
     "buffer": "^5.2.1",
@@ -57,9 +55,6 @@
     "did-resolver": "^1.1.0",
     "ethr-did-resolver": "2.1.0",
     "faker": "^4.1.0",
-    "graphql": "^14.3.1",
-    "graphql-tag": "^2.10.1",
-    "graphql-tools": "^4.0.5",
     "https-did-resolver": "^0.1.0",
     "i18next": "^17.2.0",
     "jest-junit": "^6.3.0",
@@ -108,7 +103,6 @@
     "yarn": "^1.22.0"
   },
   "devDependencies": {
-    "@apollo/react-testing": "^3.1.1",
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@commitlint/cli": "^8.1.0",
@@ -123,7 +117,7 @@
     "@types/ws": "^6.0.3",
     "babel-jest": "^24.9.0",
     "cross-fetch": "^3.0.4",
-    "detox": "^15.1.4",
+    "detox": "^17.5.7",
     "hermes-engine": "^0.2.1",
     "husky": "^1.3.1",
     "jest": "^24.9.0",
