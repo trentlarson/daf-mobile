@@ -26,7 +26,6 @@ import Intro from '../screens/main/Intro'
 
 import Scanner from '../screens/main/Scanner'
 import MessageProcess from '../screens/main/MessageProcess'
-import Request from '../screens/main/Request'
 import Requests from '../screens/main/Requests/Requests'
 import Credential from '../screens/main/Credential'
 import CredentialView from '../screens/main/CredentialView'
@@ -36,7 +35,6 @@ import IssueCredentialScreen from '../screens/main/IssueCredential'
 
 // Settings
 import Settings from '../screens/settings/Settings'
-import ShowSecret from '../screens/settings/ShowSecret'
 
 const headerLogo = () => (
   <Image
@@ -61,12 +59,6 @@ const SettingsNavigator = createStackNavigator(
       screen: Settings,
       navigationOptions: {
         title: i18n.t('Settings'),
-      },
-    },
-    [Screens.ShowSecret.screen]: {
-      screen: ShowSecret,
-      navigationOptions: {
-        title: i18n.t('Reveal Secret'),
       },
     },
   },
@@ -216,7 +208,6 @@ const DeepLinkModal = createStackNavigator({
 const App = createStackNavigator(
   {
     Tabs: TabNavigator,
-    Request: Request,
     Requests: Requests,
     Scanner: ScannerNavigator,
     IssueFirstCredential,
