@@ -49,6 +49,8 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
     did: selectedIdentity,
   })
 
+  console.log('SDR', sdrMessage)
+
   const {
     selected,
     onSelect: onSelectItem,
@@ -73,7 +75,7 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
       console.log(vp)
 
       if (isWalletConnect) {
-        await approveCallRequest(vp.proof.jwt)
+        await approveCallRequest(vp)
         updateSending(false)
       }
 
@@ -81,10 +83,10 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
     }
   }
 
-  const approveCallRequest = async (jwt: string) => {
+  const approveCallRequest = async (verifiablePresentation: any) => {
     await walletConnectApproveCallRequest(peerId, {
       id: payloadId,
-      result: jwt,
+      result: verifiablePresentation,
     })
     navigation.goBack()
   }
@@ -146,7 +148,6 @@ const SelectiveDisclosure: React.FC<RequestProps> = ({
           {sdrMessage.data &&
             sdrMessage.data.sdr &&
             sdrMessage.data.sdr.map((sdrRequestField: any, index: number) => {
-              console.log(sdrRequestField)
               return (
                 <RequestItem
                   selfSign={(claimType: string, value: string) =>

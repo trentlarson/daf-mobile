@@ -16,7 +16,6 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ navigate }) => {
     wcEventHub.addListener(
       AppConstants.events.WALLET_CONNECT.SESSION_REQUEST_INT,
       async ({ peerId, peerMeta, payload }: any) => {
-        console.log('HIII')
         const requestType = AppConstants.requests.SESSION
 
         navigate(Screens.Requests.screen, {
@@ -33,7 +32,7 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ navigate }) => {
       async ({ peerId, peerMeta, payload }) => {
         const message = payload.params[0]
           ? await agent.handleMessage({
-              raw: payload.params[0],
+              raw: payload.params[0].proof.jwt,
               metaData: [{ type: 'walletConnect' }],
               save: false,
             })
@@ -49,7 +48,6 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ navigate }) => {
           if (message.raw) {
             await agent.handleMessage({ raw: message.raw, save: true })
           }
-
           const requestType = AppConstants.requests.DISCLOSURE
           navigate(Screens.Requests.screen, {
             isWalletConnect: true,

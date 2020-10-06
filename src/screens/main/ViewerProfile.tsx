@@ -31,7 +31,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
   const {
     state: profile,
     loading: profileLoading,
-    request: refetcProfile,
+    request: refetchProfile,
   } = useAgent(getProfile, {
     subject: selectedIdentity,
     fields: ['name', 'profileImage'],
@@ -58,8 +58,7 @@ const ViewerProfile: React.FC<Props> & { navigationOptions: any } = ({
   }, [profile.data])
 
   useEffect(() => {
-    console.log(selectedIdentity)
-    refetcProfile()
+    refetchProfile()
     getCredentials()
   }, [selectedIdentity])
 

@@ -75,7 +75,7 @@ export const WalletConnectProvider = (props: any) => {
     try {
       const sessions = await asyncStorageLoadSessions()
       const _connectors = await Promise.all(
-        Object.values(sessions).map(async session => {
+        Object.values(sessions).map(async (session) => {
           const nativeOptions = await getNativeOptions()
           return new WalletConnect({ session }, nativeOptions)
         }),
@@ -195,6 +195,8 @@ export const WalletConnectProvider = (props: any) => {
         ])
 
         updateRequests(updatedRequests)
+
+        console.log('Call request init')
 
         wcEventHub.emit(AppConstants.events.WALLET_CONNECT.CALL_REQUEST_INT, {
           peerId,

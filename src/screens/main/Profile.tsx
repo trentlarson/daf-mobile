@@ -30,8 +30,6 @@ const Profile: React.FC<Props> = ({ navigation }) => {
       ? { source: { uri: identity.profileImage } }
       : {}
 
-  console.log(identity)
-
   return (
     <Screen scrollEnabled background={'primary'}>
       {identityLoading && (

@@ -15,13 +15,17 @@ const getMessageWithSdr = async ({
   messageId: string
   did: string
 }) => {
+  await agent.data
   const message = await agent.dataStoreORMGetMessages({
     where: [{ column: 'id', value: [messageId] }],
   })
   const sdr = await agent.getVerifiableCredentialsForSdr({
+    // @ts-ignore
     sdr: message[0].data,
     did,
   })
+
+  console.log('raw sdr', sdr)
 
   const sdrWithProfiles = await Promise.all(
     sdr.map(async (sd: any) => {
@@ -29,7 +33,10 @@ const getMessageWithSdr = async ({
         ...sd,
         credentials: await Promise.all(
           sd.credentials.map(async (vc: any, i: number) => {
-            return await credentialProfile(vc, i)
+            return await credentialProfile({
+              verifiableCredential: vc,
+              hash: i,
+            })
           }),
         ),
       }
@@ -47,7 +54,7 @@ const transformMessage = async (message: any, did: string, sdr?: any) => {
     ...(message.to ? { to: await getProfile({ subject: message.to }) } : {}),
     credentials: await Promise.all(
       message.credentials.map(async (vc: any, i: number) => {
-        return await credentialProfile(vc, i)
+        return await credentialProfile({ verifiableCredential: vc, hash: i })
       }),
     ),
     sdr,
@@ -91,8 +98,8 @@ const getGetCredentialsWithProfiles = async (args?: any) => {
   })
 
   return Promise.all(
-    credentials.map(async (vc: any, index: number) => {
-      return await credentialProfile(vc, index)
+    credentials.map(async (vc: any) => {
+      return await credentialProfile(vc)
     }),
   )
 }
@@ -100,29 +107,32 @@ const getGetCredentialsWithProfiles = async (args?: any) => {
 const getCredentialsFromRequestMessage = async ({ msg }: any) => {
   return await Promise.all(
     msg.credentials.map(async (vc: any, i: number) => {
-      return await credentialProfile(vc, i)
+      return await credentialProfile({ verifiableCredential: vc, hash: i })
     }),
   )
 }
 
-const credentialProfile = async (vc: any, index: number) => {
+const credentialProfile = async (vc: any) => {
   return {
-    hash: `00${index + 1}`,
-    iss: await getProfile({ subject: vc.issuer.id }),
-    sub: await getProfile({ subject: vc.credentialSubject.id }),
-    fields: Object.keys(vc.credentialSubject)
+    hash: vc.hash,
+    iss: await getProfile({ subject: vc.verifiableCredential.issuer.id }),
+    sub: await getProfile({
+      subject: vc.verifiableCredential.credentialSubject.id,
+    }),
+    fields: Object.keys(vc.verifiableCredential.credentialSubject)
       .map((key, i) => {
         return (
           key !== 'id' && {
             type: key,
-            value: vc.credentialSubject[key],
-            isObject: vc.credentialSubject[key] === typeof Object,
+            value: vc.verifiableCredential.credentialSubject[key],
+            isObject:
+              vc.verifiableCredential.credentialSubject[key] === typeof Object,
           }
         )
       })
       .filter((i) => i),
-    raw: vc.proof.jwt,
-    jwt: vc.proof.jwt,
+    raw: vc.verifiableCredential.proof.jwt,
+    jwt: vc.verifiableCredential.proof.jwt,
   }
 }
 
@@ -146,10 +156,12 @@ const getProfile = async ({
     ..._fields.map((f) => {
       return {
         [f]: all
-          .filter((a) => a.credentialSubject[f])
+          .filter((a) => a.verifiableCredential.credentialSubject[f])
           .sort(
-            (a, b) => parseInt(b.issuanceDate) - parseInt(a.issuanceDate),
-          )[0]?.credentialSubject[f],
+            (a, b) =>
+              parseInt(b.verifiableCredential.issuanceDate) -
+              parseInt(a.verifiableCredential.issuanceDate),
+          )[0]?.verifiableCredential.credentialSubject[f],
       }
     }),
   )
