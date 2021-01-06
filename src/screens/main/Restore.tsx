@@ -1,7 +1,9 @@
 /**
  *
  */
+import Debug from 'debug'
 import React, { useState } from 'react'
+import { ApolloError } from 'apollo-client'
 import { TextInput } from 'react-native'
 import { Container, Text, Screen, Constants, Button } from '@kancha/kancha-ui'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
@@ -9,18 +11,21 @@ import { Colors } from '../../theme'
 import { useMutation } from '@apollo/react-hooks'
 import { IMPORT_IDENTITY } from '../../lib/graphql/queries'
 
+const debug = Debug('daf-screen:Restore')
+
 const Restore: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
   const [seed, setSeed] = useState('')
-  const [errorState, setError] = useState(false)
+  const [errorState, setError] = useState('')
   const [importSeed] = useMutation(IMPORT_IDENTITY, {
     onCompleted(resp) {
       if (resp.importIdentity && resp.importIdentity.did) {
         navigation.navigate('CreatingWallet', { import: true })
       }
     },
-    onError(err) {
+    onError(err: ApolloError) {
       if (err) {
-        setError(true)
+        debug('Error Importing Seed', err)
+        setError(err.message)
       }
     },
   })
@@ -40,7 +45,7 @@ const Restore: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
         </Container>
         <Container marginTop={30}>
           <TextInput
-            onFocus={() => setError(false)}
+            onFocus={() => setError('')}
             autoCapitalize={'none'}
             autoCompleteType={'off'}
             autoCorrect={false}
@@ -59,11 +64,16 @@ const Restore: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
           />
         </Container>
         <Container paddingTop>
-          {errorState && (
-            <Text warn>
-              Oops...That looks like an invalid seed. Please check your seed and
-              try again..
-            </Text>
+          {!!errorState && (
+            <Container>
+              <Text warn>
+                Oops...That looks like an invalid seed. Please check your seed and
+                try again.
+              </Text>
+              <Text warn>
+                { errorState }
+              </Text>
+            </Container>
           )}
         </Container>
         <Container marginTop={30}>
