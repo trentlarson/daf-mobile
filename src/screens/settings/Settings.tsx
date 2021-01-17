@@ -36,6 +36,12 @@ const Settings: React.FC<NavigationStackScreenProps> = ({ navigation }) => {
               {t('Messages')}
             </ListItem>
             <ListItem
+              testID={'ATTENDED_BVC_SAT_BTN'}
+              onPress={() => navigation.navigate('BvcAttendedSat')}
+            >
+              {t('Attended BVC Saturday')}
+            </ListItem>
+            <ListItem
               testID={'CREATE_CREDENTIAL_BTN'}
               onPress={() => navigation.navigate('CreateCredential')}
             >

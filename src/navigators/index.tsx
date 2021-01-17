@@ -44,6 +44,7 @@ import DidViewer from '../screens/settings/DidViewer'
 import Config from '../screens/settings/Config' // *
 import Messages from '../screens/settings/Messages'
 import MessageDetail from '../screens/settings/MessageDetail'
+import BvcAttendedSat from '../screens/settings/BvcAttendedSat' // *
 import CreateCredential from '../screens/settings/CreateCredential' // *
 import CreateRequest from '../screens/settings/CreateRequest'
 import SendRequest from '../screens/settings/SendRequest'
@@ -95,6 +96,12 @@ const SettingsNavigator = createStackNavigator(
       navigationOptions: {
         title: i18n.t('Messages Detail'),
       },
+    },
+    [Screens.BvcAttendedSat.screen]: {
+      screen: BvcAttendedSat,
+      navigationOptions: {
+        title: i18n.t("Attended BVC Saturday Morning Meeting")
+      }
     },
     [Screens.CreateCredential.screen]: {
       screen: CreateCredential,

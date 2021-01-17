@@ -35,6 +35,7 @@ const DeveloperSettingsScreens = {
   MessageProcess: { screen: 'MessageProcess', title: 'Message Process' },
   Messages: { screen: 'Messages', title: 'Messages' },
   MessageDetail: { screen: 'MessageDetail', title: 'Message Detail' },
+  BvcAttendedSat: { screen: 'BvcAttendedSat', title: 'Attended BVC Saturday Meeting' },
   CreateCredential: { screen: 'CreateCredential', title: 'Create Credential' },
   CreateRequest: { screen: 'CreateRequest', title: 'Create Request' },
   ShareCredential: { screen: 'ShareCredential', title: 'Share Credential' },
